@@ -1,0 +1,159 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+<!-- ================================
+Start SEO blocks
+================================= -->
+{% block title %}Contact Me{% endblock %}
+{% block description %}Get in touch with us for any queries or support{% endblock %}
+{% block keywords %}contact, support, reach out{% endblock %}
+<!-- ================================
+END SEO blocks
+================================= -->
+
+<!-- ================================
+Start CSS blocks
+================================= -->
+{% block extend_header %}
+<style>
+  .innerPageBannerCol {
+    background: linear-gradient(135deg, #ff7e5f, #feb47b);
+    color: white;
+    padding: 50px 0;
+    text-align: center;
+  }
+  .bannerContent {
+    animation: fadeInDown 2s ease-in-out;
+  }
+  .lightBg {
+    background-color: #f9f9f9;
+    padding: 50px 0;
+  }
+  form {
+    max-width: 600px;
+    margin: 0 auto;
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    animation: fadeInUp 2s ease-in-out;
+  }
+  label {
+    font-weight: bold;
+    margin-top: 15px;
+    display: block;
+  }
+  input, textarea, select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+  .btnPrimary {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #ff7e5f;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  .btnPrimary:hover {
+    background-color: #feb47b;
+  }
+  @keyframes fadeInDown {
+    0% {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+{% endblock %}
+<!-- ================================
+END CSS blocks
+================================= -->
+
+<!-- ================================
+Start script blocks
+================================= -->
+{% block extend_footer %}
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var form = document.getElementById("contactForm");
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+      var submitButton = form.querySelector(".btnPrimary");
+      submitButton.classList.add("loading");
+      setTimeout(function() {
+        submitButton.classList.remove("loading");
+        form.submit();
+      }, 1000); // Simulate a delay for demonstration
+    });
+  });
+</script>
+{% endblock %}
+<!-- ================================
+END script blocks
+================================= -->
+
+<!-- ================================
+Start Content
+================================= -->
+{% block content %}
+<section>
+  <div class="innerPageBannerCol">
+    <div class="container">
+      <div class="row g-4 g-md-3  align-items-center">
+        <div class="col-md-6">
+          <div class="bannerContent">
+            <!--<b>You Can Reach Out Below...</b>-->
+            <!--<p>Please be sure to leave the correct email or I won't be able to reach out!</p>-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="lightBg">
+    <div class="container">
+        <form id="contactForm" method="POST" action="/contact/">
+        {% csrf_token %}
+            <label for="name">Name</label>
+            {{form.name}}
+
+            <label for="email">Email</label>
+            {{form.email}}
+
+            <label for="message">Message</label>
+            {{form.message}}
+
+            <label for="category">Category</label>
+            {{form.category}}
+            <input class="btn btnPrimary" type="submit" value="Submit">
+        </form>
+    </div>
+  </div>
+</section>
+<!-- ================================
+End Content
+================================= -->
+{% endblock %}

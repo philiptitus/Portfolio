@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>404 - Page Not Found</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f4f4f4;
+        }
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 50px;
+            border-radius: 12px;
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 90%;
+        }
+        h1 {
+            font-size: 3rem;
+            color: #ff4d4d; /* Red */
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 1.2rem;
+            color: #333;
+        }
+        .highlight {
+            color: #ffcc00; /* Yellow */
+            font-weight: bold;
+        }
+        .button {
+            margin-top: 20px;
+            padding: 15px 30px;
+            background-color: #3e8e41; /* Green */
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            transition: background-color 0.3s ease;
+        }
+        .button:hover {
+            background-color: #336b33;
+        }
+        .footer {
+            margin-top: 30px;
+            color: #666;
+        }
+        .footer a {
+            color: #ffcc00; /* Yellow */
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        .icon {
+            font-size: 4rem;
+            color: #ff4d4d;
+            margin-bottom: 20px;
+        }
+        .error-code {
+            font-size: 5rem;
+            font-weight: bold;
+            color: #ffcc00;
+            margin: 20px 0;
+        }
+        .message {
+            font-size: 1.5rem;
+            margin: 20px 0;
+            color: #666;
+        }
+        @media(max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            p, .message {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="icon">❌</div>
+        <h1>Oops! Page Not Found</h1>
+        <p>It looks like you've ventured into the <span class="highlight">unknown</span>...</p>
+        <div class="error-code">404</div>
+        <p class="message">But don't worry, you can always find your way back home!</p>
+        <a href="/" class="button">Go Back Home</a>
+        <div class="footer">
+            <p>While you're here, feel free to follow me on <a href="https://www.linkedin.com/in/philiptitus/">LinkedIn</a> or <a href="https://github.com/philiptitus">Github</a>!</p>
+        </div>
+    </div>
+</body>
+</html>

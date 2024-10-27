@@ -1,0 +1,61 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Django stuff:
+*.log
+*.pot
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+
+# Ignore Django migration files if you plan to regenerate them
+# Comment these lines out if you want to keep migration history
+**/migrations/
+
+# If you are using MySQL or PostgreSQL with Django
+*.sql
+
+# Ignore development and deployment settings
+.env
+*.local
+
+# Django cache files
+cache/
+*_cache/
+cache/*
+
+
+
+
+# Ignore Django secret key and other sensitive credentials
+secrets.json
+
+# Ignore virtual environment and dependencies
+venv/
+env/
+*.egg
+*.egg-info/
+dist/
+build/
+pip-wheel-metadata/
+
+# PyInstaller
+*.manifest
+*.spec
+
+# IDE files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# macOS-specific files
+.DS_Store
+
+# Windows-specific files
+Thumbs.db
+desktop.ini

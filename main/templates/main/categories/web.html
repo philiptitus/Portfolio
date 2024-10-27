@@ -1,0 +1,166 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+<!-- ================================
+Start SEO blocks
+================================= -->
+{% block title %}{% endblock %}
+{% block decription %}{% endblock %}
+{% block keywords %}{% endblock %}
+<!-- ================================
+END SEO blocks
+================================= -->
+
+<!-- ================================
+Start CSS blocks
+================================= -->
+{% block extend_header %}{% endblock %}
+<!-- ================================
+END CSS blocks
+================================= -->
+
+<!-- ================================
+Start script blocks
+================================= -->
+{% block extend_footer %}{% endblock %}
+<!-- ================================
+END script blocks
+================================= -->
+
+<!-- ================================
+Start Content
+================================= -->
+{% block content %}
+<section>
+  <div class="innerPageBannerCol">
+    <div class="container">
+      <div class="row g-4 g-md-3  align-items-center">
+        <div class="col-md-6">
+          <div class="bannerContent">
+            <h1 class="xlTitle pb-md-3">WEB DEVELOPMENT</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+    <h4 class="smText regular">BLOGS</h4>
+    <hr>
+
+  <div class="lightBg">
+    <div class="container">
+
+      <div class="portfolioContentMain">
+        <div class="row g-3 g-md-4 g-lg-5 portfolioRow">
+          {% for obj in object_list %}
+          {% if obj.category == 'WEB DEVELOPMENT' %}
+          <div class="col-md-6 pColMain">
+            <div class="pCol">
+              <a href="{% url 'main:blog' slug=obj.slug %}" >
+              <img src="{{obj.image.url}}" alt="..." class="pImg">
+              <i><h6>{{ obj.name }}</h6></i>
+              </a>
+            </div>
+          </div>
+          {% endif %}
+          {% endfor %}
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+    <div class="sectionSpaceSm lightBg">
+      <div class="container">
+        <div class="row pb-3">
+          <div class="col">
+            <h4 class="smText regular">Certificates</h4>
+            <hr>
+          </div>
+
+        </div>
+        <div class="sliderOuter">
+          <div class="swiper certificatesSlider">
+            <div class="swiper-wrapper">
+              {% for c in certificates %}
+
+              {% if c.is_active %}
+              {% if c.category == 'WEB DEVELOPMENT' %}
+              <div class="swiper-slide">
+                <div class="cardStyle1">
+                  <h4 class="mdTitle cs1Title">
+                    <a href="javascript:void(0)">{{c.title}}</a>
+                  </h4>
+                  <ul class="cardOptionCol">
+                    <li>{{c.date.date}}</li>
+                    <li>{{c.name|title}}</li>
+                  </ul>
+                  <p>{{c.description}}</p>
+                  <i><h6>{{ c.category }}</h6></i>
+                  {% if c.is_ongoing %}
+
+                  <i>Status: learning</i>
+                  {% else %}
+                  <i>Status: complete</i>
+                  {% endif %}
+                </div>
+              </div>
+              {% endif %}
+              {% endif %}
+              {% endfor %}
+
+            </div>
+          </div>
+          <div class="cert-swiper-button-next swiper-button-next swiperBtnStyle"></div>
+          <div class="cert-swiper-button-prev swiper-button-prev swiperBtnStyle"></div>
+          <div class="swiper-pagination swiperPaginationStyle posInitial"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+  <br>
+
+
+
+
+
+
+  <br>
+  <br>
+  <section>
+    <h4 class="smText regular">PORTFOLIOS</h4>
+    <hr>
+
+    <div class="lightBg">
+      <div class="container">
+        <div class="portfolioContentMain">
+
+          <div class="row g-3 g-md-4 g-lg-5 portfolioRow">
+            {% for obj in portfolio %}
+            {% if obj.category == 'WEB DEVELOPMENT' %}
+            <div class="col-md-6 pColMain">
+              <div class="pCol">
+                <a href="{% url 'main:portfolio' slug=obj.slug %}" >
+                <img src="{{obj.image.url}}" alt="..." class="pImg">
+                <i><h6>{{ obj.name }}</h6></i>
+                </a>
+              </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<!-- ================================
+End Content
+================================= -->
+{% endblock%}
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui voluptate eveniet possimus corrupti debitis tempore laboriosam eaque harum quo sapiente!

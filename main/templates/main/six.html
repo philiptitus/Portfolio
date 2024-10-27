@@ -1,0 +1,39 @@
+{%  load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Under Development</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'css/six.css' %}">
+</head>
+<body>
+    <div class="lamp-wrapper-main">
+        <div class="lamp-rope"></div>
+        <div class="lamp-inner">
+            <div class="lamp-main top-wrapper">
+                <div class="lamp-main top-left-wrapper"></div>
+                <div class="lamp-main top-right-wrapper right-wrapper"></div>
+            </div>
+            <div class="lamp-main lamp-center-left"></div>
+            <div class="lamp-main lamp-center-right"></div>
+            <div class="lamp-main lamp-bottom"></div>
+            <div class="lamp-blub"></div>
+        </div>
+        <div class="lamp-lamp-shadow"></div>
+    </div>
+    <h4>Coming soon..unavailable for now</h4>
+    <form oninput="body.setAttribute('data-light', slider.value)" class="lamp-input">
+        <div class="icon-sun">
+            
+            <i class="fa fa-sun-o" aria-hidden="true"></i>
+        </div>
+        <input type="range" id="slider" value="0" min="0" max="10">
+        <h6>scroll</h6>
+
+    </form>
+    
+</body>
+</html>

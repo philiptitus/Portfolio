@@ -1,0 +1,205 @@
+{% extends 'main/base.html' %}
+{% include 'main/contact.html' %}
+
+{% load static %}
+
+<!-- ================================
+Start SEO blocks
+================================= -->
+{% block title %}Blog{% endblock %}
+{% block decription %}{% endblock %}
+{% block keywords %}{% endblock %}
+<!-- ================================
+END SEO blocks
+================================= -->
+
+<!-- ================================
+Start CSS blocks
+================================= -->
+{% block extend_header %}{% endblock %}
+<!-- ================================
+END CSS blocks
+================================= -->
+
+<!-- ================================
+Start script blocks
+================================= -->
+{% block extend_footer %}{% endblock %}
+<!-- ================================
+END script blocks
+================================= -->
+
+<!-- ================================
+Start Content
+================================= -->
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/desc.css' %}">
+
+
+<!-- Hero Section -->
+<div class="hero">
+  <div class="hero-img">
+    <img src="{{object.png_url}}" style="width: 500px;" alt="Pixel Skincare">
+  </div>
+  <div class="hero-text">
+    <h1>{{object.name|title}}</h1>
+    {% if object.category == 'DATA SCIENCE.AI AND ML' %}
+      <div class="core">
+        <a href="{% url 'main:dscience' %}" class="btn"> {{ object.category }}</a>
+      </div>
+      {% elif object.category == 'WEB DEVELOPMENT' %}
+      <div class="core">
+        <a href="{% url 'main:webdevelopment' %}" class="btn"> {{ object.category }}</a>
+      </div>
+      {% elif object.category == 'MOBILE DEVELOPMENT' %}
+      <div class="core">
+        <a href="{% url 'main:mobiledevelopment' %}" class="btn"> {{ object.category }}</a>
+      </div>
+      {% elif object.category == 'CYBERSECURITY' %}
+      <div class="core">
+        <a href="{% url 'main:cybersecurity' %}" class="btn"> {{ object.category }}</a>
+      </div>
+      {% elif object.category == 'CLOUD COMPUTING' %}
+      <div class="core">
+        <a href="{% url 'main:cloud' %}" class="btn"> {{ object.category }}</a>
+      </div>
+      {% elif object.category == 'GAME DEVELOPMENT' %}
+      <div class="core">
+        <a href="{% url 'main:game' %}" class="btn"> {{ object.category }}</a>
+      </div>
+      {% else %}
+      <div class="core">
+        <a href="{% url 'main:other' %}"  class="btn"><h6>{{ object.category }}</h6></a>
+      </div>
+
+      {% endif %}
+
+  </div>
+</div>
+
+<!-- Featured Section -->
+<section id="featured">
+  <div class="title title-left">
+    <span class="line"></span><h3> by {{object.author|title}}</h3>
+  </div>
+  <div class="wrapper">
+    <div class="image">
+      <img src="{{object.image_url}}" alt="Pixel Facial Cream">
+    </div>
+<div class="text" style="margin-right: 20px;">
+  <h2>{{object.timestamp.date}}</h2>
+  <p>{{object.body|safe}}</p>
+</div>
+
+  </div>
+</section>
+
+<section id="collections">
+  <div class="title title-right">
+    <span class="line line-right"></span><a href="{% url 'main:contact' %}"><h3><b>Wanna Reach out?</b></h3></a>
+  </div>
+  <div class="wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Placeholder for the contact section -->
+    <div id="contact-section-placeholder"></div>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+{% for v in videos %}
+<section id="about">
+  <div class="title title-left">
+    <span class="line"></span><h3>{{ v.text }}</h3>
+  </div>
+  <div class="wrapper">
+    <div class="text">
+      <p>{{ v.description }}</p>
+    </div>
+    <div class="video-wrapper">
+      <iframe width="560" height="315" src="{{ v.url }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<link rel="stylesheet" href="style.css">
+<section id="contact">
+  <div class="wrapper">
+    <div class="form-wrapper">
+      <!-- <h4>Add More Beauty To Your Email</h4>
+      <form id="form" action="https://www.freecodecamp.com/email-submit">
+        <input type="email" id="email" name="email" placeholder="Your email" required>
+        <input type="submit" id="submit" value="OK" class="submit">
+      </form> -->
+    </div>
+    <div class="contact-wrapper">
+      <div class="wrapper">
+        <ul class="social-menu">
+          <li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+          <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+          <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+          <li><a href="#"><i class="fa fa-youtube-play" aria-hidden="true"></i></a></li>
+        </ul>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+{% endfor %}
+
+{% endblock %}
+<!-- ================================
+End Content
+================================= -->

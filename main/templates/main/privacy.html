@@ -1,0 +1,104 @@
+{% extends 'main/base.html' %}
+
+{% load static %}
+{% block extend_header %}{% endblock %}
+{% block title %}Privacy Policy{% endblock %}
+
+<!DOCTYPE html>
+{% block content %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/gone.png' %}">
+    <link rel="apple-touch-icon" type="image/jpg" href="{% static 'images/gone.png' %}">
+    <title>Privacy Policy</title>
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(to right, #FFB347, #FFCC33);
+        color: #333;
+    }
+    .container {
+        width: 90%;
+        max-width: 800px;
+        margin: 50px auto;
+        padding: 30px;
+        background: #fff;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        border-radius: 12px;
+    }
+    h1 {
+        text-align: center;
+        color: #FFB347;
+        margin-bottom: 20px;
+    }
+    h2, h3 {
+        color: #FFCC33;
+    }
+    p {
+        line-height: 1.8;
+        margin: 15px 0;
+        color: #666;
+    }
+    ul {
+        list-style-type: disc;
+        padding-left: 20px;
+        color: #666;
+    }
+    footer {
+        text-align: center;
+        margin-top: 40px;
+        padding: 20px;
+        background: #FFCC33;
+        color: #fff;
+        border-radius: 0 0 12px 12px;
+    }
+    a {
+        color: #FFB347;
+        text-decoration: none;
+    }
+    a:hover {
+        text-decoration: underline;
+    }
+</style>
+</head>
+<body>
+    <div class="container">
+        <h1>Privacy Policy</h1>
+        <p>Welcome to my Privacy Policy page! Here you will find information on how we collect, use, and protect your personal data.</p>
+
+        <h2>What is a Privacy Policy?</h2>
+        <p>A privacy policy is a statement or legal document that discloses some or all of the ways a party gathers, uses, discloses, and manages a customer or client's data. It fulfills a legal requirement to protect a customer's or client's privacy.</p>
+
+        <h2>Information I Collect</h2>
+        <p>For all my apps, I may collect the following information:</p>
+        <ul>
+            <li>Email address</li>
+            <li>Full name</li>
+        </ul>
+        <p>This information is essential for the functionality of my applications, including user identification and communication.</p>
+
+        <h2>How I Use the Information</h2>
+        <p>The information I collect is used for the following purposes:</p>
+        <ul>
+            <li>To provide and maintain my services</li>
+            <li>To notify you about changes to my services</li>
+            <li>To provide customer support</li>
+            <li>To gather analysis or valuable information so that I can improve my services</li>
+        </ul>
+
+        <h2>Protection of Your Information</h2>
+        <p>I take your privacy seriously and are committed to protecting your personal information. I implement various security measures to ensure the safety of your personal information when you enter, submit, or access your personal information.</p>
+
+        <h2>Changes to my Privacy Policy</h2>
+        <p>I may update my Privacy Policy from time to time. I will notify you of any changes by posting the new Privacy Policy on this page. You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.</p>
+
+
+    </div>
+</body>
+</html>
+{%endblock%}

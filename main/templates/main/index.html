@@ -1,0 +1,312 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+<!-- ================================
+Start SEO blocks
+================================= -->
+{% block title %}Philip Titus{% endblock %}
+{% block decription %}{% endblock %}
+{% block keywords %}{% endblock %}
+<!-- ================================
+END SEO blocks
+================================= -->
+
+<!-- ================================
+Start CSS blocks
+================================= -->
+{% block extend_header %}
+<style>
+  .bell-icon {
+    cursor: pointer;
+  }
+
+  .webhook-dropdown {
+    display: none;
+    position: absolute;
+    top: 40px;
+    left: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 1000;
+  }
+
+  .webhook-dropdown ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .webhook-dropdown li {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+  }
+
+  .webhook-dropdown li a {
+    text-decoration: none;
+    color: #333;
+  }
+</style>
+{% endblock %}
+<!-- ================================
+END CSS blocks
+================================= -->
+
+<!-- ================================
+Start script blocks
+================================= -->
+{% block extend_footer %}
+<script>
+  function toggleDropdown() {
+    var dropdown = document.getElementById('webhookDropdown');
+    dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+  }
+
+  // Close the dropdown if the user clicks outside of it
+  window.onclick = function(event) {
+    if (!event.target.matches('.bell-icon')) {
+      var dropdown = document.getElementById('webhookDropdown');
+      if (dropdown.style.display === 'block') {
+        dropdown.style.display = 'none';
+      }
+    }
+  }
+</script>
+{% endblock %}
+<!-- ================================
+END script blocks
+================================= -->
+
+<!-- ================================
+Start Content
+================================= -->
+{% block content %}
+<section>
+  <div class="bannerSection">
+    <div class="container">
+      <div class="row g-4 g-md-3  align-items-center">
+
+        <div class="col-md">
+          <div class="bannerContent">
+            <h1 class="xlTitle pb-3">I’m {{me.userprofile.user}},
+
+              <section class="section-specific-styles"> <!-- Add a unique class to the section -->
+                <div class="container-fluid">
+              <div class="container">
+                  <i style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: rgb(196, 71, 12); font-size: smaller;">  I craft user experiences that defy expectations. Want to see?<span class="cursor">&nbsp;</span></i>
+                  <br>
+                </div>
+                <div style="font-family: 'Times New Roman', Times, serif; font-style: italic; font-size: 14px; color: #666; text-align: center;">
+                  "Full-stack developer and AI/ML Developer"
+                </div>
+
+          </p>
+          </div>
+        </section>
+
+        <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
+
+            </br></h1>
+            <div class="bannerBtnCol">
+              <div class="row">
+                <div class="col-auto">
+                  <a download href="https://drive.google.com/file/d/1m5pAsSU-FZ5eENyyunjYAZQeR1yh0qgw/view?usp=sharing" class="btn btnPrimary">View Resume</a>
+                </div>
+                <div class="col-auto">
+                  <a href="{% url 'main:contact' %}" class="btn btnOutline">Contact</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sectionSpaceSm lightBg">
+    <div class="container">
+      <div class="row pb-3">
+        <div class="col" style="display: flex; align-items: center;">
+          <h4 class="smText regular" style="margin-right: 10px;">My Best Work</h4>
+        </div>
+      </div>
+      <div class="latestRelease">
+        {% with portfolio|dictsort:"date" as sorted_portfolio %}
+          {% for item in sorted_portfolio %}
+            {% if item.star %}
+              <div class="portfolioCard">
+                <div class="row g-4 align-items-center">
+                  <div class="col-md-auto">
+                    <div class="portfolioImgCol">
+                      <a href="{% url 'main:portfolio' slug=item.slug %}"><img src="{{ item.image_url }}" alt="..."></a>
+                    </div>
+                  </div>
+                  <div class="col-md">
+                    <div class="portfolioContentCol">
+                      <h4 class="lgTitle"><a href="{% url 'main:portfolio' slug=item.slug %}">{{ item.name }}</a></h4>
+                      <ul class="portfolioOption">
+                        <li><span class="dateLbl">{{ item.date.year }}</span></li>
+                      </ul>
+                      <p>{{ item.description }}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        {% endwith %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
+<section>
+  <div class="sectionSpaceSm lightBg">
+    <div class="container">
+      <div class="row pb-3 align-items-center">
+        <div class="col">
+          <h4 class="smText regular" style="display: inline-block; vertical-align: middle; margin: 0;">Other Featured Projects</h4>
+        </div>
+      </div>
+      <div class="sliderOuter">
+        <div class="swiper certificatesSlider">
+          <div class="swiper-wrapper">
+            {% for p in portfolio %}
+              {% if p.is_active and p.featured %}
+                <div class="swiper-slide" id="two">
+                  <div class="portfolioCard">
+                    <div class="row g-4 align-items-center">
+                      <div class="col-md-auto">
+                        <div class="portfolioImgCol">
+                          <a href="{% url 'main:portfolio' slug=p.slug %}"><img src="{{p.image_url}}" alt="..."></a>
+                        </div>
+                      </div>
+                      <div class="col-md">
+                        <div class="portfolioContentCol">
+                          <h4 class="lgTitle"><a href="{% url 'main:portfolio' slug=p.slug %}">{{p.name}}</a></h4>
+                          <ul class="portfolioOption">
+                            <li><span class="dateLbl">{{p.date.year}}</span></li>
+                          </ul>
+                          <p>{{p.description}}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+        <div class="cert-swiper-button-next swiper-button-next swiperBtnStyle"></div>
+        <div class="cert-swiper-button-prev swiper-button-prev swiperBtnStyle"></div>
+        <div class="swiper-pagination swiperPaginationStyle posInitial"></div>
+      </div>
+    </div>
+  </div>
+  <div class="d-md-none text-center">
+    <p>Swipe to view more</p>
+  </div>
+</section>
+
+<section>
+  <div class="sectionSpaceSm lightBg">
+    <div class="container">
+      <div class="row pb-3 align-items-center">
+        <div class="col">
+          <h4 class="smText regular" style="display: inline-block; vertical-align: middle; margin: 0;">Certificates</h4>
+        </div>
+      </div>
+      <div class="sliderOuter">
+        <div class="swiper certificatesSlider">
+          <div class="swiper-wrapper">
+            {% for c in certificates %}
+              {% if c.is_active %}
+                <div class="swiper-slide" id="one">
+                  <div class="cardStyle1">
+                    <h4 class="mdTitle cs1Title">
+                      <a href="{% url 'main:dev' %}">{{c.title}}</a>
+                    </h4>
+                    <ul class="cardOptionCol">
+                      <li>{{c.date.date}}</li>
+                      <li>{{c.name|title}}</li>
+                    </ul>
+                    <p>{{c.description}}</p>
+                    <i><h6>{{ c.category }}</h6></i>
+                    {% if c.is_ongoing %}
+                      <i>Status: learning</i>
+                    {% else %}
+                      <i>Status: complete</i>
+                    {% endif %}
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+        <div class="cert-swiper-button-next swiper-button-next swiperBtnStyle"></div>
+        <div class="cert-swiper-button-prev swiper-button-prev swiperBtnStyle"></div>
+        <div class="swiper-pagination swiperPaginationStyle posInitial"></div>
+      </div>
+    </div>
+  </div>
+  <div class="d-md-none text-center">
+    <p>Swipe to view more</p>
+  </div>
+</section>
+
+<section>
+  <div class="sectionSpaceSm lightBg">
+    <div class="container">
+      <div class="row pb-3 align-items-center">
+        <div class="col">
+          <h4 class="smText regular" style="display: inline-block; vertical-align: middle; margin: 0;">Recent Blogs</h4>
+        </div>
+        <div class="col-auto">
+          <a href="{% url 'main:blogs' %}" class="simpleLink">View all</a>
+        </div>
+      </div>
+      <div class="row g-3">
+        {% for b in blogs %}
+          {% if b.is_active %}
+            <div class="col-lg-6">
+              <div class="cardStyle1">
+                <h4 class="mdTitle cs1Title"><a href="{% url 'main:blog' slug=b.slug %}">{{b.name}}</a></h4>
+                <ul class="cardOptionCol">
+                  <li>{{b.timestamp.date}}</li>
+                  <li>{{b.author}}</li>
+                </ul>
+                <p>{{b.description}}</p>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Bell Icon for Webhook Events -->
+<div class="bell-icon" style="position: fixed; top: 20px; left: 20px; z-index: 1000;">
+  <img src="https://www.svgrepo.com/show/513275/bell.svg" alt="Bell Icon" width="30" height="30" onclick="toggleDropdown()">
+  <div id="webhookDropdown" class="webhook-dropdown">
+    <ul>
+      {% for event in latest_events|slice:":5" %}
+        <li>
+          <a href="{{ event.commit_url }}" target="_blank">
+            <strong>{{ event.repository }}</strong> - {{ event.description }}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+
+{% endblock %}
+<!-- ================================
+End Content
+================================= -->

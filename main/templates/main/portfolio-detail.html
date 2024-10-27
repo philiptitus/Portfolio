@@ -1,0 +1,347 @@
+{% extends 'main/base.html' %}
+
+{% load static %}
+
+<!-- ================================
+Start SEO blocks
+================================= -->
+{% block title %}Project{% endblock %}
+{% block decription %}{% endblock %}
+{% block keywords %}{% endblock %}
+<!-- ================================
+END SEO blocks
+================================= -->
+
+<!-- ================================
+Start CSS blocks
+================================= -->
+{% block extend_header %}{% endblock %}
+<!-- ================================
+END CSS blocks
+================================= -->
+
+<!-- ================================
+Start script blocks
+================================= -->
+{% block extend_footer %}{% endblock %}
+<!-- ================================
+END script blocks
+================================= -->
+
+<!-- ================================
+Start Content
+================================= -->
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/desc.css' %}">
+
+<style>
+  .skills-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .skill-tag {
+    background-color: #f1f1f1;
+    border-radius: 20px;
+    padding: 5px 10px;
+    font-size: 12px;
+    color: #333;
+    display: inline-block;
+  }
+
+  .gallery {
+    display: flex;
+    flex-wrap: wrap;
+    /* Compensate for excess margin on outer gallery flex items */
+    margin: -1rem -1rem;
+  }
+
+  .gallery-item {
+    /* Minimum width of 24rem and grow to fit available space */
+    flex: 1 0 24rem;
+    /* Margin value should be half of grid-gap value as margins on flex items don't collapse */
+    margin: 1rem;
+    box-shadow: 0.3rem 0.4rem 0.4rem rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+  }
+
+  .gallery-image {
+    display: block;
+    width: 50%;
+    height: 50%;
+    object-fit: cover;
+    transition: transform 400ms ease-out;
+  }
+
+  .gallery-image:hover {
+    transform: scale(1.15);
+  }
+
+  /*
+
+  The following rule will only run if your browser supports CSS grid.
+
+  Remove or comment-out the code block below to see how the browser will fall-back to flexbox styling.
+
+  */
+
+  @supports (display: grid) {
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(24rem, 1fr));
+      grid-gap: 2rem;
+    }
+
+    .gallery,
+    .gallery-item {
+      margin: 0;
+    }
+  }
+
+  /* Media query for mobile devices */
+  @media (max-width: 768px) {
+    .gallery, .carousel-controls {
+      display: none;
+    }
+
+    .hero-img img, .image img {
+      width: 100%;
+      height: auto;
+    }
+  }
+</style>
+
+<!-- Hero Section -->
+<div class="hero">
+  <div class="hero-img">
+    <img src="{{object.imager_url}}" style="width: 500px;" alt="Pixel Skincare">
+  </div>
+  <div class="hero-text">
+    <h1>{{object.name|title}}</h1>
+    {% if object.category == 'DATA SCIENCE.AI AND ML' %}
+      <div class="core">
+        <a href="{% url 'main:dscience' %}" class="btn"> {{ object.category }}</a>
+      </div>
+      {% elif object.category == 'WEB DEVELOPMENT' %}
+      <div class="core">
+        <a href="{% url 'main:webdevelopment' %}" class="btn"> {{ object.category }}</a>
+      </div>
+      {% elif object.category == 'MOBILE DEVELOPMENT' %}
+      <div class="core">
+        <a href="{% url 'main:mobiledevelopment' %}" class="btn"> {{ object.category }}</a>
+      </div>
+      {% elif object.category == 'CYBERSECURITY' %}
+      <div class="core">
+        <a href="{% url 'main:cybersecurity' %}" class="btn"> {{ object.category }}</a>
+      </div>
+      {% elif object.category == 'CLOUD COMPUTING' %}
+      <div class="core">
+        <a href="{% url 'main:cloud' %}" class="btn"> {{ object.category }}</a>
+      </div>
+      {% elif object.category == 'GAME DEVELOPMENT' %}
+      <div class="core">
+        <a href="{% url 'main:game' %}" class="btn"> {{ object.category }}</a>
+      </div>
+      {% else %}
+      <div class="core">
+        <a href="{% url 'main:other' %}"  class="btn"><h6>{{ object.category }}</h6></a>
+      </div>
+      {% endif %}
+
+      <!-- Display skills as tags -->
+      <div class="skills-container">
+        <h5>Tech Stack</h5>
+        {% for skill in object.skills.all %}
+          <span class="skill-tag">{{ skill.name }}</span>
+        {% endfor %}
+      </div>
+  </div>
+</div>
+
+<!-- Featured Section -->
+<section id="featured">
+  <div class="title title-left">
+    <span class="line"></span><h6>{{object.name}}</h6>
+  </div>
+  <div class="wrapper">
+    <div class="image">
+      <img src="{{object.image_url}}" alt="Pixel Facial Cream">
+      {% if object.image2_url or object.image3_url or object.image4_url or object.image5_url or object.image6_url or object.image7_url or object.image8_url or object.image9_url or object.image10_url %}
+        <div class="container">
+          <div class="gallery" id="gallery"></div>
+        </div>
+        <script>
+          const images = [
+            {% if object.image2_url %}
+              { url: "{{object.image2_url}}", alt: "Image 2" },
+            {% endif %}
+            {% if object.image3_url %}
+              { url: "{{object.image3_url}}", alt: "Image 3" },
+            {% endif %}
+            {% if object.image4_url %}
+              { url: "{{object.image4_url}}", alt: "Image 4" },
+            {% endif %}
+            {% if object.image5_url %}
+              { url: "{{object.image5_url}}", alt: "Image 5" },
+            {% endif %}
+            {% if object.image6_url %}
+              { url: "{{object.image6_url}}", alt: "Image 6" },
+            {% endif %}
+            {% if object.image7_url %}
+              { url: "{{object.image7_url}}", alt: "Image 7" },
+            {% endif %}
+            {% if object.image8_url %}
+              { url: "{{object.image8_url}}", alt: "Image 8" },
+            {% endif %}
+            {% if object.image9_url %}
+              { url: "{{object.image9_url}}", alt: "Image 9" },
+            {% endif %}
+            {% if object.image10_url %}
+              { url: "{{object.image10_url}}", alt: "Image 10" }
+            {% endif %}
+          ];
+
+          const gallery = document.getElementById('gallery');
+
+          // Loop through the images array and create gallery items
+          images.forEach(image => {
+            const galleryItem = document.createElement('div');
+            galleryItem.classList.add('gallery-item');
+
+            const img = document.createElement('img');
+            img.classList.add('gallery-image');
+            img.src = image.url;
+            img.alt = image.alt;
+
+            galleryItem.appendChild(img);
+            gallery.appendChild(galleryItem);
+          });
+        </script>
+      {% endif %}
+    </div>
+    <div class="text"  style="margin-right: 20px;">
+      <h6>Completed On: {{ object.date }}</h6>
+      <p>{{object.body|safe}}</p>
+      {% if object.category != 'MOBILE DEVELOPMENT' %}
+        <a href="{{ object.url }}" class="btn" target="_blank">View Project</a>
+        <br/>
+      {% endif %}
+      <br/>
+      {% if object.category == 'MOBILE DEVELOPMENT' %}
+        <div style="text-align: center; margin: 20px 0;">
+          <h5>DOWNLOAD OPTIONS</h5>
+          <div style="margin: 10px;">
+            <a href="javascript:void(0);" style="display: inline-block; padding: 10px 20px; border: none; border-radius: 5px; text-decoration: none; color: white; font-weight: bold; background-color: #FF9900;" onclick="showInstruction('amazon')">
+              <img src="https://www.svgrepo.com/show/349584/amazon.svg" style="width: 20px; height: 20px; margin-right: 10px; vertical-align: middle;" alt="Amazon Logo">Amazon
+            </a>
+          </div>
+          <div style="margin: 10px;">
+            <a href="javascript:void(0);" style="display: inline-block; padding: 10px 20px; border: none; border-radius: 5px; text-decoration: none; color: white; font-weight: bold; background-color: #3DDC84;" onclick="showInstruction('apk')">
+              <img src="https://www.svgrepo.com/show/475427/android.svg" style="width: 20px; height: 20px; margin-right: 10px; vertical-align: middle;" alt="Android Logo">APK (Android)
+            </a>
+          </div>
+          <p id="apk-instruction" style="display: none;">
+            {% if object.url %}
+              To download the APK, click the button below. Once downloaded, transfer the APK file to your Android device and open it to begin the installation. Note that this application is currently available for Android devices only.<br>
+              <a download href="{{object.url}}" style="display: inline-block; padding: 10px 20px; border: none; border-radius: 5px; text-decoration: none; color: white; font-weight: bold; background-color: #3DDC84;">Download APK (Android)</a>
+            {% else %}
+              <span style="color: red;">This release is not available on this platform yet.</span>
+            {% endif %}
+          </p>
+          <p id="amazon-instruction" style="display: none;">
+            {% if object.amazon_url %}
+              To get the app from the Amazon App Store, click the button below. Use this if you want to get the latest updates and smaller application sizes. Updates on APK are delayed by about 2 or 3 days.<br>
+              <a href="{{object.amazon_url}}" target="_blank" style="display: inline-block; padding: 10px 20px; border: none; border-radius: 5px; text-decoration: none; color: white; font-weight: bold; background-color: #FF9900;">Amazon App Store</a>
+            {% else %}
+              <span style="color: red;">This release is not available on this platform yet.</span>
+            {% endif %}
+          </p>
+        </div>
+        <script>
+          function showInstruction(option) {
+            document.getElementById('apk-instruction').style.display = 'none';
+            document.getElementById('amazon-instruction').style.display = 'none';
+            if (option === 'apk') {
+              document.getElementById('apk-instruction').style.display = 'block';
+            } else if (option === 'amazon') {
+              document.getElementById('amazon-instruction').style.display = 'block';
+            }
+          }
+        </script>
+      {% endif %}
+      <br/>
+      <br/>
+      <a href="{{ object.url_3 }}" class="btn" target="_blank">View API Documentation</a>
+      <br/>
+      <br/>
+      <a href="{{ object.url_2 }}" class="btn" target="_blank"><h6>View Source Code</h6></a>
+      <br/>
+      <br/>
+    </div>
+  </div>
+</section>
+
+<section id="collections">
+  <div class="title title-right">
+    <span class="line line-right"></span><a href="{% url 'main:contact' %}"><h3><b style="color: brown;">Reach out?</b></h3></a>
+    <hr>
+    <section>
+      <div class="sectionSpaceSm">
+        <div class="container">
+        </div>
+      </div>
+      <div class="core">
+        <h6>Languange: {{ object.core_skill }}</h6>
+      </div>
+    </section>
+  </div>
+  <div class="wrapper">
+    <!-- Placeholder for the contact section -->
+    <div id="contact-section-placeholder"></div>
+  </div>
+</section>
+
+{% for v in videos %}
+<section id="about">
+  <div class="title title-left">
+    <span class="line"></span><h3>{{ v.text }}</h3>
+  </div>
+  <div class="wrapper">
+    <div class="text">
+      <p>{{ v.description }}</p>
+    </div>
+    <div class="video-wrapper">
+      <iframe width="560" height="315" src="{{ v.url }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrapper">
+    <div class="form-wrapper">
+      <!-- <h4>Add More Beauty To Your Email</h4>
+      <form id="form" action="https://www.freecodecamp.com/email-submit">
+        <input type="email" id="email" name="email" placeholder="Your email" required>
+        <input type="submit" id="submit" value="OK" class="submit">
+      </form> -->
+    </div>
+    <div class="contact-wrapper">
+      <div class="wrapper">
+        <ul class="social-menu">
+          <li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+          <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+          <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+          <li><a href="#"><i class="fa fa-youtube-play" aria-hidden="true"></i></a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+{% endfor %}
+
+{% endblock %}
+<!-- ================================
+End Content
+================================= -->
