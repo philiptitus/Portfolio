@@ -59,7 +59,7 @@ Start Content
           <div class="col-md-6 pColMain">
             <div class="pCol">
               <a href="{% url 'main:blog' slug=obj.slug %}" >
-              <img src="{{obj.image.url}}" alt="..." class="pImg">
+              <img src="{{obj.image_url}}" alt="..." class="pImg">
               <i><h6>{{ obj.name }}</h6></i>
               </a>
             </div>
@@ -146,7 +146,7 @@ Start Content
             <div class="col-md-6 pColMain">
               <div class="pCol">
                 <a href="{% url 'main:portfolio' slug=obj.slug %}" >
-                <img src="{{obj.image.url}}" alt="..." class="pImg">
+                <img src="{{obj.image_url}}" alt="..." class="pImg">
                 <i><h6>{{ obj.name }}</h6></i>
                 </a>
               </div>

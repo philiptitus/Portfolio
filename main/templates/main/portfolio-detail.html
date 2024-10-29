@@ -69,9 +69,11 @@ Start Content
 
   .gallery-image {
     display: block;
-    width: 50%;
-    height: 50%;
-    object-fit: cover;
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    max-height: 300px; /* Set a maximum height */
+    object-fit: contain; /* Maintain aspect ratio */
     transition: transform 400ms ease-out;
   }
 
@@ -154,6 +156,7 @@ Start Content
       <div class="skills-container">
         <h5>Tech Stack</h5>
         {% for skill in object.skills.all %}
+
           <span class="skill-tag">{{ skill.name }}</span>
         {% endfor %}
       </div>
@@ -168,6 +171,8 @@ Start Content
   <div class="wrapper">
     <div class="image">
       <img src="{{object.image_url}}" alt="Pixel Facial Cream">
+      <br/>
+      <br/>
       {% if object.image2_url or object.image3_url or object.image4_url or object.image5_url or object.image6_url or object.image7_url or object.image8_url or object.image9_url or object.image10_url %}
         <div class="container">
           <div class="gallery" id="gallery"></div>
