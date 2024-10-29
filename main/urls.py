@@ -10,7 +10,7 @@ urlpatterns = [
     path('privacy/', views.PrivacyView.as_view(), name="privacy"),
     path('404/', views.NotFoundView.as_view(), name="404"),
 
-    path('new/', views.LatestEventsView.as_view(), name='latest-events'),
+    path('new/', views.LatestEventsView.as_view(), name='latest_events'),
 
     path('development/', views.Development.as_view(), name="dev"),
 	path('contact/', views.ContactView.as_view(), name="contact"),

@@ -39,10 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ckeditor',
+    'corsheaders',
     'main'
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',  # Must be at the top
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -189,6 +191,10 @@ SITE_UNDER_CONSTRUCTION = False
 if SITE_UNDER_CONSTRUCTION == True:
     # Custom middleware for "Under Construction" mode
     MIDDLEWARE.insert(0, 'main.middleware.UnderConstructionMiddleware')
+
+
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 
 

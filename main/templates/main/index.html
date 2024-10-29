@@ -20,33 +20,46 @@ Start CSS blocks
     cursor: pointer;
   }
 
-  .webhook-dropdown {
+  /* Ensure the modal overlay is centered and displays fully */
+  .modal-overlay {
     display: none;
-    position: absolute;
-    top: 40px;
+    position: fixed;
+    top: 0;
     left: 0;
-    background-color: white;
-    border: 1px solid #ccc;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    max-height: 200px;
-    overflow-y: auto;
-    z-index: 1000;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
   }
 
-  .webhook-dropdown ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+ /* Ensure modal content is centered within the overlay */
+ .modal {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
 
-  .webhook-dropdown li {
-    padding: 10px;
-    border-bottom: 1px solid #eee;
+  .modal-header {
+    font-size: 18px;
+    margin-bottom: 10px;
   }
 
-  .webhook-dropdown li a {
-    text-decoration: none;
-    color: #333;
+  .modal-body {
+    margin-bottom: 10px;
+  }
+
+  .close-btn {
+    cursor: pointer;
+    background: #ff4d4d;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
   }
 </style>
 {% endblock %}
@@ -59,18 +72,15 @@ Start script blocks
 ================================= -->
 {% block extend_footer %}
 <script>
-  function toggleDropdown() {
-    var dropdown = document.getElementById('webhookDropdown');
-    dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+  function toggleModal() {
+    const modalOverlay = document.getElementById('modal');
+    modalOverlay.style.display = modalOverlay.style.display === 'none' || modalOverlay.style.display === '' ? 'flex' : 'none';
   }
 
-  // Close the dropdown if the user clicks outside of it
   window.onclick = function(event) {
-    if (!event.target.matches('.bell-icon')) {
-      var dropdown = document.getElementById('webhookDropdown');
-      if (dropdown.style.display === 'block') {
-        dropdown.style.display = 'none';
-      }
+    const modalOverlay = document.getElementById('modal');
+    if (event.target === modalOverlay) {
+      modalOverlay.style.display = 'none';
     }
   }
 </script>
@@ -299,21 +309,107 @@ Start Content
   </div>
 </section>
 
-<!-- Bell Icon for Webhook Events -->
-<div class="bell-icon" style="position: fixed; top: 20px; left: 20px; z-index: 1000;">
-  <img src="https://www.svgrepo.com/show/513275/bell.svg" alt="Bell Icon" width="30" height="30" onclick="toggleDropdown()">
-  <div id="webhookDropdown" class="webhook-dropdown">
-    <ul>
-      {% for event in latest_events|slice:":5" %}
-        <li>
-          <a href="{{ event.commit_url }}" target="_blank">
-            <strong>{{ event.repository }}</strong> - {{ event.description }}
-          </a>
-        </li>
-      {% endfor %}
-    </ul>
+ <!-- Bell Icon -->
+ <div class="bell-icon" style="position: fixed; top: 20px; left: 20px; z-index: 1000;">
+  <img src="https://www.svgrepo.com/show/513275/bell.svg" alt="Bell Icon" width="30" height="30" data-bs-toggle="modal" data-bs-target="#notificationModal">
+</div>
+
+<!-- Modal Structure -->
+<!-- Modal Structure -->
+<div class="modal fade" id="notificationModal" tabindex="-1" aria-labelledby="notificationModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" style="background-color: #FFE5B4; border-radius: 15px;"> <!-- Light orange background -->
+      <div class="modal-header" style="border-bottom: none;">
+        <h5 class="modal-title" id="notificationModalLabel" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Recent Activities</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> <!-- Close button -->
+      </div>
+      <div class="modal-body">
+        <p style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 14px; color: #888; text-align: center; margin: 0 0 10px;">Powered by GitHub Webhooks</p>
+        <div id="loading-spinner" style="display: none; text-align: center;">
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+        <ul id="activity-list" style="list-style-type: none; padding: 0; margin: 0;"></ul>
+        <p id="no-updates-message" style="display: none; text-align: center; color: #ff0000;">No new updates yet.</p>
+      </div>
+    </div>
   </div>
 </div>
+
+<script>
+// Function to fetch and display recent activities
+async function fetchRecentActivities() {
+  const activityList = document.getElementById('activity-list');
+  const loadingSpinner = document.getElementById('loading-spinner');
+  const noUpdatesMessage = document.getElementById('no-updates-message');
+  
+  // Show loading spinner and hide other elements initially
+  loadingSpinner.style.display = 'block';
+  activityList.innerHTML = '';
+  noUpdatesMessage.style.display = 'none';
+
+  try {
+    const response = await fetch('https://mrphilip.pythonanywhere.com/new/');
+    const data = await response.json();
+
+    // Hide loading spinner
+    loadingSpinner.style.display = 'none';
+
+    if (data.length > 0) {
+      data.slice(0, 5).forEach(event => {
+        const listItem = document.createElement('li');
+        listItem.innerHTML = `
+          <a href="${event.commit_url}" target="_blank" style="text-decoration: none; color: #007bff;">
+            <strong>${event.repository}</strong> - ${event.description}
+          </a>`;
+        activityList.appendChild(listItem);
+      });
+    } else {
+      // Show message if no updates are available
+      noUpdatesMessage.style.display = 'block';
+    }
+  } catch (error) {
+    console.error('Error fetching activities:', error);
+    loadingSpinner.style.display = 'none';
+    noUpdatesMessage.innerText = 'Failed to load updates. Please try again later.';
+    noUpdatesMessage.style.display = 'block';
+  }
+}
+
+// Trigger the fetch function each time the modal is opened
+document.getElementById('notificationModal').addEventListener('show.bs.modal', fetchRecentActivities);
+</script>
+
+<style>
+/* Add some custom styles */
+.modal-content {
+  transition: all 0.3s ease; /* Smooth transition */
+}
+
+.modal-body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#activity-list li {
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+}
+
+#activity-list li a {
+  color: #007bff;
+}
+
+#activity-list li a:hover {
+  text-decoration: underline;
+}
+
+#no-updates-message {
+  font-weight: bold;
+}
+</style>
+
+
 
 {% endblock %}
 <!-- ================================
