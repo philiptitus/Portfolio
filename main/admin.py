@@ -48,8 +48,11 @@ class MediaAdmin(admin.ModelAdmin):
 #             'fields': ('date', 'star', 'featured')
 #         }),
 #     )
-admin.site.register(Portfolio)
+class PortfolioAdmin(admin.ModelAdmin):
+    list_display = ['name', 'category', 'core_skill', 'is_active']
+    filter_horizontal = ('skills',)  # Enables the dual list selection widget for skills
 
+admin.site.register(Portfolio, PortfolioAdmin)
 @admin.register(Blog)
 class BlogAdmin(admin.ModelAdmin):
     list_display = ('id','name','is_active')

@@ -156,6 +156,8 @@ EMAIL_USE_SSL = False  # Use True for SSL
 
 
 
+
+
 CKEDITOR_CONFIGS = {
     'default': {
         'toolbar': 'Custom',

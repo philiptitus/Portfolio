@@ -161,6 +161,10 @@ class Portfolio(models.Model):
         return f"/portfolio/{self.slug}"
 
 
+
+
+
+
 class Project(models.Model):
     CATEGORY = [
         ('DATA SCIENCE.AI AND ML', 'DATA SCIENCE.AI AND ML'),

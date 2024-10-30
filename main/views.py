@@ -48,7 +48,7 @@ class IndexView(generic.TemplateView):
 class ContactView(FormView):
     template_name = "main/contact.html"
     form_class = ContactForm
-    success_url = "/success"
+    success_url = "/success/"
 
     def form_valid(self, form):
         form.save()
@@ -377,5 +377,5 @@ class LatestEventsView(ListView):
 
     def render_to_response(self, context, **response_kwargs):
         # Extract only the specified fields for each event
-        events = list(context['events'].values('commit_url', 'repository_url', 'repository', 'description'))
+        events = list(context['events'].values('commit_url', 'repository_url', 'repository', 'description', 'timestamp'))
         return JsonResponse(events, safe=False)
