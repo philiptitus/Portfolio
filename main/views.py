@@ -32,7 +32,7 @@ class IndexView(generic.TemplateView):
 
 		skills = Skill.objects.all
 		certificates = Certificate.objects.filter(is_active=True).order_by('-date')
-		blogs = Blog.objects.filter(is_active=True)
+		blogs = Blog.objects.filter(is_active=True).order_by('-timestamp')
 		portfolio = Portfolio.objects.filter(is_active=True)
 
 		context["skills"] = skills
