@@ -106,7 +106,7 @@ Start Content
                 <div class="container-fluid">
 
                 <div style="font-family: 'Times New Roman', Times, serif; font-style: italic; font-size: 20px; color: #dc871e; text-align: center;">
-                  "Software Engineer and Machine Learning Engineer"
+                  "Software / Machine Learning Engineer"
                 </div>
 
           </p>
@@ -224,7 +224,7 @@ Start Content
     <div class="container">
       <div class="row pb-3 align-items-center">
         <div class="col">
-          <h4 class="smText regular" style="display: inline-block; vertical-align: middle; margin: 0;">Certificates</h4>
+          <h4 class="smText regular" style="display: inline-block; vertical-align: middle; margin: 0;">Education & Certifications</h4>
         </div>
       </div>
       <div class="sliderOuter">
@@ -264,6 +264,54 @@ Start Content
     <p>Swipe to view more</p>
   </div>
 </section>
+
+
+
+
+
+
+<section>
+  <div class="sectionSpaceSm lightBg">
+    <div class="container">
+      <div class="row pb-3 align-items-center">
+        <div class="col">
+          <h4 class="smText regular" style="display: inline-block; vertical-align: middle; margin: 0;">Awards & Honors</h4>
+        </div>
+      </div>
+      <div class="sliderOuter">
+        <div class="swiper certificatesSlider">
+          <div class="swiper-wrapper">
+            {% for c in awards %}
+              {% if c.is_active %}
+                <div class="swiper-slide" id="one">
+                  <div class="cardStyle1">
+                    <h4 class="mdTitle cs1Title">
+                      <a>{{c.title}}</a>
+                    </h4>
+                    <ul class="cardOptionCol">
+                      <img src="{{ c.image_url }}" alt="...">
+                      <li>{{c.date.date}}</li>
+                    </ul>
+                    <p>{{c.description}}</p>
+                    <i><h6>Issued by: {{ c.issued_by }}</h6></i>
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+        <div class="cert-swiper-button-next swiper-button-next swiperBtnStyle"></div>
+        <div class="cert-swiper-button-prev swiper-button-prev swiperBtnStyle"></div>
+        <div class="swiper-pagination swiperPaginationStyle posInitial"></div>
+      </div>
+    </div>
+  </div>
+  <div class="d-md-none text-center">
+    <p>Swipe to view more</p>
+  </div>
+</section>
+
+
 
 <section>
   <div class="sectionSpaceSm lightBg">

@@ -9,7 +9,8 @@ from . models import (
     Skill,
     Project,
     Video,
-    WebhookEvent
+    WebhookEvent,
+    Award
     )
 
 
@@ -75,6 +76,6 @@ class VideoAdmin(admin.ModelAdmin):
         list_display = ('url','text',)
 
 admin.site.register(WebhookEvent)
-
+admin.site.register(Award)
 
 

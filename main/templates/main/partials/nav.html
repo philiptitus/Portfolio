@@ -21,7 +21,7 @@ Start Navigation Bar
                                 <!--<li><a href="{%url 'main:home'%}">Home</a></li>-->
                                 <li><a href="{%url 'main:portfolios' %}">All Projects</a></li>
                                 <!--<li><a href="{%url 'main:projects' %}">Coming Soon</a></li>-->
-                                <li><a href="{% url 'main:blogs' %}">Blog</a></li>
+                                <li><a href="{% url 'main:blogs' %}">My Blogs</a></li>
                                 <li><a href="{%url 'main:contact'%}">Contact</a></li>
                                 <!-- Bell Icon -->
                                 <li>
@@ -86,6 +86,8 @@ async function fetchRecentActivities() {
       data.forEach(event => {
         const listItem = document.createElement('li');
         listItem.innerHTML = `
+<a href="${event.repository_url}" target="_blank" style="text-decoration: none; color: green; font-family: Arial, sans-serif;">Project: ${event.repository_url}</a>
+
           <a href="${event.commit_url}" target="_blank" style="text-decoration: none; color: #007bff;">
             <strong>${event.repository}</strong> - ${event.description}
           </a>

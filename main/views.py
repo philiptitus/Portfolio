@@ -15,7 +15,8 @@ from .models import (
 		Skill,
 		Project,
 		Video,
-		WebhookEvent
+		WebhookEvent,
+		Award
 	)
 
 from django.views import generic
@@ -33,10 +34,13 @@ class IndexView(generic.TemplateView):
 		skills = Skill.objects.all
 		certificates = Certificate.objects.filter(is_active=True).order_by('-date')
 		blogs = Blog.objects.filter(is_active=True).order_by('-timestamp')
-		portfolio = Portfolio.objects.filter(is_active=True)
+		portfolio = Portfolio.objects.filter(is_active=True).order_by('-date')
+		awards = Award.objects.filter(is_active=True).order_by('-date')
 
 		context["skills"] = skills
 		context["certificates"] = certificates
+		context["awards"] = awards
+
 		context["blogs"] = blogs
 		context["portfolio"] = portfolio
 		return context
@@ -86,7 +90,7 @@ class PortfolioView(generic.ListView):
 	paginate_by = 10
 
 	def get_queryset(self):
-		return super().get_queryset().filter(is_active=True)
+		return super().get_queryset().filter(is_active=True).order_by('-date')
 
 
 class PortfolioDetailView(generic.DetailView):
