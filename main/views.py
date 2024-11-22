@@ -115,7 +115,7 @@ class BlogView(generic.ListView):
 	paginate_by = 10
 
 	def get_queryset(self):
-		return super().get_queryset().filter(is_active=True)
+		return super().get_queryset().filter(is_active=True).order_by('-timestamp')
 
 
 class BlogDetailView(generic.DetailView):
