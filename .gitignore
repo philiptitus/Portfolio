@@ -11,6 +11,7 @@ __pycache__/
 *.pyd
 *.db
 *.sqlite3
+*.bak
 
 # Ignore Django migration files if you plan to regenerate them
 # Comment these lines out if you want to keep migration history
@@ -58,3 +59,4 @@ pip-wheel-metadata/
 # Windows-specific files
 Thumbs.db
 desktop.ini
+/backups
