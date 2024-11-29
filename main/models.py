@@ -364,3 +364,29 @@ class Video(models.Model):
     url = models.URLField(blank=True, null=True)
     text = models.CharField(max_length=264)
     description = models.TextField(max_length=1000)
+
+
+
+
+
+
+
+from django.db import models
+
+class JobExperience(models.Model):
+    job_title = models.CharField(max_length=100, help_text="Title of the job, e.g., Software Engineer")
+    company_name = models.CharField(max_length=100, help_text="Name of the company")
+    location = models.CharField(max_length=100, blank=True, null=True, help_text="Location of the job (optional)")
+    start_date = models.DateField(help_text="Start date of the job")
+    end_date = models.DateField(blank=True, null=True, help_text="End date of the job. Leave blank if currently working")
+    description = models.TextField(help_text="Description of your responsibilities and achievements")
+    is_current = models.BooleanField(default=False, help_text="Check if this is your current job")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    url = models.URLField(blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.job_title} at {self.company_name}"
+
+    class Meta:
+        ordering = ['-start_date']

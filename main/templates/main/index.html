@@ -269,6 +269,51 @@ Start Content
 
 
 
+<section>
+  <div class="sectionSpaceSm lightBg">
+    <div class="container">
+      <div class="row pb-3 align-items-center">
+        <div class="col">
+          <h4 class="smText regular" style="display: inline-block; vertical-align: middle; margin: 0;">Work Experience</h4>
+        </div>
+      </div>
+      <div class="sliderOuter">
+        <div class="swiper jobsSlider">
+          <div class="swiper-wrapper">
+            {% for j in jobs %}
+                <div class="swiper-slide" id="one">
+                  <div class="cardStyle1">
+                    <h4 class="mdTitle cs1Title">
+                      <a>{{j.job_title}}</a>
+                    </h4>
+                    <ul class="cardOptionCol">
+                      <li>Start Date: {{j.start_date}}</li>
+                      <li>Company: {{j.company_name|title}}</li>
+                    </ul>
+                    <p>{{j.description}}</p>
+                    <i><h6>Location: {{ j.location }}</h6></i>
+                    {% if j.is_current %}
+                    <i style="color: green;">My Current Role</i>
+                    {% endif %}
+                  </div>
+                </div>
+            {% endfor %}
+          </div>
+        </div>
+        <div class="job-swiper-button-next swiper-button-next swiperBtnStyle"></div>
+        <div class="job-swiper-button-prev swiper-button-prev swiperBtnStyle"></div>
+        <div class="swiper-pagination swiperPaginationStyle posInitial"></div>
+      </div>
+    </div>
+  </div>
+  <div class="d-md-none text-center">
+    <p>Swipe to view more</p>
+  </div>
+</section>
+
+
+
+
 
 <section>
   <div class="sectionSpaceSm lightBg">

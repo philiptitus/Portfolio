@@ -10,7 +10,8 @@ from . models import (
     Project,
     Video,
     WebhookEvent,
-    Award
+    Award,
+    JobExperience
     )
 
 
@@ -77,5 +78,5 @@ class VideoAdmin(admin.ModelAdmin):
 
 admin.site.register(WebhookEvent)
 admin.site.register(Award)
-
+admin.site.register(JobExperience)
 

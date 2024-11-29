@@ -16,7 +16,8 @@ from .models import (
 		Project,
 		Video,
 		WebhookEvent,
-		Award
+		Award,
+		JobExperience
 	)
 
 from django.views import generic
@@ -36,10 +37,13 @@ class IndexView(generic.TemplateView):
 		blogs = Blog.objects.filter(is_active=True).order_by('-timestamp')
 		portfolio = Portfolio.objects.filter(is_active=True).order_by('-date')
 		awards = Award.objects.filter(is_active=True).order_by('-date')
+		jobs = JobExperience.objects.order_by('-start_date')
+
 
 		context["skills"] = skills
 		context["certificates"] = certificates
 		context["awards"] = awards
+		context["jobs"] = jobs
 
 		context["blogs"] = blogs
 		context["portfolio"] = portfolio

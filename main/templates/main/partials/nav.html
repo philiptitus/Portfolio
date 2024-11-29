@@ -7,7 +7,7 @@ Start Navigation Bar
         <div class="container-fluid">
             <div class="row align-items-center">
                 <div class="col-auto">
-                    <div class="logoCol"><a href="{% url 'main:home' %}"><img style="width: 50%;" src="{% static 'images/og.svg' %}" alt="..."></a></div>
+                    <div class="logoCol"><a href="{% url 'main:home' %}"><img style="width: 10%;" src="{% static 'images/christmas.png' %}" alt="..."></a></div>
                 </div>
                 <div class="col">
                     <div class="d-md-none">
@@ -86,14 +86,18 @@ async function fetchRecentActivities() {
       data.forEach(event => {
         const listItem = document.createElement('li');
         listItem.innerHTML = `
-<a href="${event.repository_url}" target="_blank" style="text-decoration: none; color: green; font-family: Arial, sans-serif;">Project: ${event.repository_url}</a>
+<div style="font-family: Arial, sans-serif;">
+  <a href="${event.repository_url}" target="_blank" style="text-decoration: none; color: green;">
+    Project: ${event.repository_url}
+  </a>
+  <br>
+  <a href="${event.commit_url}" target="_blank" style="text-decoration: none; color: #007bff;">
+    <strong>${event.repository}</strong> - ${event.description}
+  </a>
+  <br>
+  <small>${new Date(event.timestamp).toLocaleString()}</small>
+</div>
 
-          <a href="${event.commit_url}" target="_blank" style="text-decoration: none; color: #007bff;">
-            <strong>${event.repository}</strong> - ${event.description}
-          </a>
-          <br>
-          <small>${new Date(event.timestamp).toLocaleString()}</small>
-          <br>
         `;
         activityList.appendChild(listItem);
       });
