@@ -142,36 +142,6 @@ $('.navToggle').on('click', function (e) {
 
 
 
-  var swiper = new Swiper(".jobsSlider", {
-    slidesPerView: 1,
-    spaceBetween: 16,
-    pagination: {
-      el: ".swiper-pagination",
-      clickable: true,
-    },
-    navigation: {
-      nextEl: ".job-swiper-button-next",
-      prevEl: ".job-swiper-button-prev",
-    },
-    breakpoints: {
-      640: {
-        slidesPerView: 2,
-        spaceBetween: 16,
-      },
-      768: {
-        slidesPerView: 2,
-        spaceBetween: 16,
-      },
-      1024: {
-        slidesPerView: 2,
-        spaceBetween: 16,
-      },
-    },
-  });
-
-
-
-
 
   
   

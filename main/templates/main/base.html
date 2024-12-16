@@ -6,19 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="google-site-verification" content="T1sIhWvtdzT_vetMspZhaJbGSSkBdurmt5McJgwDlKY" />
     <!-- Include Bootstrap CSS in the head -->
-   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-w5LOjaglnF5An5shNvd6jbO9CD8BdkaTa+60RB/1+7TSOdo0DW0n17DkwpgiNS82" crossorigin="anonymous">
-<!-- Include Bootstrap JS before the closing body tag -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-w5LOjaglnF5An5shNvd6jbO9CD8BdkaTa+60RB/1+7TSOdo0DW0n17DkwpgiNS82" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQta5cD6rfJ7tJcF5b6xlUtZ0u2BoqStvVSp9IT5zSfMd/vEmSrf1cK5SE3ojszx" crossorigin="anonymous"></script>
-
-    <script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "mwgsql2uuh");
-</script>
-
-
 
 
 
@@ -32,17 +21,10 @@
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/gone.png' %}">
     <link rel="apple-touch-icon" type="image/jpg" href="{% static 'images/gone.png' %}">
 
-    <!-- ================================
-    Start CSS
-    ================================= -->
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/swiper@7.0.5/swiper-bundle.min.css">
-    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'css/christmas.css' %}" rel="stylesheet">
     {% block extend_header%}{%endblock%}
-    <!-- ================================
-    End CSS
-    ================================= -->
-
   </head>
   <body>
     {% include 'main/partials/messages.html' %}
@@ -60,6 +42,10 @@
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
     <script src="https://unpkg.com/swiper@7.0.5/swiper-bundle.min.js"></script>
     <script src="{% static 'js/main3.js' %}"></script>
+    <!-- Add the Canvas Confetti library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+
+
     {% block extend_footer %}{%endblock%}
     <!-- ================================
     End Scripts
