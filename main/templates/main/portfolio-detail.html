@@ -229,7 +229,7 @@ Start Content
     <div class="text"  style="margin-right: 20px;">
       <h6>Completed On: {{ object.date }}</h6>
       <p>{{object.body|safe}}</p>
-      {% if object.category != 'MOBILE DEVELOPMENT' %}
+      {% if object.category != 'MOBILE DEVELOPMENT' and object.is_live %}
         <a href="{{ object.url }}" class="btn" target="_blank">View Project</a>
         <br/>
       {% endif %}
@@ -278,7 +278,11 @@ Start Content
       {% endif %}
       <br/>
       <br/>
+      {% if object.is_api %}
+
       <a href="{{ object.url_3 }}" class="btn" target="_blank">View API Documentation</a>
+      {% endif %}
+
       <br/>
       <br/>
       <a href="{{ object.url_2 }}" class="btn" target="_blank"><h6>View Source Code</h6></a>

@@ -143,6 +143,9 @@ class Portfolio(models.Model):
     star = models.BooleanField(default=False)
     featured = models.BooleanField(default=False)
     skills = models.ManyToManyField(Skill, related_name='portfolios', blank=True)
+    video_url = models.URLField(blank=True, null=True)
+    is_api = models.BooleanField(default=True)
+    is_live = models.BooleanField(default=True)
 
     app = models.FileField(upload_to='apk', blank=True, null=True)  # Added field for uploading APK files
 

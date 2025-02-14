@@ -3,39 +3,46 @@
 Start Navigation Bar
 ================================= -->
 <header>
-    <div class="headerCol">
-        <div class="container-fluid">
-            <div class="row align-items-center">
-                <div class="col-auto">
-                    <div class="logoCol"><a href="{% url 'main:home' %}"><img style="width: 50%;" src="{% static 'images/og.svg' %}" alt="..."></a></div>
-                </div>
-                <div class="col">
-                    <div class="d-md-none">
-                        <button class="navToggle">
-                            <span class="navToggle__text">Toggle Menu</span>
-                        </button>
-                    </div>
-                    <div class="navCollapseCol">
-                        <div class="navCol">
-                            <ul>
-                                <!--<li><a href="{%url 'main:home'%}">Home</a></li>-->
-                                <li><a href="{%url 'main:portfolios' %}">All Projects</a></li>
-                                <!--<li><a href="{%url 'main:projects' %}">Coming Soon</a></li>-->
-                                <li><a href="{% url 'main:blogs' %}">My Blogs</a></li>
-                                <li><a href="{%url 'main:contact'%}">Contact</a></li>
-                                <!-- Bell Icon -->
-                                <li>
-                                    <div class="bell-icon" style="position: relative; display: inline-block;">
-                                        <img src="https://www.svgrepo.com/show/513275/bell.svg" alt="Bell Icon" width="30" height="30" data-bs-toggle="modal" data-bs-target="#notificationModal">
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+  <div class="headerCol">
+      <div class="container-fluid">
+          <div class="row align-items-center">
+              <div class="col-auto">
+                  <div class="logoCol"><a href="{% url 'main:home' %}"><img style="width: 50%;" src="{% static 'images/og.svg' %}" alt="..."></a></div>
+              </div>
+              <div class="col">
+                  <div class="d-md-none">
+                      <button class="navToggle">
+                          <span class="navToggle__text">Toggle Menu</span>
+                      </button>
+                  </div>
+                  <div class="navCollapseCol">
+                      <div class="navCol">
+                          <ul>
+                              <li><a href="{%url 'main:portfolios' %}">All Projects</a></li>
+                              <li class="dropdown">
+                                  <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">More</a>
+                                  <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="{%url 'main:contact'%}">Contact</a></li>
+
+                                      <li><a class="dropdown-item" href="{% url 'main:blogs' %}">My Blogs</a></li>
+                                      <li><a class="dropdown-item" href="{%url 'main:dev'%}">MarketPlace</a></li>
+                                  </ul>
+                              </li>
+
+                              <li>
+                                  <div class="bell-icon" style="position: relative; display: inline-block;">
+                                      <img src="https://www.svgrepo.com/show/513275/bell.svg" alt="Bell Icon" width="30" height="30" data-bs-toggle="modal" data-bs-target="#notificationModal">
+                                  </div>
+                              </li>
+
+
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
 </header>
 <!-- ================================
 End Navigation Bar
