@@ -16,50 +16,478 @@ Start CSS blocks
 ================================= -->
 {% block extend_header %}
 <style>
-  .bell-icon {
-    cursor: pointer;
+  /* Modern Design System */
+  :root {
+    --primary: #2D3436;
+    --secondary: #00B894;
+    --accent: #0984E3;
+    --background: #F5F6FA;
+    --surface: #FFFFFF;
+    --text: #2D3436;
+    --text-light: #636E72;
+    --border: #DFE6E9;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
   }
 
-  /* Ensure the modal overlay is centered and displays fully */
-  .modal-overlay {
-    display: none;
+  /* Hero Section */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--primary) 0%, #1E272E 100%);
+    color: white;
+    padding: 6rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-title {
+    font-size: 4rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  .hero-subtitle {
+    font-size: 1.5rem;
+    font-weight: 300;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .btn-primary {
+    background: var(--secondary);
+    color: white;
+    border: none;
+  }
+
+  .btn-primary:hover {
+    background: #00A187;
+    transform: translateY(-2px);
+  }
+
+  .btn-outline {
+    border: 2px solid white;
+    color: white;
+    background: transparent;
+  }
+
+  .btn-outline:hover {
+    background: white;
+    color: var(--primary);
+    transform: translateY(-2px);
+  }
+
+  /* Section Styles */
+  .section {
+    padding: 6rem 0;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 3rem;
+    text-align: center;
+    position: relative;
+  }
+
+  .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: var(--secondary);
+  }
+
+  /* Portfolio Cards */
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+  }
+
+  .portfolio-card {
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 1;
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    background: var(--surface);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+
+  .portfolio-card:hover {
+    transform: scale(1.05);
+    z-index: 100;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  }
+
+  .portfolio-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+
+  .portfolio-content {
+    position: relative;
+    z-index: 2;
+    padding: 2rem;
+  }
+
+  .portfolio-title {
+    color: var(--primary);
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+
+  .portfolio-date {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+
+  /* Swiper Customization */
+  .swiper {
+    padding: 2rem 0;
+  }
+
+  .swiper-slide {
+    height: auto;
+  }
+
+  .swiper-button-next,
+  .swiper-button-prev {
+    color: var(--secondary) !important;
+    background: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    box-shadow: var(--shadow);
+  }
+
+  .swiper-button-next:after,
+  .swiper-button-prev:after {
+    font-size: 1.5rem;
+  }
+
+  .swiper-pagination-bullet {
+    background: var(--secondary) !important;
+    opacity: 0.5;
+    width: 10px;
+    height: 10px;
+  }
+
+  .swiper-pagination-bullet-active {
+    opacity: 1;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .hero-title {
+      font-size: 2.5rem;
+    }
+    
+    .hero-subtitle {
+      font-size: 1.2rem;
+    }
+    
+    .hero-buttons {
+      flex-direction: column;
+    }
+    
+    .btn {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .section-title {
+      font-size: 2rem;
+    }
+  }
+
+  /* Featured Project Card */
+  .featured-project-card {
+    background: var(--surface);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(135deg, var(--primary) 0%, #1E272E 100%);
+    color: white;
+  }
+
+  .featured-project-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  .featured-content {
+    position: relative;
+    z-index: 1;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .featured-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+
+  .featured-title a {
+    color: white;
+    text-decoration: none;
+    transition: var(--transition);
+  }
+
+  .featured-title a:hover {
+    color: var(--secondary);
+  }
+
+  .featured-date {
+    color: var(--secondary);
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .featured-description {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+  }
+
+  /* Shop Section */
+  .shop-banner {
+    background: linear-gradient(135deg, var(--primary) 0%, #1E272E 100%);
+    border-radius: 20px;
+    padding: 4rem 2rem;
+    text-align: center;
+    color: white;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .shop-banner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  .shop-content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .shop-description {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+  }
+
+  .shop-button {
+    background: var(--secondary);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .shop-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent
+    );
+    transition: 0.5s;
+  }
+
+  .shop-button:hover::before {
+    left: 100%;
+  }
+
+  .shop-button:hover {
+    background: #00A187;
+    transform: translateY(-2px);
+    color: white;
+    box-shadow: 0 5px 15px rgba(0, 184, 148, 0.3);
+  }
+
+  /* Video Controls */
+  .video-controls {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+    z-index: 1001;
+  }
+
+  .video-controls button,
+  .video-controls a {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+  }
+
+  .video-controls button:hover,
+  .video-controls a:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+  }
+
+  .video-controls i {
+    font-size: 1.2rem;
+  }
+
+  /* Expanded Video State */
+  .video-container.expanded {
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+  }
+
+  /* Overlay for modal */
+  .portfolio-card:hover::before {
+    content: '';
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 99;
   }
 
- /* Ensure modal content is centered within the overlay */
- .modal {
-    background: white;
-    padding: 20px;
-    border-radius: 5px;
-    width: 300px;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  /* Ensure navigation stays above modal */
+  .swiper-button-next,
+  .swiper-button-prev {
+    z-index: 1001 !important;
   }
 
-  .modal-header {
-    font-size: 18px;
-    margin-bottom: 10px;
+  .swiper-pagination {
+    z-index: 1001 !important;
   }
 
-  .modal-body {
-    margin-bottom: 10px;
+  /* Portfolio Content */
+  .portfolio-content {
+    position: relative;
+    z-index: 2;
   }
 
-  .close-btn {
-    cursor: pointer;
-    background: #ff4d4d;
-    color: white;
-    padding: 5px 10px;
-    border: none;
-    border-radius: 3px;
+  .portfolio-title a {
+    color: var(--primary);
+    text-decoration: none;
+    transition: var(--transition);
+  }
+
+  .portfolio-title a:hover {
+    color: var(--secondary);
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .portfolio-card .video-container {
+      width: 95vw;
+      height: 70vh;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .portfolio-card .video-container {
+      width: 100vw;
+      height: 60vh;
+    }
+  }
+
+  /* Responsive Hero Buttons */
+  @media (max-width: 768px) {
+    .hero-buttons {
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .btn {
+      width: 100%;
+      justify-content: center;
+    }
   }
 </style>
 {% endblock %}
@@ -71,19 +499,7 @@ END CSS blocks
 Start script blocks
 ================================= -->
 {% block extend_footer %}
-<script>
-  function toggleModal() {
-    const modalOverlay = document.getElementById('modal');
-    modalOverlay.style.display = modalOverlay.style.display === 'none' || modalOverlay.style.display === '' ? 'flex' : 'none';
-  }
-
-  window.onclick = function(event) {
-    const modalOverlay = document.getElementById('modal');
-    if (event.target === modalOverlay) {
-      modalOverlay.style.display = 'none';
-    }
-  }
-</script>
+<script src="{% static 'js/carousel.js' %}"></script>
 
 <script type="text/javascript">
   (function(c,l,a,r,i,t,y){
@@ -91,11 +507,7 @@ Start script blocks
       t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
       y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
   })(window, document, "clarity", "script", "mwgsql2uuh");
-  
-  
-  </script>
-
-
+</script>
 {% endblock %}
 <!-- ================================
 END script blocks
@@ -105,317 +517,241 @@ END script blocks
 Start Content
 ================================= -->
 {% block content %}
-<section>
-  <div class="bannerSection">
-    <div class="container">
-      <div class="row g-4 g-md-3  align-items-center">
-
-        <div class="col-md">
-          <div class="bannerContent">
-            <h1 class="xlTitle pb-3">Hi,I’m {{me.userprofile.user}},
-
-              <section class="section-specific-styles"> <!-- Add a unique class to the section -->
-                <div class="container-fluid">
-
-                <div style="font-family: 'Times New Roman', Times, serif; font-style: italic; font-size: 20px; color: #dc871e; text-align: center;">
-                  "Software / Machine Learning Engineer"
-                </div>
-
-          </p>
-          </div>
-        </section>
-
-        <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
-
-            </br></h1>
-            <div class="bannerBtnCol">
-              <div class="row">
-                  <div class="col"><a download href="https://drive.google.com/file/d/1ajM6soc5lJxwVTVnyhqmVjg81uR-ZuBU/view?usp=sharing" class="btn btnPrimary" target="_blank">View Resume</a></div>
-                  <div class="col"><a href="https://github.com/philiptitus" class="btn btnPrimary" target="_blank">My Github</a></div>
-                  <div class="col"><a href="https://linkedin.com/in/philiptitus" class="btn btnPrimary" target="_blank">My LinkedIn</a></div>
-                  <div class="col"><a href="{% url 'main:contact' %}" class="btn btnOutline" target="_blank">Contact</a></div>
-              </div>
-            </div>
-            
-          </div>
+<!-- Hero Section -->
+<section class="hero">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6 hero-content">
+        <h1 class="hero-title">Hi, I'm {{me.userprofile.user}}</h1>
+        <div class="hero-subtitle">Software / Machine Learning Engineer</div>
+        <div class="hero-buttons">
+          <a href="https://drive.google.com/file/d/1ajM6soc5lJxwVTVnyhqmVjg81uR-ZuBU/view?usp=sharing" class="btn btn-primary" target="_blank">
+            <i class="fas fa-file-alt"></i> View Resume
+          </a>
+          <a href="https://github.com/philiptitus" class="btn btn-outline" target="_blank">
+            <i class="fab fa-github"></i> My Github
+          </a>
+          <a href="https://linkedin.com/in/philiptitus" class="btn btn-outline" target="_blank">
+            <i class="fab fa-linkedin"></i> My LinkedIn
+          </a>
+          <a href="https://pmart-pi.vercel.app/" class="btn btn-primary shop-button" target="_blank">
+            <i class="fas fa-shopping-cart"></i> Visit Shop
+          </a>
+          <a href="{% url 'main:contact' %}" class="btn btn-outline">
+            <i class="fas fa-envelope"></i> Contact
+          </a>
         </div>
+      </div>
+      <div class="col-lg-6">
+        <dotlottie-player
+          src="https://lottie.host/0c0c0c0c-0c0c-0c0c-0c0c-0c0c0c0c0c0c/0c0c0c0c-0c0c-0c0c-0c0c-0c0c0c0c0c0c.json"
+          background="transparent"
+          speed="1"
+          style="width: 100%; height: 400px;"
+          loop
+          autoplay>
+        </dotlottie-player>
       </div>
     </div>
   </div>
 </section>
 
-<section>
-  <div class="sectionSpaceSm lightBg">
-    <div class="container">
-      <div class="row pb-3">
-        <div class="col" style="display: flex; align-items: center;">
-          <h4 class="smText regular" style="margin-right: 10px;">My Best Work</h4>
-        </div>
-      </div>
-      <div class="latestRelease">
-        {% with portfolio|dictsort:"date" as sorted_portfolio %}
-          {% for item in sorted_portfolio %}
-            {% if item.star %}
-              <div class="portfolioCard">
-                <div class="row g-4 align-items-center">
-                  <div class="col-md-auto">
-                    <div class="portfolioImgCol">
-                      <a href="{% url 'main:portfolio' slug=item.slug %}"><img src="{{ item.image_url }}" alt="..."></a>
-                    </div>
-                  </div>
-                  <div class="col-md">
-                    <div class="portfolioContentCol">
-                      <h4 class="lgTitle"><a href="{% url 'main:portfolio' slug=item.slug %}">{{ item.name }}</a></h4>
-                      <ul class="portfolioOption">
-                        <li><span class="dateLbl">{{ item.date.year }}</span></li>
-                      </ul>
-                      <p>{{ item.description }}</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            {% endif %}
-          {% endfor %}
-        {% endwith %}
-      </div>
-    </div>
-  </div>
-</section>
-
-<script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
-<section>
-  <div class="sectionSpaceSm lightBg">
-    <div class="container">
-      <div class="row pb-3 align-items-center">
-        <div class="col">
-          <h4 class="smText regular" style="display: inline-block; vertical-align: middle; margin: 0;">Other Featured Projects</h4>
-        </div>
-      </div>
-      <div class="sliderOuter">
-        <div class="swiper projectsSlider">
-          <div class="swiper-wrapper">
-            {% for p in portfolio %}
-              {% if p.is_active and p.featured %}
-                <div class="swiper-slide" id="two">
-                  <div class="portfolioCard">
-                    <div class="row g-4 align-items-center">
-                      <div class="col-md-auto">
-                        <div class="portfolioImgCol">
-                          <a href="{% url 'main:portfolio' slug=p.slug %}"><img src="{{p.image_url}}" alt="..."></a>
-                        </div>
-                      </div>
-                      <div class="col-md">
-                        <div class="portfolioContentCol">
-                          <h4 class="lgTitle"><a href="{% url 'main:portfolio' slug=p.slug %}">{{p.name}}</a></h4>
-                          <ul class="portfolioOption">
-                            <li><span class="dateLbl">{{p.date.year}}</span></li>
-                          </ul>
-                          <p>{{p.description}}</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              {% endif %}
-            {% endfor %}
-          </div>
-        </div>
-        <div class="proj-swiper-button-next swiper-button-next swiperBtnStyle"></div>
-        <div class="proj-swiper-button-prev swiper-button-prev swiperBtnStyle"></div>
-        <div class="swiper-pagination swiperPaginationStyle posInitial"></div>
-      </div>
-    </div>
-  </div>
-  <div class="d-md-none text-center">
-    <p>Swipe to view more</p>
-  </div>
-</section>
-
-<section>
-  <div class="sectionSpaceSm lightBg">
-    <div class="container">
-      <div class="row pb-3 align-items-center">
-        <div class="col">
-          <h4 class="smText regular" style="display: inline-block; vertical-align: middle; margin: 0;">Education & Certifications</h4>
-        </div>
-      </div>
-      <div class="sliderOuter">
-        <div class="swiper certificatesSlider">
-          <div class="swiper-wrapper">
-            {% for c in certificates %}
-              {% if c.is_active %}
-                <div class="swiper-slide" id="one">
-                  <div class="cardStyle1">
-                    <h4 class="mdTitle cs1Title">
-                      <a href="{% url 'main:dev' %}">{{c.title}}</a>
-                    </h4>
-                    <ul class="cardOptionCol">
-                      <li>{{c.date.date}}</li>
-                      <li>{{c.name|title}}</li>
-                    </ul>
-                    <p>{{c.description}}</p>
-                    <i><h6>{{ c.category }}</h6></i>
-                    {% if c.is_ongoing %}
-                      <i>Status: learning</i>
-                    {% else %}
-                      <i>Status: complete</i>
-                    {% endif %}
-                  </div>
-                </div>
-              {% endif %}
-            {% endfor %}
-          </div>
-        </div>
-        <div class="cert-swiper-button-next swiper-button-next swiperBtnStyle"></div>
-        <div class="cert-swiper-button-prev swiper-button-prev swiperBtnStyle"></div>
-        <div class="swiper-pagination swiperPaginationStyle posInitial"></div>
-      </div>
-    </div>
-  </div>
-  <div class="d-md-none text-center">
-    <p>Swipe to view more</p>
-  </div>
-</section>
-
-
-
-
-
-<section>
-  <div class="sectionSpaceSm lightBg">
-    <div class="container">
-      <div class="row pb-3 align-items-center">
-        <div class="col">
-          <h4 class="smText regular" style="display: inline-block; vertical-align: middle; margin: 0;">Work Experience</h4>
-        </div>
-      </div>
-      <div class="sliderOuter">
-        <div class="swiper jobsSlider">
-          <div class="swiper-wrapper">
-            {% for j in jobs %}
-                <div class="swiper-slide" id="one">
-                  <div class="cardStyle1">
-                    <h4 class="mdTitle cs1Title">
-                      <a>{{j.job_title}}</a>
-                    </h4>
-                    <ul class="cardOptionCol">
-                      <li>Start Date: {{j.start_date}}</li>
-                      <li>Company: {{j.company_name|title}}</li>
-                    </ul>
-                    <p>{{j.description}}</p>
-                    <i><h6>Location: {{ j.location }}</h6></i>
-                    {% if j.is_current %}
-                    <i style="color: green;">My Current Role</i>
-                    {% endif %}
-                  </div>
-                </div>
-            {% endfor %}
-          </div>
-        </div>
-        <div class="job-swiper-button-next swiper-button-next swiperBtnStyle"></div>
-        <div class="job-swiper-button-prev swiper-button-prev swiperBtnStyle"></div>
-        <div class="swiper-pagination swiperPaginationStyle posInitial"></div>
-      </div>
-    </div>
-  </div>
-  <div class="d-md-none text-center">
-    <p>Swipe to view more</p>
-  </div>
-</section>
-
-
-
-
-
-<section>
-  <div class="sectionSpaceSm lightBg">
-    <div class="container">
-      <div class="row pb-3 align-items-center">
-        <div class="col">
-          <h4 class="smText regular" style="display: inline-block; vertical-align: middle; margin: 0;">Awards & Honors</h4>
-        </div>
-      </div>
-      <div class="sliderOuter">
-        <div class="swiper awardsSlider">
-          <div class="swiper-wrapper">
-            {% for c in awards %}
-              {% if c.is_active %}
-                <div class="swiper-slide" id="one">
-                  <div class="cardStyle1">
-                    <h4 class="mdTitle cs1Title">
-                      <a>{{c.title}}</a>
-                    </h4>
-                    <ul class="cardOptionCol">
-                      <img src="{{ c.image_url }}" alt="...">
-                      <li>{{c.date.date}}</li>
-                    </ul>
-                    <p>{{c.description}}</p>
-                    <i><h6>Issued by: {{ c.issued_by }}</h6></i>
-                  </div>
-                </div>
-              {% endif %}
-            {% endfor %}
-          </div>
-        </div>
-        <div class="award-swiper-button-next swiper-button-next swiperBtnStyle"></div>
-        <div class="award-swiper-button-prev swiper-button-prev swiperBtnStyle"></div>
-        <div class="swiper-pagination swiperPaginationStyle posInitial"></div>
-      </div>
-    </div>
-  </div>
-  <div class="d-md-none text-center">
-    <p>Swipe to view more</p>
-  </div>
-</section>
-
-
-
-<section>
-  <div class="sectionSpaceSm lightBg">
-    <div class="container">
-      <div class="row pb-3 align-items-center">
-        <div class="col">
-          <h4 class="smText regular" style="display: inline-block; vertical-align: middle; margin: 0;">Recent Blogs</h4>
-        </div>
-        <div class="col-auto">
-          <a href="{% url 'main:blogs' %}" class="simpleLink">View all</a>
-        </div>
-      </div>
-      <div class="sliderOuter">
-        <div class="swiper blogsSlider">
-          <div class="swiper-wrapper">
-
-        {% for b in blogs %}
-          {% if b.is_active %}
-          <div class="swiper-slide" id="three">
-            <div class="cardStyle1">
-                <h4 class="mdTitle cs1Title"><a href="{% url 'main:blog' slug=b.slug %}">{{b.name}}</a></h4>
-                <ul class="cardOptionCol">
-                  <li>{{b.timestamp.date}}</li>
-                  <li>{{b.author}}</li>
-                </ul>
-                <p>{{b.description}}</p>
+<!-- Best Work Section -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">Showcasing Excellence</h2>
+    <div class="portfolio-grid">
+      {% with portfolio|dictsort:"date" as sorted_portfolio %}
+        {% for item in sorted_portfolio %}
+          {% if item.star %}
+            <div class="featured-project-card">
+              <div class="featured-content">
+                <h3 class="featured-title">
+                  <a href="{% url 'main:portfolio' slug=item.slug %}">{{ item.name }}</a>
+                </h3>
+                <div class="featured-date">{{ item.date.year }}</div>
+                <p class="featured-description">{{ item.description }}</p>
+                <a href="{% url 'main:portfolio' slug=item.slug %}" class="btn btn-primary">View Project</a>
               </div>
             </div>
           {% endif %}
         {% endfor %}
-        </div>
-      </div>
-
-      <div class="blog-swiper-button-next swiper-button-next swiperBtnStyle"></div>
-      <div class="blog-swiper-button-prev swiper-button-prev swiperBtnStyle"></div>
-      <div class="swiper-pagination swiperPaginationStyle posInitial"></div>
-      </div>
+      {% endwith %}
     </div>
   </div>
 </section>
 
+<!-- Other Projects Section -->
+<section class="section" style="background: var(--background);">
+  <div class="container">
+    <h2 class="section-title">Other Projects</h2>
+    <div class="swiper projectsSlider">
+      <div class="swiper-wrapper">
+        {% for p in portfolio %}
+          {% if p.is_active and p.featured %}
+            <div class="swiper-slide">
+              <a href="{% url 'main:portfolio' slug=p.slug %}" class="portfolio-card">
+                <div class="card-content">
+                  <img src="{{p.image_url}}" alt="{{p.name}}" class="portfolio-image">
+                  {% if p.video_url %}
+                    <div class="video-container">
+                      <div class="video-controls">
+                        <button class="expand-video" type="button">
+                          <i class="fas fa-expand"></i>
+                        </button>
+                        <a href="{% url 'main:portfolio' slug=p.slug %}" class="view-project" onclick="event.stopPropagation();">
+                          <i class="fas fa-external-link-alt"></i>
+                        </a>
+                      </div>
+                      <iframe 
+                        src="{{p.video_url}}?autoplay=1&mute=1&controls=0&loop=1&playlist={{p.video_url|slice:'-11:'}}"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                      </iframe>
+                    </div>
+                  {% endif %}
+                  <div class="portfolio-content">
+                    <h3 class="portfolio-title">{{p.name}}</h3>
+                    <div class="portfolio-date">{{p.date.year}}</div>
+                    <p>{{p.description}}</p>
+                  </div>
+                </div>
+              </a>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+      <div class="swiper-pagination"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+    </div>
+  </div>
+</section>
 
+<!-- Certificates Section -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">Education & Certifications</h2>
+    <div class="swiper certificatesSlider">
+      <div class="swiper-wrapper">
+        {% for c in certificates %}
+          {% if c.is_active %}
+            <div class="swiper-slide">
+              <div class="portfolio-card">
+                <div class="portfolio-content">
+                  <h3 class="portfolio-title">
+                    <a href="{% url 'main:dev' %}">{{c.title}}</a>
+                  </h3>
+                  <div class="portfolio-date">{{c.date}}</div>
+                  <p>{{c.description}}</p>
+                  <div class="portfolio-date">{{ c.category }}</div>
+                  {% if c.is_ongoing %}
+                    <div class="portfolio-date" style="color: var(--secondary);">Status: learning</div>
+                  {% else %}
+                    <div class="portfolio-date" style="color: var(--secondary);">Status: complete</div>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+      <div class="swiper-pagination"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+    </div>
+  </div>
+</section>
 
+<!-- Work Experience Section -->
+<section class="section" style="background: var(--background);">
+  <div class="container">
+    <h2 class="section-title">Work Experience</h2>
+    <div class="swiper jobsSlider">
+      <div class="swiper-wrapper">
+        {% for j in jobs %}
+          <div class="swiper-slide">
+            <div class="portfolio-card">
+              <div class="portfolio-content">
+                <h3 class="portfolio-title">{{j.job_title}}</h3>
+                <div class="portfolio-date">Start Date: {{j.start_date}}</div>
+                <div class="portfolio-date">Company: {{j.company_name|title}}</div>
+                <p>{{j.description}}</p>
+                <div class="portfolio-date">Location: {{ j.location }}</div>
+                {% if j.is_current %}
+                  <div class="portfolio-date" style="color: var(--secondary);">My Current Role</div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      <div class="swiper-pagination"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+    </div>
+  </div>
+</section>
 
+<!-- Awards Section -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">Awards & Honors</h2>
+    <div class="swiper awardsSlider">
+      <div class="swiper-wrapper">
+        {% for c in awards %}
+          {% if c.is_active %}
+            <div class="swiper-slide">
+              <div class="portfolio-card">
+                <img src="{{ c.image_url }}" alt="{{ c.title }}" class="portfolio-image">
+                <div class="portfolio-content">
+                  <h3 class="portfolio-title">{{c.title}}</h3>
+                  <div class="portfolio-date">{{c.date.date}}</div>
+                  <p>{{c.description}}</p>
+                  <div class="portfolio-date">Issued by: {{ c.issued_by }}</div>
+                </div>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+      <div class="swiper-pagination"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+    </div>
+  </div>
+</section>
 
-
-
+<!-- Blogs Section -->
+<section class="section" style="background: var(--background);">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2 class="section-title">Recent Blogs</h2>
+      <a href="{% url 'main:blogs' %}" class="btn btn-outline">View all</a>
+    </div>
+    <div class="swiper blogsSlider">
+      <div class="swiper-wrapper">
+        {% for b in blogs %}
+          {% if b.is_active %}
+            <div class="swiper-slide">
+              <a href="{% url 'main:blog' slug=b.slug %}" class="portfolio-card">
+                <div class="portfolio-content">
+                  <h3 class="portfolio-title">{{b.name}}</h3>
+                  <div class="portfolio-date">{{b.timestamp.date}}</div>
+                  <div class="portfolio-date">Author: {{b.author}}</div>
+                  <p>{{b.description}}</p>
+                </div>
+              </a>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+      <div class="swiper-pagination"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+    </div>
+  </div>
+</section>
 {% endblock %}
 <!-- ================================
 End Content
