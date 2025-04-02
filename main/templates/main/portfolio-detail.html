@@ -15,7 +15,436 @@ END SEO blocks
 <!-- ================================
 Start CSS blocks
 ================================= -->
-{% block extend_header %}{% endblock %}
+{% block extend_header %}
+<link rel="stylesheet" href="{% static 'css/desc.css' %}">
+<style>
+  :root {
+    --primary-color: #0a0a0a;
+    --secondary-color: #1a1a1a;
+    --accent-color: #f5a623;
+    --text-color: #ffffff;
+    --text-secondary: #a0a0a0;
+    --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  body {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+  .project-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    min-height: 100vh;
+    position: relative;
+  }
+
+  .project-sidebar {
+    background-color: var(--secondary-color);
+    padding: 3rem 2rem;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .project-number {
+    font-size: 1rem;
+    color: var(--accent-color);
+    margin-bottom: 2rem;
+    font-weight: 500;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 1rem;
+  }
+
+  .project-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  .project-category {
+    display: inline-block;
+    background-color: rgba(245, 166, 35, 0.1);
+    color: var(--accent-color);
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    font-size: 0.8rem;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: var(--transition);
+  }
+
+  .project-category:hover {
+    background-color: var(--accent-color);
+    color: var(--primary-color);
+  }
+
+  .skills-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 2rem 0;
+  }
+
+  .skill-tag {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 2rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    display: inline-block;
+    transition: var(--transition);
+  }
+
+  .skill-tag:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+  }
+
+  .project-date {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+  }
+
+  .project-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 2rem 0;
+    position: sticky;
+    top: 1rem;
+    z-index: 10;
+    background-color: rgba(10, 10, 10, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-color);
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+    flex: 1 1 auto;
+    min-width: 150px;
+  }
+
+  .btn:hover {
+    border-color: var(--accent-color);
+    background-color: rgba(245, 166, 35, 0.05);
+    transform: translateY(-2px);
+  }
+
+  .btn::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--accent-color);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+  }
+
+  .btn:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  .btn-primary {
+    background-color: var(--accent-color);
+    color: var(--primary-color);
+    border: none;
+  }
+
+  .btn-primary:hover {
+    background-color: #e69100;
+    transform: translateY(-2px);
+  }
+
+  .btn-primary::after {
+    display: none;
+  }
+
+  .btn-icon {
+    margin-right: 0.5rem;
+  }
+
+  .project-content {
+    padding: 3rem;
+    overflow-y: auto;
+  }
+
+  .project-description {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    margin-bottom: 3rem;
+    max-width: 800px;
+  }
+
+  /* Carousel Styles */
+  .carousel-container {
+    position: relative;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto 3rem;
+    overflow: hidden;
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  }
+
+  .carousel {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    height: 500px;
+  }
+
+  .carousel-slide {
+    min-width: 100%;
+    position: relative;
+    background-color: var(--secondary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .carousel-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+
+  .carousel-video-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .carousel-video {
+    width: 100%;
+    height: 100%;
+  }
+
+  .carousel-controls {
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 1rem;
+    z-index: 10;
+  }
+
+  .carousel-btn {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: none;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition);
+    color: var(--text-color);
+  }
+
+  .carousel-btn:hover {
+    background-color: var(--accent-color);
+    color: var(--primary-color);
+  }
+
+  .carousel-indicators {
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .carousel-indicator {
+    width: 2rem;
+    height: 0.25rem;
+    background-color: rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    transition: var(--transition);
+  }
+
+  .carousel-indicator.active {
+    background-color: var(--accent-color);
+  }
+
+  .carousel-counter {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    font-size: 0.8rem;
+    color: var(--text-color);
+  }
+
+  .download-options {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 2rem 0;
+    padding: 2rem;
+    background-color: rgba(255, 255, 255, 0.03);
+    border-radius: 0.5rem;
+  }
+
+  .download-title {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+  }
+
+  .download-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    border: none;
+    border-radius: 0.25rem;
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+    transition: var(--transition);
+  }
+
+  .download-btn img {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-right: 0.75rem;
+  }
+
+  .amazon-btn {
+    background-color: #FF9900;
+  }
+
+  .android-btn {
+    background-color: #3DDC84;
+  }
+
+  .download-instruction {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 0.25rem;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+  }
+
+  .videos-section {
+    margin-top: 4rem;
+  }
+
+  .video-container {
+    margin: 2rem 0;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  }
+
+  .video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
+  }
+
+  .video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    color: var(--text-color);
+  }
+
+  .section-title::before {
+    content: '';
+    display: inline-block;
+    width: 2rem;
+    height: 2px;
+    background-color: var(--accent-color);
+    margin-right: 1rem;
+  }
+
+  .core {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-secondary);
+  }
+
+  /* Media Queries */
+  @media (max-width: 1024px) {
+    .project-container {
+      grid-template-columns: 1fr;
+    }
+    
+    .project-sidebar {
+      position: relative;
+      height: auto;
+      padding: 2rem;
+    }
+    
+    .carousel-container {
+      height: 400px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .carousel-container {
+      height: 300px;
+    }
+    
+    .project-title {
+      font-size: 2rem;
+    }
+    
+    .project-actions {
+      flex-direction: column;
+    }
+  }
+</style>
+{% endblock %}
 <!-- ================================
 END CSS blocks
 ================================= -->
@@ -23,7 +452,172 @@ END CSS blocks
 <!-- ================================
 Start script blocks
 ================================= -->
-{% block extend_footer %}{% endblock %}
+{% block extend_footer %}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Carousel functionality
+    const carousel = document.querySelector('.carousel');
+    const slides = document.querySelectorAll('.carousel-slide');
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
+    const indicators = document.querySelectorAll('.carousel-indicator');
+    const counter = document.querySelector('.carousel-counter');
+    
+    let currentIndex = 0;
+    const totalSlides = slides.length;
+    let autoSlideInterval;
+    let isVideoPlaying = false;
+    
+    // Check for video in carousel
+    const videoIframe = document.querySelector('.carousel-video');
+    
+    // Update counter
+    function updateCounter() {
+      counter.textContent = `${currentIndex + 1} / ${totalSlides}`;
+    }
+    
+    // Update indicators
+    function updateIndicators() {
+      indicators.forEach((indicator, index) => {
+        if (index === currentIndex) {
+          indicator.classList.add('active');
+        } else {
+          indicator.classList.remove('active');
+        }
+      });
+    }
+    
+    // Move to slide
+    function goToSlide(index) {
+      if (index < 0) {
+        currentIndex = totalSlides - 1;
+      } else if (index >= totalSlides) {
+        currentIndex = 0;
+      } else {
+        currentIndex = index;
+      }
+      
+      carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+      updateCounter();
+      updateIndicators();
+    }
+    
+    // Event listeners
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        goToSlide(currentIndex - 1);
+      });
+    }
+    
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        goToSlide(currentIndex + 1);
+      });
+    }
+    
+    indicators.forEach((indicator, index) => {
+      indicator.addEventListener('click', () => {
+        goToSlide(index);
+      });
+    });
+    
+    // Auto slide
+    function startAutoSlide() {
+      if (autoSlideInterval) clearInterval(autoSlideInterval);
+      
+      autoSlideInterval = setInterval(() => {
+        if (!isVideoPlaying) {
+          goToSlide(currentIndex + 1);
+        }
+      }, 5000);
+    }
+    
+    function stopAutoSlide() {
+      clearInterval(autoSlideInterval);
+    }
+    
+    // Handle YouTube iframe API
+    if (videoIframe) {
+      // Create YouTube player API
+      let player;
+      
+      // This function will be called when the YouTube API is ready
+      window.onYouTubeIframeAPIReady = function() {
+        // Get the video ID from the src attribute
+        const videoSrc = videoIframe.getAttribute('src');
+        const videoId = videoSrc.split('/').pop().split('?')[0];
+        
+        player = new YT.Player(videoIframe, {
+          events: {
+            'onStateChange': onPlayerStateChange
+          }
+        });
+      };
+      
+      // Handle player state changes
+      function onPlayerStateChange(event) {
+        // 1 = playing, 2 = paused
+        if (event.data === 1) {
+          isVideoPlaying = true;
+          stopAutoSlide();
+        } else if (event.data === 2) {
+          isVideoPlaying = false;
+          startAutoSlide();
+        }
+      }
+      
+      // Load YouTube API
+      const tag = document.createElement('script');
+      tag.src = "https://www.youtube.com/iframe_api";
+      const firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    }
+    
+    // Start auto slide if there are multiple slides
+    if (totalSlides > 1) {
+      startAutoSlide();
+      
+      // Pause on hover
+      carousel.addEventListener('mouseenter', stopAutoSlide);
+      carousel.addEventListener('mouseleave', () => {
+        if (!isVideoPlaying) {
+          startAutoSlide();
+        }
+      });
+    }
+    
+    // Initialize
+    updateCounter();
+    updateIndicators();
+    
+    // Mobile app download options
+    const amazonBtn = document.getElementById('amazon-btn');
+    const apkBtn = document.getElementById('apk-btn');
+    const amazonInstruction = document.getElementById('amazon-instruction');
+    const apkInstruction = document.getElementById('apk-instruction');
+    
+    if (amazonBtn) {
+      amazonBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        if (amazonInstruction) {
+          apkInstruction.style.display = 'none';
+          amazonInstruction.style.display = 'block';
+        }
+      });
+    }
+    
+    if (apkBtn) {
+      apkBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        if (apkInstruction) {
+          amazonInstruction.style.display = 'none';
+          apkInstruction.style.display = 'block';
+        }
+      });
+    }
+  });
+</script>
+{% endblock %}
 <!-- ================================
 END script blocks
 ================================= -->
@@ -32,324 +626,271 @@ END script blocks
 Start Content
 ================================= -->
 {% block content %}
-<link rel="stylesheet" href="{% static 'css/desc.css' %}">
-
-<style>
-  .skills-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 20px;
-  }
-
-  .skill-tag {
-    background-color: #f1f1f1;
-    border-radius: 20px;
-    padding: 5px 10px;
-    font-size: 12px;
-    color: #333;
-    display: inline-block;
-  }
-
-  .gallery {
-    display: flex;
-    flex-wrap: wrap;
-    /* Compensate for excess margin on outer gallery flex items */
-    margin: -1rem -1rem;
-  }
-
-  .gallery-item {
-    /* Minimum width of 24rem and grow to fit available space */
-    flex: 1 0 24rem;
-    /* Margin value should be half of grid-gap value as margins on flex items don't collapse */
-    margin: 1rem;
-    box-shadow: 0.3rem 0.4rem 0.4rem rgba(0, 0, 0, 0.4);
-    overflow: hidden;
-  }
-
-  .gallery-image {
-    display: block;
-    width: 100%;
-    height: auto;
-    max-width: 100%;
-    max-height: 300px; /* Set a maximum height */
-    object-fit: contain; /* Maintain aspect ratio */
-    transition: transform 400ms ease-out;
-  }
-
-  .gallery-image:hover {
-    transform: scale(1.15);
-  }
-
-  /*
-
-  The following rule will only run if your browser supports CSS grid.
-
-  Remove or comment-out the code block below to see how the browser will fall-back to flexbox styling.
-
-  */
-
-  @supports (display: grid) {
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(24rem, 1fr));
-      grid-gap: 2rem;
-    }
-
-    .gallery,
-    .gallery-item {
-      margin: 0;
-    }
-  }
-
-  /* Media query for mobile devices */
-  @media (max-width: 768px) {
-    .gallery, .carousel-controls {
-      display: none;
-    }
-
-    .hero-img img, .image img {
-      width: 100%;
-      height: auto;
-    }
-  }
-</style>
-
-<!-- Hero Section -->
-<div class="hero">
-  <div class="hero-img">
-    <img src="{{object.imager_url}}" style="width: 500px;" alt="Pixel Skincare">
-  </div>
-  <div class="hero-text">
-    <h1>{{object.name|title}}</h1>
+<div class="project-container">
+  <!-- Project Sidebar -->
+  <div class="project-sidebar">
+    <div class="project-number">/01</div>
+    
+    <h1 class="project-title">{{object.name|title}}</h1>
+    
     {% if object.category == 'DATA SCIENCE.AI AND ML' %}
-      <div class="core">
-        <a href="{% url 'main:dscience' %}" class="btn"> {{ object.category }}</a>
-      </div>
-      {% elif object.category == 'WEB DEVELOPMENT' %}
-      <div class="core">
-        <a href="{% url 'main:webdevelopment' %}" class="btn"> {{ object.category }}</a>
-      </div>
-      {% elif object.category == 'MOBILE DEVELOPMENT' %}
-      <div class="core">
-        <a href="{% url 'main:mobiledevelopment' %}" class="btn"> {{ object.category }}</a>
-      </div>
-      {% elif object.category == 'CYBERSECURITY' %}
-      <div class="core">
-        <a href="{% url 'main:cybersecurity' %}" class="btn"> {{ object.category }}</a>
-      </div>
-      {% elif object.category == 'CLOUD COMPUTING' %}
-      <div class="core">
-        <a href="{% url 'main:cloud' %}" class="btn"> {{ object.category }}</a>
-      </div>
-      {% elif object.category == 'GAME DEVELOPMENT' %}
-      <div class="core">
-        <a href="{% url 'main:game' %}" class="btn"> {{ object.category }}</a>
-      </div>
-      {% else %}
-      <div class="core">
-        <a href="{% url 'main:other' %}"  class="btn"><h6>{{ object.category }}</h6></a>
-      </div>
+      <a href="{% url 'main:dscience' %}" class="project-category">{{ object.category }}</a>
+    {% elif object.category == 'WEB DEVELOPMENT' %}
+      <a href="{% url 'main:webdevelopment' %}" class="project-category">{{ object.category }}</a>
+    {% elif object.category == 'MOBILE DEVELOPMENT' %}
+      <a href="{% url 'main:mobiledevelopment' %}" class="project-category">{{ object.category }}</a>
+    {% elif object.category == 'CYBERSECURITY' %}
+      <a href="{% url 'main:cybersecurity' %}" class="project-category">{{ object.category }}</a>
+    {% elif object.category == 'CLOUD COMPUTING' %}
+      <a href="{% url 'main:cloud' %}" class="project-category">{{ object.category }}</a>
+    {% elif object.category == 'GAME DEVELOPMENT' %}
+      <a href="{% url 'main:game' %}" class="project-category">{{ object.category }}</a>
+    {% else %}
+      <a href="{% url 'main:other' %}" class="project-category">{{ object.category }}</a>
+    {% endif %}
+    
+    <div class="project-date">Completed: {{ object.date }}</div>
+    
+    <!-- Tech Stack -->
+    <div class="skills-container">
+      <h5>Tech Stack</h5>
+      {% for skill in object.skills.all %}
+        <span class="skill-tag">{{ skill.name }}</span>
+      {% endfor %}
+    </div>
+    
+    <div class="core">
+      <h6>Language: {{ object.core_skill }}</h6>
+    </div>
+  </div>
+  
+  <!-- Project Content -->
+  <div class="project-content">
+    <!-- Project Action Buttons - Now at the top and sticky -->
+    <div class="project-actions">
+      {% if object.category != 'MOBILE DEVELOPMENT' and object.is_live %}
+        <a href="{{ object.url }}" class="btn btn-primary" target="_blank">
+          <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+            <polyline points="15 3 21 3 21 9"></polyline>
+            <line x1="10" y1="14" x2="21" y2="3"></line>
+          </svg>
+          View Live Project
+        </a>
       {% endif %}
-
-      <!-- Display skills as tags -->
-      <div class="skills-container">
-        <h5>Tech Stack</h5>
-        {% for skill in object.skills.all %}
-
-          <span class="skill-tag">{{ skill.name }}</span>
+      
+      {% if object.is_api %}
+        <a href="{{ object.url_3 }}" class="btn" target="_blank">
+          <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="16 18 22 12 16 6"></polyline>
+            <polyline points="8 6 2 12 8 18"></polyline>
+          </svg>
+          API Documentation
+        </a>
+      {% endif %}
+      
+      <a href="{{ object.url_2 }}" class="btn" target="_blank">
+        <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+        </svg>
+        Source Code
+      </a>
+    </div>
+    
+    <!-- Carousel with Video Support -->
+    <div class="carousel-container">
+      <div class="carousel">
+        <!-- Video (if available) -->
+        {% if object.video_url %}
+          <div class="carousel-slide">
+            <div class="carousel-video-wrapper">
+              <iframe class="carousel-video" src="{{ object.video_url }}" title="Project Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+          </div>
+        {% endif %}
+        
+        <!-- Main image -->
+        <div class="carousel-slide">
+          <img src="{{object.imager_url}}" class="carousel-image" alt="{{object.name}}">
+        </div>
+        
+        <!-- Additional images -->
+        {% if object.image_url %}
+          <div class="carousel-slide">
+            <img src="{{object.image_url}}" class="carousel-image" alt="{{object.name}}">
+          </div>
+        {% endif %}
+        
+        {% if object.image2_url %}
+          <div class="carousel-slide">
+            <img src="{{object.image2_url}}" class="carousel-image" alt="{{object.name}}">
+          </div>
+        {% endif %}
+        
+        {% if object.image3_url %}
+          <div class="carousel-slide">
+            <img src="{{object.image3_url}}" class="carousel-image" alt="{{object.name}}">
+          </div>
+        {% endif %}
+        
+        {% if object.image4_url %}
+          <div class="carousel-slide">
+            <img src="{{object.image4_url}}" class="carousel-image" alt="{{object.name}}">
+          </div>
+        {% endif %}
+        
+        {% if object.image5_url %}
+          <div class="carousel-slide">
+            <img src="{{object.image5_url}}" class="carousel-image" alt="{{object.name}}">
+          </div>
+        {% endif %}
+        
+        {% if object.image6_url %}
+          <div class="carousel-slide">
+            <img src="{{object.image6_url}}" class="carousel-image" alt="{{object.name}}">
+          </div>
+        {% endif %}
+        
+        {% if object.image7_url %}
+          <div class="carousel-slide">
+            <img src="{{object.image7_url}}" class="carousel-image" alt="{{object.name}}">
+          </div>
+        {% endif %}
+        
+        {% if object.image8_url %}
+          <div class="carousel-slide">
+            <img src="{{object.image8_url}}" class="carousel-image" alt="{{object.name}}">
+          </div>
+        {% endif %}
+        
+        {% if object.image9_url %}
+          <div class="carousel-slide">
+            <img src="{{object.image9_url}}" class="carousel-image" alt="{{object.name}}">
+          </div>
+        {% endif %}
+        
+        {% if object.image10_url %}
+          <div class="carousel-slide">
+            <img src="{{object.image10_url}}" class="carousel-image" alt="{{object.name}}">
+          </div>
+        {% endif %}
+      </div>
+      
+      <!-- Carousel Controls -->
+      <div class="carousel-counter">1 / {% if object.video_url %}{{ totalSlides|add:"1" }}{% else %}{{ totalSlides }}{% endif %}</div>
+      
+      <div class="carousel-controls">
+        <button class="carousel-btn prev-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+        <button class="carousel-btn next-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+      </div>
+      
+      <!-- Carousel Indicators -->
+      <div class="carousel-indicators">
+        {% if object.video_url %}
+          <div class="carousel-indicator active"></div>
+        {% endif %}
+        <div class="carousel-indicator {% if not object.video_url %}active{% endif %}"></div>
+        {% if object.image_url %}
+          <div class="carousel-indicator"></div>
+        {% endif %}
+        {% if object.image2_url %}
+          <div class="carousel-indicator"></div>
+        {% endif %}
+        {% if object.image3_url %}
+          <div class="carousel-indicator"></div>
+        {% endif %}
+        {% if object.image4_url %}
+          <div class="carousel-indicator"></div>
+        {% endif %}
+        {% if object.image5_url %}
+          <div class="carousel-indicator"></div>
+        {% endif %}
+        {% if object.image6_url %}
+          <div class="carousel-indicator"></div>
+        {% endif %}
+        {% if object.image7_url %}
+          <div class="carousel-indicator"></div>
+        {% endif %}
+        {% if object.image8_url %}
+          <div class="carousel-indicator"></div>
+        {% endif %}
+        {% if object.image9_url %}
+          <div class="carousel-indicator"></div>
+        {% endif %}
+        {% if object.image10_url %}
+          <div class="carousel-indicator"></div>
+        {% endif %}
+      </div>
+    </div>
+    
+    <!-- Project Description -->
+    <div class="project-description">
+      {{object.body|safe}}
+    </div>
+    
+    <!-- Mobile App Download Options -->
+    {% if object.category == 'MOBILE DEVELOPMENT' %}
+      <div class="download-options">
+        <h3 class="download-title">DOWNLOAD OPTIONS</h3>
+        
+        <a href="javascript:void(0);" id="amazon-btn" class="download-btn amazon-btn">
+          <img src="https://www.svgrepo.com/show/349584/amazon.svg" alt="Amazon Logo">
+          Amazon App Store
+        </a>
+        
+        <a href="javascript:void(0);" id="apk-btn" class="download-btn android-btn">
+          <img src="https://www.svgrepo.com/show/475427/android.svg" alt="Android Logo">
+          APK (Android)
+        </a>
+        
+        <div id="amazon-instruction" class="download-instruction" style="display: none;">
+          {% if object.amazon_url %}
+            To get the app from the Amazon App Store, click the button below. Use this if you want to get the latest updates and smaller application sizes. Updates on APK are delayed by about 2 or 3 days.<br>
+            <a href="{{object.amazon_url}}" target="_blank" class="download-btn amazon-btn" style="margin-top: 1rem;">
+              Amazon App Store
+            </a>
+          {% else %}
+            <span style="color: red;">This release is not available on this platform yet.</span>
+          {% endif %}
+        </div>
+        
+        <div id="apk-instruction" class="download-instruction" style="display: none;">
+          {% if object.url %}
+            To download the APK, click the button below. Once downloaded, transfer the APK file to your Android device and open it to begin the installation. Note that this application is currently available for Android devices only.<br>
+            <a download href="{{object.url}}" class="download-btn android-btn" style="margin-top: 1rem;">
+              Download APK (Android)
+            </a>
+          {% else %}
+            <span style="color: red;">This release is not available on this platform yet.</span>
+          {% endif %}
+        </div>
+      </div>
+    {% endif %}
+    
+    <!-- Videos Section -->
+    {% if videos %}
+      <div class="videos-section">
+        {% for v in videos %}
+          <h3 class="section-title">{{ v.text }}</h3>
+          <p>{{ v.description }}</p>
+          <div class="video-container">
+            <div class="video-wrapper">
+              <iframe src="{{ v.url }}" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+          </div>
         {% endfor %}
       </div>
+    {% endif %}
   </div>
 </div>
-
-<!-- Featured Section -->
-<section id="featured">
-  <div class="title title-left">
-    <span class="line"></span><h6>{{object.name}}</h6>
-  </div>
-  <div class="wrapper">
-    <div class="image">
-      <img src="{{object.image_url}}" alt="Pixel Facial Cream">
-      <br/>
-      <br/>
-      {% if object.image2_url or object.image3_url or object.image4_url or object.image5_url or object.image6_url or object.image7_url or object.image8_url or object.image9_url or object.image10_url %}
-        <div class="container">
-          <div class="gallery" id="gallery"></div>
-        </div>
-        <script>
-          const images = [
-            {% if object.image2_url %}
-              { url: "{{object.image2_url}}", alt: "Image 2" },
-            {% endif %}
-            {% if object.image3_url %}
-              { url: "{{object.image3_url}}", alt: "Image 3" },
-            {% endif %}
-            {% if object.image4_url %}
-              { url: "{{object.image4_url}}", alt: "Image 4" },
-            {% endif %}
-            {% if object.image5_url %}
-              { url: "{{object.image5_url}}", alt: "Image 5" },
-            {% endif %}
-            {% if object.image6_url %}
-              { url: "{{object.image6_url}}", alt: "Image 6" },
-            {% endif %}
-            {% if object.image7_url %}
-              { url: "{{object.image7_url}}", alt: "Image 7" },
-            {% endif %}
-            {% if object.image8_url %}
-              { url: "{{object.image8_url}}", alt: "Image 8" },
-            {% endif %}
-            {% if object.image9_url %}
-              { url: "{{object.image9_url}}", alt: "Image 9" },
-            {% endif %}
-            {% if object.image10_url %}
-              { url: "{{object.image10_url}}", alt: "Image 10" }
-            {% endif %}
-          ];
-
-          const gallery = document.getElementById('gallery');
-
-          // Loop through the images array and create gallery items
-          images.forEach(image => {
-            const galleryItem = document.createElement('div');
-            galleryItem.classList.add('gallery-item');
-
-            const img = document.createElement('img');
-            img.classList.add('gallery-image');
-            img.src = image.url;
-            img.alt = image.alt;
-
-            galleryItem.appendChild(img);
-            gallery.appendChild(galleryItem);
-          });
-        </script>
-      {% endif %}
-    </div>
-    <div class="text"  style="margin-right: 20px;">
-      <h6>Completed On: {{ object.date }}</h6>
-      <p>{{object.body|safe}}</p>
-      {% if object.category != 'MOBILE DEVELOPMENT' and object.is_live %}
-        <a href="{{ object.url }}" class="btn" target="_blank">View Project</a>
-        <br/>
-      {% endif %}
-      <br/>
-      {% if object.category == 'MOBILE DEVELOPMENT' %}
-        <div style="text-align: center; margin: 20px 0;">
-          <h5>DOWNLOAD OPTIONS</h5>
-          <div style="margin: 10px;">
-            <a href="javascript:void(0);" style="display: inline-block; padding: 10px 20px; border: none; border-radius: 5px; text-decoration: none; color: white; font-weight: bold; background-color: #FF9900;" onclick="showInstruction('amazon')">
-              <img src="https://www.svgrepo.com/show/349584/amazon.svg" style="width: 20px; height: 20px; margin-right: 10px; vertical-align: middle;" alt="Amazon Logo">Amazon
-            </a>
-          </div>
-          <div style="margin: 10px;">
-            <a href="javascript:void(0);" style="display: inline-block; padding: 10px 20px; border: none; border-radius: 5px; text-decoration: none; color: white; font-weight: bold; background-color: #3DDC84;" onclick="showInstruction('apk')">
-              <img src="https://www.svgrepo.com/show/475427/android.svg" style="width: 20px; height: 20px; margin-right: 10px; vertical-align: middle;" alt="Android Logo">APK (Android)
-            </a>
-          </div>
-          <p id="apk-instruction" style="display: none;">
-            {% if object.url %}
-              To download the APK, click the button below. Once downloaded, transfer the APK file to your Android device and open it to begin the installation. Note that this application is currently available for Android devices only.<br>
-              <a download href="{{object.url}}" style="display: inline-block; padding: 10px 20px; border: none; border-radius: 5px; text-decoration: none; color: white; font-weight: bold; background-color: #3DDC84;">Download APK (Android)</a>
-            {% else %}
-              <span style="color: red;">This release is not available on this platform yet.</span>
-            {% endif %}
-          </p>
-          <p id="amazon-instruction" style="display: none;">
-            {% if object.amazon_url %}
-              To get the app from the Amazon App Store, click the button below. Use this if you want to get the latest updates and smaller application sizes. Updates on APK are delayed by about 2 or 3 days.<br>
-              <a href="{{object.amazon_url}}" target="_blank" style="display: inline-block; padding: 10px 20px; border: none; border-radius: 5px; text-decoration: none; color: white; font-weight: bold; background-color: #FF9900;">Amazon App Store</a>
-            {% else %}
-              <span style="color: red;">This release is not available on this platform yet.</span>
-            {% endif %}
-          </p>
-        </div>
-        <script>
-          function showInstruction(option) {
-            document.getElementById('apk-instruction').style.display = 'none';
-            document.getElementById('amazon-instruction').style.display = 'none';
-            if (option === 'apk') {
-              document.getElementById('apk-instruction').style.display = 'block';
-            } else if (option === 'amazon') {
-              document.getElementById('amazon-instruction').style.display = 'block';
-            }
-          }
-        </script>
-      {% endif %}
-      <br/>
-      <br/>
-      {% if object.is_api %}
-
-      <a href="{{ object.url_3 }}" class="btn" target="_blank">View API Documentation</a>
-      {% endif %}
-
-      <br/>
-      <br/>
-      <a href="{{ object.url_2 }}" class="btn" target="_blank"><h6>View Source Code</h6></a>
-      <br/>
-      <br/>
-    </div>
-  </div>
-</section>
-
-<section id="collections">
-  <div class="title title-right">
-    <span class="line line-right"></span><a href="{% url 'main:contact' %}"><h3><b style="color: brown;">Reach out?</b></h3></a>
-    <hr>
-    <section>
-      <div class="sectionSpaceSm">
-        <div class="container">
-        </div>
-      </div>
-      <div class="core">
-        <h6>Languange: {{ object.core_skill }}</h6>
-      </div>
-    </section>
-  </div>
-  <div class="wrapper">
-    <!-- Placeholder for the contact section -->
-    <div id="contact-section-placeholder"></div>
-  </div>
-</section>
-
-{% for v in videos %}
-<section id="about">
-  <div class="title title-left">
-    <span class="line"></span><h3>{{ v.text }}</h3>
-  </div>
-  <div class="wrapper">
-    <div class="text">
-      <p>{{ v.description }}</p>
-    </div>
-    <div class="video-wrapper">
-      <iframe width="560" height="315" src="{{ v.url }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-    </div>
-  </div>
-</section>
-
-<section id="contact">
-  <div class="wrapper">
-    <div class="form-wrapper">
-      <!-- <h4>Add More Beauty To Your Email</h4>
-      <form id="form" action="https://www.freecodecamp.com/email-submit">
-        <input type="email" id="email" name="email" placeholder="Your email" required>
-        <input type="submit" id="submit" value="OK" class="submit">
-      </form> -->
-    </div>
-    <div class="contact-wrapper">
-      <div class="wrapper">
-        <ul class="social-menu">
-          <li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
-          <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-          <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-          <li><a href="#"><i class="fa fa-youtube-play" aria-hidden="true"></i></a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-{% endfor %}
-
 {% endblock %}
 <!-- ================================
 End Content
