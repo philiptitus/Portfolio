@@ -2,81 +2,10 @@
 {% load static %}
 {% block title %}My Projects{% endblock %}
 
-
 <!-- ================================
 Start CSS blocks
 ================================= -->
-{% block extend_header %}
-<style>
-  /* Add custom styles here */
-  .portfolioRow {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 20px;
-  }
 
-  .pColMain {
-    flex: 0 0 calc(50% - 20px);
-    max-width: calc(50% - 20px);
-    margin-bottom: 20px;
-  }
-
-  .pCol {
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  }
-
-  .pImg {
-    width: 100%;
-    height: auto;
-    border-radius: 10px 10px 0 0;
-  }
-
-  .pContent {
-    padding: 15px;
-    background-color: #fff;
-    border-radius: 0 0 10px 10px;
-    text-align: center;
-  }
-
-  .pTitle {
-    font-size: 1.2rem;
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
-
-  .pDesc {
-    font-size: 0.9rem;
-    color: #666;
-    line-height: 1.5;
-    height: 90px; /* Adjust height as needed */
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .pDate {
-    font-size: 0.8rem;
-    color: #999;
-    margin-top: 1px;
-  }
-
-  .pLink {
-    display: inline-block;
-    margin-top: 15px;
-    font-size: 0.9rem;
-    color: #007bff;
-    text-decoration: none;
-    transition: color 0.3s ease;
-  }
-
-  .pLink:hover {
-    color: #0056b3;
-  }
-</style>
-{% endblock %}
 <!-- ================================
 END CSS blocks
 ================================= -->
@@ -85,6 +14,8 @@ END CSS blocks
 Start Content
 ================================= -->
 {% block content %}
+<link rel="stylesheet" href="{% static 'css/portfolio.css' %}">
+
 <section>
   <div class="innerPageBannerCol">
     <div class="container">
@@ -94,7 +25,6 @@ Start Content
             <h1 class="xlTitle pb-md-3">See my recent projects below</h1>
             <h6><i>Click on a picture to view</i></h6>
             <h6><b>PS, these are not all my projects just my major ones check out my github, for more (link on footer)</b></h6>
-
           </div>
         </div>
       </div>
@@ -108,7 +38,7 @@ Start Content
       <div class="portfolioContentMain">
         <div class="row g-3 g-md-4 g-lg-5 portfolioRow">
           {% for obj in object_list %}
-          <div class="col-md-6 pColMain">
+          <div class="pColMain">
             <div class="pCol">
               <a href="{% url 'main:portfolio' slug=obj.slug %}">
                 <img src="{{obj.image_url}}" alt="{{ obj.name }}" class="pImg">
@@ -126,6 +56,9 @@ Start Content
     </div>
   </div>
 </section>
+
+<!-- Load JavaScript at the end of the body -->
+<script src="{% static 'js/portfolio.js' %}"></script>
 {% endblock %}
 <!-- ================================
 End Content

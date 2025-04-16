@@ -11,7 +11,8 @@ from . models import (
     Video,
     WebhookEvent,
     Award,
-    JobExperience
+    JobExperience,
+    MLModel,
     )
 
 
@@ -80,3 +81,23 @@ admin.site.register(WebhookEvent)
 admin.site.register(Award)
 admin.site.register(JobExperience)
 
+
+@admin.register(MLModel)
+class MLModelAdmin(admin.ModelAdmin):
+    list_display = ['name', 'category', 'tier', 'is_active']
+    list_filter = ['category', 'tier', 'is_active']
+    search_fields = ['name', 'body']
+    filter_horizontal = ('skills',)
+    readonly_fields = ('slug',)
+
+    fieldsets = (
+        (None, {
+            'fields': ('name', 'body', 'category', 'tier', 'skills', 'is_active', 'slug')
+        }),
+        ('Media & Links', {
+            'fields': ('image', 'github_url')
+        }),
+        ('Dates', {
+            'fields': ('date',)
+        }),
+    )

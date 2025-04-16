@@ -114,6 +114,12 @@ class Portfolio(models.Model):
         ('DJANGO + REACT NATIVE', 'DJANGO + REACT NATIVE'),
     ]
 
+    TIER_CHOICES = [
+        ('S', 'S'),
+        ('A', 'A'),
+        ('B', 'B'),
+    ]
+
     class Meta:
         verbose_name_plural = 'Portfolios'
         verbose_name = 'Portfolio'
@@ -126,6 +132,7 @@ class Portfolio(models.Model):
     url = models.URLField(blank=True, null=True,)
     core_skill = models.CharField(max_length=264, choices=STATUS_SKILLS, default='PYTHON')
     category = models.CharField(max_length=264, choices=CATEGORY, default='WEB DEVELOPMENT')
+    tier = models.CharField(max_length=1, choices=TIER_CHOICES, default='A')  # New tier field
     image_url = models.URLField(null=True, blank=True)
     imager_url = models.URLField(null=True, blank=True)
     image2_url = models.URLField(null=True, blank=True)
@@ -146,9 +153,7 @@ class Portfolio(models.Model):
     video_url = models.URLField(blank=True, null=True)
     is_api = models.BooleanField(default=True)
     is_live = models.BooleanField(default=True)
-
-    app = models.FileField(upload_to='apk', blank=True, null=True)  # Added field for uploading APK files
-
+    app = models.FileField(upload_to='apk', blank=True, null=True)
     slug = models.SlugField(null=True, blank=True)
     is_active = models.BooleanField(default=True)
 
@@ -164,8 +169,67 @@ class Portfolio(models.Model):
         return f"/portfolio/{self.slug}"
 
 
+class MLModel(models.Model):
+    CATEGORY = [
+        ('SUPERVISED_LEARNING', 'Supervised Learning'),
+        ('UNSUPERVISED_LEARNING', 'Unsupervised Learning'),
+        ('REINFORCEMENT_LEARNING', 'Reinforcement Learning'),
+        ('DEEP_LEARNING', 'Deep Learning'),
+        ('NATURAL_LANGUAGE_PROCESSING', 'Natural Language Processing'),
+        ('COMPUTER_VISION', 'Computer Vision'),
+        ('TIME_SERIES', 'Time Series Analysis'),
+        ('RECOMMENDATION_SYSTEMS', 'Recommendation Systems'),
+        ('ANOMALY_DETECTION', 'Anomaly Detection'),
+        ('CLUSTERING', 'Clustering'),
+    ]
 
+    ML_SKILLS = [
+        ('SCIKIT_LEARN', 'Scikit-Learn'),
+        ('TENSORFLOW', 'TensorFlow'),
+        ('PYTORCH', 'PyTorch'),
+        ('KERAS', 'Keras'),
+        ('NUMPY', 'NumPy'),
+        ('PANDAS', 'Pandas'),
+        ('OPENCV', 'OpenCV'),
+        ('NLTK', 'NLTK'),
+        ('SPACY', 'SpaCy'),
+        ('XGBOOST', 'XGBoost'),
+        ('LIGHTGBM', 'LightGBM'),
+        ('TRANSFORMERS', 'Transformers'),
+    ]
 
+    TIER_CHOICES = [
+        ('S', 'S'),
+        ('A', 'A'),
+        ('B', 'B'),
+    ]
+
+    class Meta:
+        verbose_name_plural = 'ML Models'
+        verbose_name = 'ML Model'
+        ordering = ["name"]
+
+    date = models.DateTimeField(blank=True, null=True)
+    name = models.CharField(max_length=200, blank=True, null=True)
+    body = RichTextField(blank=True, null=True)
+    category = models.CharField(max_length=264, choices=CATEGORY, default='SUPERVISED_LEARNING')
+    tier = models.CharField(max_length=1, choices=TIER_CHOICES, default='A')
+    image = models.ImageField(upload_to='ml_models', blank=True, null=True)
+    github_url = models.URLField(blank=True, null=True)
+    skills = models.ManyToManyField(Skill, related_name='ml_models', blank=True)
+    slug = models.SlugField(null=True, blank=True)
+    is_active = models.BooleanField(default=True)
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.slug = slugify(self.name)
+        super(MLModel, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return f"/ml-model/{self.slug}"
 
 
 class Project(models.Model):

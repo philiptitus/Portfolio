@@ -11,7 +11,7 @@ urlpatterns = [
     path('404/', views.NotFoundView.as_view(), name="404"),
 
     path('new/', views.LatestEventsView.as_view(), name='latest_events'),
-
+    path('ml-models/', views.MLModelListView.as_view(), name="mlmodels"),
     path('development/', views.Development.as_view(), name="dev"),
 	path('contact/', views.ContactView.as_view(), name="contact"),
     path('project/', views.ProjectView.as_view(), name="projects"),
@@ -27,4 +27,6 @@ urlpatterns = [
 	path('portfolio/<slug:slug>', views.PortfolioDetailView.as_view(), name="portfolio"),
 	path('blog/', views.BlogView.as_view(), name="blogs"),
 	path('blog/<slug:slug>', views.BlogDetailView.as_view(), name="blog"),
+    path('ml-model/<slug:slug>/', views.MLModelDetailView.as_view(), name="mlmodel_detail"),
+
 	]

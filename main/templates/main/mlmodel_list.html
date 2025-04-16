@@ -1,0 +1,85 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block title %}Machine Learning{% endblock %}
+
+
+
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/ml_models.css' %}">
+
+<!-- Neural network background -->
+<div class="neural-bg"></div>
+<div class="particles-container"></div>
+
+<div class="ml-container">
+    <div class="container">
+        <h1 class="mb-4">Machine Learning Models</h1>
+        
+        <div class="timeline-container">
+            <div class="timeline"></div>
+            
+            {% for mlmodel in object_list %}
+                <div class="ml-model-section">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="ml-card" data-tier="{{ mlmodel.tier }}">
+                                {% if mlmodel.image %}
+                                    <div class="ml-card-img-container">
+                                        <img src="{{ mlmodel.image.url }}" class="ml-card-img" alt="{{ mlmodel.name }}">
+                                    </div>
+                                {% endif %}
+                                <div class="ml-card-body">
+                                    <h5 class="ml-card-title">{{ mlmodel.name }}</h5>
+                                    <div class="ml-card-badges">
+                                        <span class="ml-badge ml-badge-primary">{{ mlmodel.category }}</span>
+                                        <span class="ml-badge ml-badge-tier-{{ mlmodel.tier }}">Tier {{ mlmodel.tier }}</span>
+                                    </div>
+                                    <a href="{% url 'main:mlmodel_detail' mlmodel.slug %}" class="ml-btn ml-btn-primary">View Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="ml-empty-state">
+                    <div class="ml-scanning-animation"></div>
+                    <div class="ml-empty-state-message">No  models available</div>
+                    <p class="text-muted-foreground"> Check back later.</p>
+                </div>
+            {% endfor %}
+
+            {% if is_paginated %}
+            <nav aria-label="Page navigation" class="mt-4">
+                <ul class="ml-pagination">
+                    {% if page_obj.has_previous %}
+                        <li class="ml-page-item">
+                            <a class="ml-page-link" href="?page={{ page_obj.previous_page_number }}">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                    {% endif %}
+
+                    {% for num in page_obj.paginator.page_range %}
+                        <li class="ml-page-item {% if page_obj.number == num %}active{% endif %}">
+                            <a class="ml-page-link" href="?page={{ num }}">{{ num }}</a>
+                        </li>
+                    {% endfor %}
+
+                    {% if page_obj.has_next %}
+                        <li class="ml-page-item">
+                            <a class="ml-page-link" href="?page={{ page_obj.next_page_number }}">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<script src="{% static 'js/ml_models.js' %}"></script>
+
+{% endblock %}
+

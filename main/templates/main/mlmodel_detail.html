@@ -1,0 +1,78 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block title %}{{ object.name }}{% endblock %}
+
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/ml_models.css' %}">
+
+<!-- Neural network background -->
+<div class="neural-bg"></div>
+<div class="particles-container"></div>
+
+<div class="ml-detail-container">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="ml-detail-header">
+                    <h1>{{ object.name }}</h1>
+                    
+                    <div class="mb-3">
+                        <span class="ml-badge ml-badge-primary">{{ object.category }}</span>
+                        <span class="ml-badge ml-badge-tier-{{ object.tier }}">Tier {{ object.tier }}</span>
+                    </div>
+                </div>
+
+                {% if object.image %}
+                <div class="ml-detail-image" data-tier="{{ object.tier }}">
+                    <img src="{{ object.image.url }}" class="img-fluid" alt="{{ object.name }}">
+                </div>
+                {% endif %}
+
+                <div class="ml-detail-content">
+                    {{ object.body|safe }}
+                </div>
+
+                {% if object.github_url %}
+                <div class="mb-4">
+                    <a href="{{ object.github_url }}" class="ml-btn ml-btn-primary" target="_blank">
+                        View on GitHub
+                    </a>
+                </div>
+                {% endif %}
+
+                {% if object.skills.all %}
+                <div class="ml-detail-content">
+                    <h3>Technologies Used:</h3>
+                    <div class="ml-card-badges">
+                        {% for skill in object.skills.all %}
+                            <span class="ml-badge ml-badge-info">{{ skill.name }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="col-md-4">
+                {% if related_models %}
+                <div class="ml-related-card">
+                    <div class="ml-related-card-header">
+                        <h3>Related Models</h3>
+                    </div>
+                    {% for model in related_models %}
+                    <div class="ml-related-item">
+                        <a href="{% url 'main:mlmodel_detail' model.slug %}">{{ model.name }}</a>
+                        <span class="ml-badge ml-badge-tier-{{ model.tier }}">Tier {{ model.tier }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+<script src="{% static 'js/ml_models.js' %}"></script>
+
+{% endblock %}
+
+

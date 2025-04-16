@@ -17,7 +17,9 @@ from .models import (
 		Video,
 		WebhookEvent,
 		Award,
-		JobExperience
+		JobExperience,
+		MLModel,
+		
 	)
 
 from django.views import generic
@@ -387,3 +389,33 @@ class LatestEventsView(ListView):
         # Extract only the specified fields for each event
         events = list(context['events'].values('commit_url', 'repository_url', 'repository', 'description', 'timestamp'))
         return JsonResponse(events, safe=False)
+
+
+
+class MLModelListView(generic.ListView):
+    model = MLModel
+    template_name = "main/mlmodel_list.html"
+    paginate_by = 10
+
+    def get_queryset(self):
+        return super().get_queryset().filter(is_active=True).order_by('-date')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Add any additional context if needed
+        return context
+
+
+class MLModelDetailView(generic.DetailView):
+    model = MLModel
+    template_name = "main/mlmodel_detail.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Get related models (optional)
+        related_models = MLModel.objects.filter(
+            category=self.object.category,
+            is_active=True
+        ).exclude(id=self.object.id)[:3]
+        context["related_models"] = related_models
+        return context
