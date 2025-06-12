@@ -515,129 +515,130 @@
     }
   }
   
-  /* Mobile One-Sided Tree Design */
+  /* Mobile Zoom-Out Approach - More Aggressive Scaling */
   @media (max-width: 767px) {
-    .tree-timeline {
-      padding-top: 60px;
+    .lightBg {
+      overflow-x: auto; /* Allow horizontal scrolling if needed */
+      padding-top: 30px;
     }
   
-    .tree-trunk {
-      left: 60px; /* Position tree trunk to the left side */
-      transform: none; /* Remove centering transform */
-      width: 25px;
-    }
-  
-    /* Force all branches to extend to the right */
-    .branch {
-      left: 60px !important; /* Start from tree trunk */
-      width: 80px !important;
-      transform: rotate(0deg) !important; /* Make all branches horizontal */
-      transform-origin: left center !important;
-    }
-  
-    /* Override any left-side branch positioning */
-    .branch[style*="right:"],
-    .branch[style*="transform: rotate(-"] {
-      right: auto !important;
-      left: 60px !important;
-      transform: rotate(0deg) !important;
-    }
-  
-    .portfolioRow {
-      gap: 120px; /* Reduce gap for mobile */
-      padding: 0;
-      margin: 0;
-      width: 100%;
-      align-items: flex-start; /* Align to start */
-      padding-left: 0;
-    }
-  
-    /* Force all portfolio items to the right side */
-    .pColMain {
-      position: relative !important;
-      left: 150px !important; /* Position to the right of tree trunk + branch */
-      right: auto !important;
-      top: 0 !important;
-      margin: 0 0 40px 0 !important; /* Add bottom margin for spacing */
-      width: calc(100% - 170px) !important; /* Account for left positioning */
-      max-width: 280px !important;
-    }
-  
-    /* Override any right-side positioning to ensure consistency */
-    .pColMain:nth-child(odd),
-    .pColMain:nth-child(even) {
-      left: 150px !important;
-      right: auto !important;
-      margin-left: 0 !important;
-      margin-right: 0 !important;
-    }
-  
-    /* Stagger the portfolio items vertically to prevent overlap */
-    .pColMain:nth-child(1) { top: 0px !important; }
-    .pColMain:nth-child(2) { top: 160px !important; }
-    .pColMain:nth-child(3) { top: 320px !important; }
-    .pColMain:nth-child(4) { top: 480px !important; }
-    .pColMain:nth-child(5) { top: 640px !important; }
-    .pColMain:nth-child(6) { top: 800px !important; }
-    .pColMain:nth-child(7) { top: 960px !important; }
-    .pColMain:nth-child(8) { top: 1120px !important; }
-    .pColMain:nth-child(9) { top: 1280px !important; }
-    .pColMain:nth-child(10) { top: 1440px !important; }
-  
-    /* Hide vines on mobile for cleaner look */
-    .vine {
-      display: none;
-    }
-  
-    /* Adjust banner content for mobile */
     .innerPageBannerCol {
-      padding: 2rem 0;
-      margin-top: 60px;
+      margin-top: 30px;
+      padding: 1rem 0;
     }
   
     .bannerContent {
       text-align: center;
-      padding: 0 20px;
+      padding: 0 10px;
     }
   
     .xlTitle {
+      font-size: 1.4rem;
+    }
+  
+    .bannerContent h6 {
+      font-size: 0.8rem;
+    }
+  
+    /* Scale down the entire portfolio content more aggressively */
+    .portfolioContentMain {
+      transform: scale(0.5); /* Scale down to 50% */
+      transform-origin: top center;
+      width: 200%; /* Compensate for scale: 100/0.5 */
+      margin: 0 auto;
+      position: relative;
+      left: 50%;
+      margin-left: -100%; /* Half of the compensated width */
+    }
+  
+    /* Adjust container to accommodate scaled content */
+    .container {
+      max-width: 100%;
+      padding: 0 5px;
+    }
+  
+    /* Ensure tree trunk scales properly */
+    .tree-trunk {
+      width: 30px;
+    }
+  
+    /* Reduce vine complexity on mobile */
+    .vine {
+      opacity: 0.6;
+    }
+  
+    /* Increase text size significantly to compensate for aggressive scaling */
+    .pTitle {
       font-size: 1.8rem;
     }
   
-    /* Ensure container has enough height for all items */
-    .lightBg {
-      min-height: calc(100vh + 1600px); /* Adjust based on number of portfolio items */
+    .pDesc {
+      font-size: 1.3rem;
+      line-height: 1.4;
     }
   
-    /* Add some breathing room at the bottom */
-    .portfolioRow {
-      padding-bottom: 200px;
+    .pDate {
+      font-size: 1.1rem;
+    }
+  
+    /* Increase padding to maintain readability */
+    .pContent {
+      padding: 25px;
     }
   }
   
-  /* Additional fix for very small screens */
+  /* Additional scaling for very small screens */
   @media (max-width: 480px) {
-    .tree-trunk {
-      left: 40px;
-      width: 20px;
+    .portfolioContentMain {
+      transform: scale(0.45); /* Scale down to 45% */
+      width: 222.22%; /* Compensate for scale: 100/0.45 */
+      margin-left: -111.11%; /* Half of the compensated width */
     }
   
-    .branch {
-      left: 40px !important;
-      width: 60px !important;
-    }
-  
-    .pColMain {
-      left: 110px !important;
-      width: calc(100% - 130px) !important;
-      max-width: 250px !important;
-    }
-    
     .xlTitle {
-      font-size: 1.5rem;
+      font-size: 1.2rem;
     }
-    
+  
     .bannerContent h6 {
-      font-size: 0.9rem;
+      font-size: 0.75rem;
+    }
+  
+    /* Even larger text to compensate for more aggressive scaling */
+    .pTitle {
+      font-size: 2rem;
+    }
+  
+    .pDesc {
+      font-size: 1.4rem;
+    }
+  
+    .pDate {
+      font-size: 1.2rem;
+    }
+  
+    .pContent {
+      padding: 30px;
+    }
+  }
+  
+  /* Landscape mobile optimization */
+  @media (max-width: 767px) and (orientation: landscape) {
+    .portfolioContentMain {
+      transform: scale(0.6); /* Less aggressive scaling in landscape */
+      width: 166.67%; /* Compensate for scale: 100/0.6 */
+      margin-left: -83.33%; /* Half of the compensated width */
+    }
+  
+    .innerPageBannerCol {
+      padding: 0.5rem 0;
+    }
+  
+    /* Adjust text for landscape */
+    .pTitle {
+      font-size: 1.6rem;
+    }
+  
+    .pDesc {
+      font-size: 1.2rem;
     }
   }
