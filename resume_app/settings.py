@@ -26,8 +26,10 @@ SECRET_KEY = 'django-insecure-v8bzoj5)*&_%x-yy7o*z-2$*m1uuo*hbtb(n)%@bboej@%wkox
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['mrphilip.pythonanywhere.com', '127.0.0.1']
+ALLOWED_HOSTS = ['mrphilip.pythonanywhere.com', '127.0.0.1', '127.0.0.1:8000', 'localhost:8000', '127.0.0.1', 'localhost']
 
+
+# ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -79,7 +81,7 @@ WSGI_APPLICATION = 'resume_app.wsgi.application'
 
 
 # Database
-# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
+#https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
     'default': {
@@ -87,6 +89,27 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+
+# DATABASES = {
+
+#     'default': {
+
+#         'ENGINE': 'django.db.backends.postgresql',
+
+#         'NAME': os.getenv('DB_NAME'),
+
+#         'USER': os.getenv('DB_USER'),
+
+#         'PASSWORD': os.getenv('DB_PASSWORD'),
+
+#         'HOST': os.getenv('DB_HOST'),
+
+#         'PORT': os.getenv('DB_PORT'),
+
+#     }
+
+# }
 
 # settings.py
 
