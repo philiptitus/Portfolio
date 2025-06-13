@@ -33,7 +33,7 @@ ALLOWED_HOSTS = [
     'localhost:8000',
     '127.0.0.1',
     'localhost',
-    'portfolio-4i38o6yaa-philip-titus-projects.vercel.app'
+    '.vercel.app'
 ]
 
 
