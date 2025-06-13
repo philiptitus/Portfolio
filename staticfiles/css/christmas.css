@@ -3,9 +3,9 @@
 font-family: 'Heebo', sans-serif; */
 :root {
   --primaryColor: #000000;
-  --primaryDarkColor: #76e255;
-  --primaryHoverColor: #76e255;
-  --secondaryColor: #FAF6F0;
+  --primaryDarkColor: #e25555;
+  --primaryHoverColor: #e25555;
+  --secondaryColor: #faf0f0;
   --baseColor: #21243D;
   --baseFont: 'Heebo', sans-serif;
   --titleFont: 'Courier Prime', monospace;
@@ -13,7 +13,7 @@ font-family: 'Heebo', sans-serif; */
   --medium: 500;
   --bold: 700;
   --black: 900;
-  --lightBg: #F4EAE0;
+  --lightBg: #f7d0d0;
 }
 html {
   scroll-behavior: smooth;
@@ -22,7 +22,7 @@ body {
   font-family: var(--baseFont);
   color: var(--baseColor);
   line-height: normal;
-  background-color: #cff4c8;
+  background-color: #f4c8c8;
 }
 ul {
   margin: 0;
@@ -36,12 +36,12 @@ a {
   color: inherit;
 }
 .viewp{
-  color: #3af900;
+  color: #f90000;
   align-items: center;
 }
 .core{
   text-align: right;
-  color:#04f900;
+  color:#f90000;
   font-style: var(--primaryDarkColor);
   font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }

@@ -50,7 +50,7 @@ section{
 .title.title-right{
   justify-content: flex-end;
 }
-.line{  
+.line{
   width: 3em;
   height: 1px;
   background-color: #000;
@@ -69,7 +69,7 @@ section{
   display: inline-block;
   padding: .5em 1.5em;
   color: #000000;
-  border: solid 1px #090b08;  
+  border: solid 1px #090b08;
   transition: all .3s ease-in;
 }
 .btn:hover, .btn:focus{
@@ -77,7 +77,7 @@ section{
   -webkit-box-shadow: 0px 10px 7px -9px rgba(0,0,0,0.75);
   -moz-box-shadow: 0px 10px 7px -9px rgba(0,0,0,0.75);
   box-shadow: 0px 10px 7px -9px rgba(0,0,0,0.75);
-  transition: all .3s ease-out; 
+  transition: all .3s ease-out;
 }
 
 /* Header */
@@ -176,7 +176,7 @@ a.nav-link:focus{
 	align-items: center;
 }
 .hero-img img{
-  
+
 }
 .hero-text{
   padding: 0 2em 7.5em;
@@ -276,7 +276,7 @@ form input:first-child{
 }
 form input:last-child{
   flex: 1 0 20%;
-  border-left: 0;  
+  border-left: 0;
   cursor: pointer;
   background-color: #f5d9d6;
   transition: all .25s ease;
@@ -330,14 +330,14 @@ input{
 
 /* Responsive Style */
 @media(min-width: 320px){
-  
+
 }
 @media(min-width: 576px){
   /*  Global  */
   h1{
     font-size: 2em;
   }
-  
+
   /*  Hero Section  */
   .hero{
     background-image: none;
@@ -354,12 +354,12 @@ input{
   .hero-text{
     padding: 0 2em;
   }
-  
+
   /*  Featured Section  */
   .text{
     margin: 2em 2em auto;
   }
-  
+
   /*  Collections Section  */
   #collections .wrapper{
     display: flex;
@@ -378,7 +378,7 @@ input{
   .box3{
     flex: 2 0 100%;
   }
-  
+
   /*  About Section  */
   .video-wrapper{
     margin: 0 2em;
@@ -389,7 +389,7 @@ input{
   .wrapper{
     display: flex;
   }
-  
+
   /*  Header  */
   .nav-brand img{
     height: 10em;
@@ -419,10 +419,10 @@ input{
   a.nav-link{
     margin-right: 3em;
   }
-  
-  /*  Featured Section  */  
+
+  /*  Featured Section  */
   .text{
-    text-align: left;    
+    text-align: left;
     margin: 0 0 auto 4em;
   }
   #featured .text{
@@ -433,12 +433,12 @@ input{
     flex: 1 0 12em;
     order: 2;
   }
-  
+
   /*  Collections Section  */
   #collections .wrapper{
     margin: 0 4em;
   }
-  
+
   /*  About Section  */
   #about .wrapper{
     display: block;
@@ -449,7 +449,7 @@ input{
   .video-wrapper{
     margin: auto 4em;
   }
-  
+
   /* Contact Section  */
   #contact .wrapper{
     flex-wrap: wrap;
@@ -477,7 +477,7 @@ input{
     background-color: transparent;
   }
   .contact-wrapper a.contact-footer:hover i{
-    
+
   }
   .contact-wrapper a i{
     width: auto;
@@ -502,7 +502,7 @@ input{
   /*  Global  */
   section{
     padding: 5.8em 7em 0;
-  }  
+  }
   .title.title-left{
     margin-left: -2.5em;
   }
@@ -512,17 +512,17 @@ input{
   .line{
     width: 5.5em;
   }
-  
+
   /*  Hero Section  */
   .hero-img img{
     width: 14.5em;
   }
-  
+
   /*  Featured Section  */
   #featured .image{
     margin-top: -2em;
   }
-  
+
   /* About Section  */
   #about .wrapper{
     display: flex;
@@ -536,7 +536,7 @@ input{
     flex: 2 0 55%;
     padding-bottom: 33.25%;
     align-self: center;
-    margin: 1.4em 0;        
+    margin: 1.4em 0;
   }
   .contact-tel{
     flex-basis: 20%;
@@ -550,17 +550,17 @@ input{
   section{
     padding: 5.8em 11em 0;
   }
-  
+
   /*  Hero Section  */
   .hero-img img{
     width: 15.5em;
   }
-  
+
   /*  Featured Section  */
   #featured .image{
     margin-top: -4em;
   }
-  
+
   /*  About Section  */
   #about .text{
     padding-right: 3em;
@@ -569,4 +569,22 @@ input{
   .video-wrapper{
     margin: 0;
   }
+}
+
+
+
+.skills-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.skill-tag {
+  background-color: #f1f1f1;
+  border-radius: 20px;
+  padding: 5px 10px;
+  font-size: 12px;
+  color: #333;
+  display: inline-block;
 }
