@@ -1,0 +1,35 @@
+# Ignore Python virtual environments
+env/
+venv/
+.venv/
+
+# Ignore compiled files and caches
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore local media and static (except build output)
+media/
+static/
+
+# Ignore database and backups
+backups/
+
+# Ignore editor and OS files
+.DS_Store
+*.swp
+*.swo
+*.bak
+
+# Ignore test and docs
+tests/
+docs/
+
+# Ignore git and Vercel config
+.git/
+.gitignore
+.vercel/
+
+# Allow only the staticfiles_build output for static
+!staticfiles_build/

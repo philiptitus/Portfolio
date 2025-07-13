@@ -102,7 +102,7 @@ class Chatbot {
 
         try {
             // Send to API
-            const response = await fetch('/api/chatbot/', {
+            const response = await fetch('https://mrphilip.pythonanywhere.com/api/chatbot/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
