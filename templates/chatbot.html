@@ -1,0 +1,47 @@
+<!-- Chatbot Button and Modal -->
+<div id="chatbot-container">
+    <!-- Floating Chat Button -->
+    <button id="chatbot-toggle" class="chatbot-button" title="Chat with me">
+        <span class="robot-icon">🤖</span>
+    </button>
+
+    <!-- Chat Modal -->
+    <div id="chatbot-modal" class="chatbot-modal">
+        <div class="chatbot-header">
+            <div class="chatbot-title">
+                <span class="robot-icon">🤖</span>
+                <span>Philip Titus</span>
+            </div>
+            <button id="chatbot-close" class="chatbot-close">&times;</button>
+        </div>
+
+        <div class="chatbot-messages" id="chatbot-messages">
+            <div class="message bot-message">
+                <div class="message-content">
+                    <div class="message-avatar">🤖</div>
+                    <div class="message-text">
+                        Hi! I'm Philip's AI assistant. Ask me anything about my skills, projects, experience, or background!
+                    </div>
+                </div>
+                <div class="message-time">Just now</div>
+            </div>
+        </div>
+
+        <div class="chatbot-input-container">
+            <div class="chatbot-input-wrapper">
+                <input type="text" id="chatbot-input" placeholder="Type your message..." maxlength="500">
+                <button id="chatbot-send" class="chatbot-send-btn">
+                    <span>➤</span>
+                </button>
+            </div>
+            <div class="chatbot-typing" id="chatbot-typing" style="display: none;">
+                <div class="typing-indicator">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <span>Philip is typing...</span>
+            </div>
+        </div>
+    </div>
+</div> 

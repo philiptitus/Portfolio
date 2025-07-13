@@ -124,6 +124,17 @@ class BlogView(generic.ListView):
 		return super().get_queryset().filter(is_active=True).order_by('-timestamp')
 
 
+
+from django.http import JsonResponse
+from .models import Blog
+from django.views import View
+
+class BlogListJsonView(View):
+    def get(self, request, *args, **kwargs):
+        blogs = Blog.objects.filter(is_active=True).order_by('-timestamp').values()
+        return JsonResponse(list(blogs), safe=False)
+
+
 class BlogDetailView(generic.DetailView):
 	model = Blog
 	template_name = "main/blog-detail.html"

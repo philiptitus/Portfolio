@@ -18,6 +18,11 @@ Start Navigation Bar
                   <div class="navCollapseCol">
                       <div class="navCol">
                           <ul>
+
+<li>
+  <a href="https://blog.mrphilip.cv/" target="_blank">Blog</a>
+</li>
+
                               <li><a href="{%url 'main:portfolios' %}">All Projects</a></li>
 
 
@@ -79,7 +84,7 @@ async function fetchRecentActivities() {
   noUpdatesMessage.style.display = 'none';
 
   try {
-    const response = await fetch('https://mrphilip.pythonanywhere.com/new/');
+    const response = await fetch('https://www.mrphilip.cv/new/');
     const data = await response.json();
 
     // Hide loading spinner

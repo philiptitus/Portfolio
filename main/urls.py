@@ -9,6 +9,7 @@ urlpatterns = [
     path('success/', views.Success.as_view(), name="success"),
     path('privacy/', views.PrivacyView.as_view(), name="privacy"),
     path('404/', views.NotFoundView.as_view(), name="404"),
+    path('api/blogs/', views.BlogListJsonView.as_view(), name='blog-list-json'),
 
     path('new/', views.LatestEventsView.as_view(), name='latest_events'),
     path('ml-models/', views.MLModelListView.as_view(), name="mlmodels"),

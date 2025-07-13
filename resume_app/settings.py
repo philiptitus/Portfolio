@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
-
+import dj_database_url
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -26,18 +26,19 @@ SECRET_KEY = 'django-insecure-v8bzoj5)*&_%x-yy7o*z-2$*m1uuo*hbtb(n)%@bboej@%wkox
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    'mrphilip.pythonanywhere.com',
-    '127.0.0.1',
-    '127.0.0.1:8000',
-    'localhost:8000',
-    '127.0.0.1',
-    'localhost',
-    '.vercel.app'
-]
+# ALLOWED_HOSTS = [
+#     'mrphilip.pythonanywhere.com',
+#     '127.0.0.1',
+#     '127.0.0.1:8000',
+#     'localhost:8000',
+#     '127.0.0.1',
+#     'localhost',
+#     '.vercel.app'
+#     'www.mrphilip.cv'
+# ]
 
 
-# ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -63,6 +64,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'main.middleware.Redirect404Middleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware'
 
 ]
 
@@ -98,26 +100,21 @@ DATABASES = {
     }
 }
 
+from dotenv import load_dotenv
+
+
+load_dotenv()  # Make sure this is at the top if you use a .env file
+
+# DATABASE_URL = os.environ.get("DATABASE_URL")
 
 # DATABASES = {
-
-#     'default': {
-
-#         'ENGINE': 'django.db.backends.postgresql',
-
-#         'NAME': os.getenv('DB_NAME'),
-
-#         'USER': os.getenv('DB_USER'),
-
-#         'PASSWORD': os.getenv('DB_PASSWORD'),
-
-#         'HOST': os.getenv('DB_HOST'),
-
-#         'PORT': os.getenv('DB_PORT'),
-
-#     }
-
+#     'default': dj_database_url.parse(
+#         DATABASE_URL,
+#         conn_max_age=600,
+#         ssl_require=True
+#     )
 # }
+
 
 # settings.py
 
@@ -166,7 +163,9 @@ STATICFILES_DIRS = [
 ]
 
 STATIC_URL = "/static/"
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = BASE_DIR / "staticfiles_build" / "static"
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "mediafiles"
 
@@ -227,6 +226,5 @@ if SITE_UNDER_CONSTRUCTION == True:
 
 
 CORS_ALLOW_ALL_ORIGINS = True
-
 
 

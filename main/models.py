@@ -9,8 +9,9 @@ class Skill(models.Model):
         verbose_name_plural = 'Skills'
         verbose_name = 'Skill'
 
-    name = models.CharField(max_length=20, blank=True, null=True)
+    name = models.CharField(max_length=100, blank=True, null=True)
     score = models.IntegerField(default=80, blank=True, null=True)
+    name_embedding = models.TextField(blank=True, null=True)  # Embedding for 'name'
     image = models.FileField(blank=True, null=True, upload_to="skills")
     is_key_skill = models.BooleanField(default=False)
 
@@ -27,6 +28,7 @@ class UserProfile(models.Model):
     avatar = models.ImageField(blank=True, null=True, upload_to="avatar")
     title = models.CharField(max_length=200, blank=True, null=True)
     bio = models.TextField(blank=True, null=True)
+    bio_embedding = models.TextField(blank=True, null=True)  # Embedding for 'bio'
     skills = models.ManyToManyField(Skill, blank=True)
     cv = models.FileField(blank=True, null=True, upload_to="cv")
 
@@ -127,8 +129,11 @@ class Portfolio(models.Model):
 
     date = models.DateTimeField(blank=True, null=True)
     name = models.CharField(max_length=200, blank=True, null=True)
+    name_embedding = models.TextField(blank=True, null=True)  # Embedding for 'name'
     description = models.CharField(max_length=500, blank=True, null=True)
+    description_embedding = models.TextField(blank=True, null=True)  # Embedding for 'description'
     body = RichTextField(blank=True, null=True)
+    body_embedding = models.TextField(blank=True, null=True)  # Embedding for 'body'
     url = models.URLField(blank=True, null=True,)
     core_skill = models.CharField(max_length=264, choices=STATUS_SKILLS, default='PYTHON')
     category = models.CharField(max_length=264, choices=CATEGORY, default='WEB DEVELOPMENT')
@@ -211,7 +216,9 @@ class MLModel(models.Model):
 
     date = models.DateTimeField(blank=True, null=True)
     name = models.CharField(max_length=200, blank=True, null=True)
+    name_embedding = models.TextField(blank=True, null=True)  # Embedding for 'name'
     body = RichTextField(blank=True, null=True)
+    body_embedding = models.TextField(blank=True, null=True)  # Embedding for 'body'
     category = models.CharField(max_length=264, choices=CATEGORY, default='SUPERVISED_LEARNING')
     tier = models.CharField(max_length=1, choices=TIER_CHOICES, default='A')
     image = models.ImageField(upload_to='ml_models', blank=True, null=True)
@@ -276,6 +283,7 @@ class Project(models.Model):
 
     date = models.DateField(blank=True, null=True)
     name = models.CharField(max_length=264)
+    name_embedding = models.TextField(blank=True, null=True)  # Embedding for 'name'
     status = models.CharField(max_length=1000, choices=STATUS_CHOICES, default='Just Started')
     slug = models.SlugField(null=True, blank=True)
     image = models.ImageField(blank=True, null=True, upload_to="portfolio")
@@ -284,7 +292,9 @@ class Project(models.Model):
     category = models.CharField(max_length=264, choices=CATEGORY, default='WEB DEVELOPMENT')
     url = models.URLField(default="https://github.com/philiptitus/todoapp2.0.git")
     description = models.TextField(max_length=1000, blank=True, null=True)
+    description_embedding = models.TextField(blank=True, null=True)  # Embedding for 'description'
     body = RichTextField(blank=True, null=True)
+    body_embedding = models.TextField(blank=True, null=True)  # Embedding for 'body'
     # skills = models.ManyToManyField(Skill, blank=True)
     for_sale = models.BooleanField(default=False)
 
@@ -331,8 +341,11 @@ class Blog(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
     author = models.CharField(max_length=200, blank=True, null=True)
     name = models.CharField(max_length=200, blank=True, null=True)
+    name_embedding = models.TextField(blank=True, null=True)  # Embedding for 'name'
     description = models.CharField(max_length=500, blank=True, null=True)
+    description_embedding = models.TextField(blank=True, null=True)  # Embedding for 'description'
     body = RichTextField(blank=True, null=True)
+    body_embedding = models.TextField(blank=True, null=True)  # Embedding for 'body'
     png_url=models.URLField(null=True, blank=True)
     category = models.CharField(max_length=264, choices=CATEGORY, default='WEB DEVELOPMENT')
     slug = models.SlugField(null=True, blank=True)
@@ -372,10 +385,12 @@ class Certificate(models.Model):
         verbose_name = 'Certificate'
 
     date = models.DateTimeField(blank=True, null=True)
-    name = models.CharField(max_length=50, blank=True, null=True)
-    category = models.CharField(max_length=264, choices=CATEGORY, default='WEB DEVELOPMENT')
+    name = models.CharField(max_length=100, blank=True, null=True)
+    name_embedding = models.TextField(blank=True, null=True)  # Embedding for 'name'
     title = models.CharField(max_length=200, blank=True, null=True)
+    title_embedding = models.TextField(blank=True, null=True)  # Embedding for 'title'
     description = models.CharField(max_length=500, blank=True, null=True)
+    description_embedding = models.TextField(blank=True, null=True)  # Embedding for 'description'
     is_active = models.BooleanField(default=True)
     is_ongoing = models.BooleanField(default=True)
     image_url = models.URLField(null=True, blank=True)
@@ -395,9 +410,11 @@ class Award(models.Model):
         verbose_name = 'Award'
 
     date = models.DateTimeField(blank=True, null=True)
-    issued_by = models.CharField(max_length=50, blank=True, null=True)
+    issued_by = models.CharField(max_length=100, blank=True, null=True)
     title = models.CharField(max_length=200, blank=True, null=True)
+    title_embedding = models.TextField(blank=True, null=True)  # Embedding for 'title'
     description = models.CharField(max_length=500, blank=True, null=True)
+    description_embedding = models.TextField(blank=True, null=True)  # Embedding for 'description'
     is_active = models.BooleanField(default=True)
     image_url = models.URLField(null=True, blank=True)
 
@@ -445,11 +462,15 @@ from django.db import models
 
 class JobExperience(models.Model):
     job_title = models.CharField(max_length=100, help_text="Title of the job, e.g., Software Engineer")
+    job_title_embedding = models.TextField(blank=True, null=True)  # Embedding for 'job_title'
     company_name = models.CharField(max_length=100, help_text="Name of the company")
+    company_name_embedding = models.TextField(blank=True, null=True)  # Embedding for 'company_name'
     location = models.CharField(max_length=100, blank=True, null=True, help_text="Location of the job (optional)")
+    location_embedding = models.TextField(blank=True, null=True)  # Embedding for 'location'
     start_date = models.DateField(help_text="Start date of the job")
     end_date = models.DateField(blank=True, null=True, help_text="End date of the job. Leave blank if currently working")
     description = models.TextField(help_text="Description of your responsibilities and achievements")
+    description_embedding = models.TextField(blank=True, null=True)  # Embedding for 'description'
     is_current = models.BooleanField(default=False, help_text="Check if this is your current job")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

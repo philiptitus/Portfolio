@@ -13,6 +13,8 @@ __pycache__/
 *.sqlite3
 *.bak
 
+staticfiles/
+
 # Ignore Django migration files if you plan to regenerate them
 # Comment these lines out if you want to keep migration history
 
