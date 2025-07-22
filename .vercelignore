@@ -10,8 +10,6 @@ __pycache__/
 *.pyd
 
 # Ignore local media and static (except build output)
-media/
-static/
 
 # Ignore database and backups
 backups/
@@ -33,3 +31,5 @@ docs/
 
 # Allow only the staticfiles_build output for static
 !staticfiles_build/
+
+main/chatbot_views.py

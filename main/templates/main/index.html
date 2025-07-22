@@ -8,9 +8,6 @@ Start SEO blocks
 
 ================================= -->
 
-
-
-
 {% block decription %}{% endblock %}
 {% block keywords %}{% endblock %}
 <!-- ================================
@@ -21,498 +18,9 @@ END SEO blocks
 Start CSS blocks
 ================================= -->
 {% block extend_header %}
-<link rel="stylesheet" href="/css/index.css">
-<style>
-  /* Modern Design System */
-  :root {
-    --primary: #2D3436;
-    --secondary: #00B894;
-    --accent: #0984E3;
-    --background: #F5F6FA;
-    --surface: #FFFFFF;
-    --text: #2D3436;
-    --text-light: #636E72;
-    --border: #DFE6E9;
-    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    --transition: all 0.3s ease;
-  }
 
-  /* Hero Section */
-  .hero {
-    min-height: 100vh;
-    background: linear-gradient(135deg, var(--primary) 0%, #1E272E 100%);
-    color: white;
-    padding: 6rem 0;
-    position: relative;
-    overflow: hidden;
-  }
+<link href="{% static 'css/index3.css' %}" rel="stylesheet">
 
-  .hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-  }
-
-  .hero-content {
-    position: relative;
-    z-index: 1;
-  }
-
-  .hero-title {
-    font-size: 4rem;
-    font-weight: 800;
-    margin-bottom: 1rem;
-    line-height: 1.2;
-  }
-
-  .hero-subtitle {
-    font-size: 1.5rem;
-    font-weight: 300;
-    margin-bottom: 2rem;
-    opacity: 0.9;
-  }
-
-  .hero-buttons {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-
-  .btn {
-    padding: 1rem 2rem;
-    border-radius: 50px;
-    font-weight: 600;
-    text-decoration: none;
-    transition: var(--transition);
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  .btn-primary {
-    background: var(--secondary);
-    color: white;
-    border: none;
-  }
-
-  .btn-primary:hover {
-    background: #00A187;
-    transform: translateY(-2px);
-  }
-
-  .btn-outline {
-    border: 2px solid white;
-    color: white;
-    background: transparent;
-  }
-
-  .btn-outline:hover {
-    background: white;
-    color: var(--primary);
-    transform: translateY(-2px);
-  }
-
-  /* Section Styles */
-  .section {
-    padding: 6rem 0;
-  }
-
-  .section-title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: var(--primary);
-    margin-bottom: 3rem;
-    text-align: center;
-    position: relative;
-  }
-
-  .section-title::after {
-    content: '';
-    position: absolute;
-    bottom: -1rem;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 4px;
-    background: var(--secondary);
-  }
-
-  /* Portfolio Cards */
-  .portfolio-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-bottom: 4rem;
-  }
-
-  .portfolio-card {
-    transition: all 0.3s ease;
-    position: relative;
-    z-index: 1;
-    display: block;
-    text-decoration: none;
-    color: inherit;
-    background: var(--surface);
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: var(--shadow);
-  }
-
-  .portfolio-card:hover {
-    transform: scale(1.05);
-    z-index: 100;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-  }
-
-  .portfolio-image {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-  }
-
-  .portfolio-content {
-    position: relative;
-    z-index: 2;
-    padding: 2rem;
-  }
-
-  .portfolio-title {
-    color: var(--primary);
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-  }
-
-  .portfolio-date {
-    color: var(--text-light);
-    font-size: 0.9rem;
-    margin-bottom: 1rem;
-  }
-
-  /* Swiper Customization */
-  .swiper {
-    padding: 2rem 0;
-  }
-
-  .swiper-slide {
-    height: auto;
-  }
-
-  .swiper-button-next,
-  .swiper-button-prev {
-    color: var(--secondary) !important;
-    background: white;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    box-shadow: var(--shadow);
-  }
-
-  .swiper-button-next:after,
-  .swiper-button-prev:after {
-    font-size: 1.5rem;
-  }
-
-  .swiper-pagination-bullet {
-    background: var(--secondary) !important;
-    opacity: 0.5;
-    width: 10px;
-    height: 10px;
-  }
-
-  .swiper-pagination-bullet-active {
-    opacity: 1;
-  }
-
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .hero-title {
-      font-size: 2.5rem;
-    }
-    
-    .hero-subtitle {
-      font-size: 1.2rem;
-    }
-    
-    .hero-buttons {
-      flex-direction: column;
-    }
-    
-    .btn {
-      width: 100%;
-      justify-content: center;
-    }
-
-    .section-title {
-      font-size: 2rem;
-    }
-  }
-
-  /* Featured Project Card */
-  .featured-project-card {
-    background: var(--surface);
-    border-radius: 20px;
-    padding: 2rem;
-    box-shadow: var(--shadow);
-    transition: var(--transition);
-    position: relative;
-    overflow: hidden;
-    min-height: 300px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    background: linear-gradient(135deg, var(--primary) 0%, #1E272E 100%);
-    color: white;
-  }
-
-  .featured-project-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-  }
-
-  .featured-content {
-    position: relative;
-    z-index: 1;
-    max-width: 600px;
-    margin: 0 auto;
-  }
-
-  .featured-title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-  }
-
-  .featured-title a {
-    color: white;
-    text-decoration: none;
-    transition: var(--transition);
-  }
-
-  .featured-title a:hover {
-    color: var(--secondary);
-  }
-
-  .featured-date {
-    color: var(--secondary);
-    font-size: 1.1rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .featured-description {
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
-    opacity: 0.9;
-  }
-
-  /* Shop Section */
-  .shop-banner {
-    background: linear-gradient(135deg, var(--primary) 0%, #1E272E 100%);
-    border-radius: 20px;
-    padding: 4rem 2rem;
-    text-align: center;
-    color: white;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .shop-banner::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-  }
-
-  .shop-content {
-    position: relative;
-    z-index: 1;
-  }
-
-  .shop-description {
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
-    opacity: 0.9;
-  }
-
-  .shop-button {
-    background: var(--secondary);
-    color: white;
-    padding: 1rem 2rem;
-    border-radius: 50px;
-    text-decoration: none;
-    transition: var(--transition);
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .shop-button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(255, 255, 255, 0.2),
-      transparent
-    );
-    transition: 0.5s;
-  }
-
-  .shop-button:hover::before {
-    left: 100%;
-  }
-
-  .shop-button:hover {
-    background: #00A187;
-    transform: translateY(-2px);
-    color: white;
-    box-shadow: 0 5px 15px rgba(0, 184, 148, 0.3);
-  }
-
-  /* Video Controls */
-  .video-controls {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    display: flex;
-    gap: 10px;
-    z-index: 1001;
-  }
-
-  .video-controls button,
-  .video-controls a {
-    background: rgba(255, 255, 255, 0.2);
-    border: none;
-    color: white;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-decoration: none;
-  }
-
-  .video-controls button:hover,
-  .video-controls a:hover {
-    background: rgba(255, 255, 255, 0.3);
-    transform: scale(1.1);
-  }
-
-  .video-controls i {
-    font-size: 1.2rem;
-  }
-
-  /* Expanded Video State */
-  .video-container.expanded {
-    width: 100vw;
-    height: 100vh;
-    border-radius: 0;
-  }
-
-  /* Overlay for modal */
-  .portfolio-card:hover::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.8);
-    z-index: 99;
-  }
-
-  /* Ensure navigation stays above modal */
-  .swiper-button-next,
-  .swiper-button-prev {
-    z-index: 1001 !important;
-  }
-
-  .swiper-pagination {
-    z-index: 1001 !important;
-  }
-
-  /* Portfolio Content */
-  .portfolio-content {
-    position: relative;
-    z-index: 2;
-  }
-
-  .portfolio-title a {
-    color: var(--primary);
-    text-decoration: none;
-    transition: var(--transition);
-  }
-
-  .portfolio-title a:hover {
-    color: var(--secondary);
-  }
-
-  /* Responsive adjustments */
-  @media (max-width: 768px) {
-    .portfolio-card .video-container {
-      width: 95vw;
-      height: 70vh;
-    }
-  }
-
-  @media (max-width: 576px) {
-    .portfolio-card .video-container {
-      width: 100vw;
-      height: 60vh;
-    }
-  }
-
-  /* Responsive Hero Buttons */
-  @media (max-width: 768px) {
-    .hero-buttons {
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    .btn {
-      width: 100%;
-      justify-content: center;
-    }
-  }
-
-  /* Exempt certificates section cards from zoom and dim effect */
-.certificatesSlider .portfolio-card:hover {
-  transform: none !important;
-  z-index: 1 !important;
-  box-shadow: var(--shadow) !important;
-}
-.certificatesSlider .portfolio-card:hover::before {
-  content: none !important;
-}
-
-/* Remove overlay for certificates cards */
-.certificatesSlider .portfolio-card::before {
-  content: none !important;
-}
-
-</style>
 
 {% endblock %}
 <!-- ================================
@@ -667,15 +175,156 @@ document.addEventListener('DOMContentLoaded', async () => {
         await waitForSwiper();
         window.portfolioCarousels = initAllCarousels();
         setupVideoInteractions();
+        initModal();
     } catch (error) {
         console.error('Failed to initialize carousels:', error);
     }
 }); 
+
+// Parallax effect for floating elements
+document.addEventListener('mousemove', (e) => {
+    const floatingElements = document.querySelectorAll('.floating-element');
+    const x = e.clientX / window.innerWidth;
+    const y = e.clientY / window.innerHeight;
+    
+    floatingElements.forEach((element, index) => {
+        const speed = (index + 1) * 0.5;
+        const xPos = (x - 0.5) * speed * 20;
+        const yPos = (y - 0.5) * speed * 20;
+        element.style.transform = `translate(${xPos}px, ${yPos}px)`;
+    });
+});
+
   (function(c,l,a,r,i,t,y){
       c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
       t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
       y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
   })(window, document, "clarity", "script", "mwgsql2uuh");
+
+// Modal functionality - Only for Certificates section
+function initModal() {
+    const modal = document.getElementById('cardModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalContent = document.getElementById('modalContent');
+    const modalImage = document.getElementById('modalImage');
+    const closeModal = document.getElementById('closeModal');
+    const modalTriggers = document.querySelectorAll('.modal-trigger');
+
+    // Helper function to clean text
+    function cleanText(text) {
+        return text ? text.trim().replace(/\s+/g, ' ') : '';
+    }
+
+    // Helper function to extract text content safely
+    function getTextContent(element, selector) {
+        const el = element.querySelector(selector);
+        return el ? cleanText(el.textContent) : '';
+    }
+
+    // Open modal function
+    function openModal(trigger) {
+        // Clear previous content
+        modalContent.innerHTML = '';
+        modalImage.innerHTML = '';
+        
+        // Extract title
+        const title = getTextContent(trigger, '.portfolio-title') || getTextContent(trigger, '.portfolio-title a') || 'Details';
+        modalTitle.textContent = title;
+        
+        // Extract description
+        const description = getTextContent(trigger, 'p');
+        
+        // Extract and display image
+        const imageElement = trigger.querySelector('img.portfolio-image') || trigger.querySelector('.portfolio-image');
+        if (imageElement && imageElement.src && !imageElement.src.includes('placeholder')) {
+            modalImage.innerHTML = `<img src="${imageElement.src}" alt="${title}" class="modal-image">`;
+        }
+        
+        // Build content for certificates only
+        let contentHTML = '';
+        
+        const allDateElements = trigger.querySelectorAll('.portfolio-date');
+        const credentialLink = trigger.querySelector('a[href*="http"]');
+        
+        let category = '';
+        let status = '';
+        
+        allDateElements.forEach(el => {
+            const text = cleanText(el.textContent);
+            if (text.startsWith('Status:')) {
+                status = text.replace('Status:', '').trim();
+            } else if (text && !text.startsWith('Status:')) {
+                category = text;
+            }
+        });
+        
+        contentHTML = `
+            ${description ? `
+            <div class="modal-detail">
+                <h4>Description</h4>
+                <p>${description}</p>
+            </div>` : ''}
+            ${category ? `
+            <div class="modal-detail">
+                <h4>Category</h4>
+                <p>${category}</p>
+            </div>` : ''}
+            ${status ? `
+            <div class="modal-detail">
+                <h4>Status</h4>
+                <p class="status-${status.toLowerCase()}">${status === 'learning' ? 'Currently Learning' : 'Completed'}</p>
+            </div>` : ''}
+            ${credentialLink ? `
+            <div class="modal-detail">
+                <a href="${credentialLink.href}" target="_blank" class="btn btn-primary">📜 View Credential</a>
+            </div>` : ''}
+        `;
+        
+        // Fallback content
+        if (!contentHTML.trim()) {
+            contentHTML = `
+                <div class="modal-detail">
+                    <h4>Description</h4>
+                    <p>${description || 'No additional details available.'}</p>
+                </div>
+            `;
+        }
+        
+        modalContent.innerHTML = contentHTML;
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+    
+    // Close modal function
+    function closeModalFunc() {
+        modal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+    
+    // Add click listeners to modal triggers (only certificates)
+    modalTriggers.forEach(trigger => {
+        trigger.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            openModal(trigger);
+        });
+    });
+    
+    // Close modal listeners
+    closeModal.addEventListener('click', closeModalFunc);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            closeModalFunc();
+        }
+    });
+    
+    // Close on escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            closeModalFunc();
+        }
+    });
+}
 </script>
 {% endblock %}
 <!-- ================================
@@ -686,219 +335,233 @@ END script blocks
 Start Content
 ================================= -->
 {% block content %}
+<!-- Floating Background Elements -->
+<div class="floating-elements">
+  <div class="floating-element floating-circle"></div>
+  <div class="floating-element floating-square"></div>
+  <div class="floating-element floating-triangle"></div>
+  <div class="floating-element floating-hexagon"></div>
+</div>
+
+<!-- Modal for Card Details (Certificates Only) -->
+<div id="cardModal" class="modal-overlay">
+  <div class="modal-container">
+    <div class="modal-header">
+      <h3 id="modalTitle" class="modal-title"></h3>
+      <button id="closeModal" class="modal-close">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div id="modalImage" class="modal-image-container"></div>
+      <div id="modalContent" class="modal-content"></div>
+    </div>
+  </div>
+</div>
+
 <!-- Hero Section -->
 <section class="hero">
   <div class="container">
-    <div class="row align-items-center">
-      <div class="col-lg-6 hero-content">
-        <h1 class="hero-title">Hi, I'm Philip</h1>
-        <div class="hero-subtitle">Software / Machine Learning Engineer</div>
-        <div class="hero-buttons">
-          <a href="https://drive.google.com/file/d/1xyb5oOds6_F44RQKhZYOfQjGpPovDAAW/view?usp=drive_link" class="btn btn-primary" target="_blank">
-            <i class="fas fa-file-alt"></i> View Resume
-          </a>
-          <a href="https://github.com/philiptitus" class="btn btn-outline" target="_blank">
-            <i class="fab fa-github"></i> My Github
-          </a>
-          <a href="https://linkedin.com/in/philiptitus" class="btn btn-outline" target="_blank">
-            <i class="fab fa-linkedin"></i> My LinkedIn
-          </a>
-          <a href="https://shop.mrphilip.cv/" class="btn btn-primary shop-button" target="_blank">
-            <i class="fas fa-shopping-cart"></i> Visit Shop
-          </a>
-          <a href="{% url 'main:contact' %}" class="btn btn-outline">
-            <i class="fas fa-envelope"></i> Contact
-          </a>
+    <div class="glass-container hero-glass">
+      <div class="row align-items-center">
+        <div class="col-lg-6 hero-content">
+          <h1 class="hero-title">Hi, I'm Philip</h1>
+          <div class="hero-subtitle">Software & Machine Learning Engineer</div>
+          <div class="hero-buttons">
+            <a href="https://github.com/philiptitus" class="btn btn-outline" target="_blank">
+              <i class="fab fa-github"></i> My Github
+            </a>
+            <a href="https://linkedin.com/in/philiptitus" class="btn btn-outline" target="_blank">
+              <i class="fab fa-linkedin"></i> My LinkedIn
+            </a>
+            <a href="https://shop.mrphilip.cv/" class="btn btn-primary shop-button" target="_blank">
+              <i class="fas fa-shopping-cart"></i> Visit Shop
+            </a>
+            <a href="{% url 'main:contact' %}" class="btn btn-outline">
+              <i class="fas fa-envelope"></i> Contact
+            </a>
+          </div>
         </div>
-      </div>
-      <div class="col-lg-6">
-        <dotlottie-player
-          src="https://lottie.host/0c0c0c0c-0c0c-0c0c-0c0c-0c0c0c0c0c0c/0c0c0c0c-0c0c-0c0c-0c0c-0c0c0c0c0c0c.json"
-          background="transparent"
-          speed="1"
-          style="width: 100%; height: 400px;"
-          loop
-          autoplay>
-        </dotlottie-player>
+        <div class="col-lg-6">
+          <div class="hero-animation">
+            <dotlottie-player
+              src="https://lottie.host/0c0c0c0c-0c0c-0c0c-0c0c-0c0c0c0c0c0c/0c0c0c0c-0c0c-0c0c-0c0c-0c0c0c0c0c0c.json"
+              background="transparent"
+              speed="1"
+              style="width: 100%; height: 400px;"
+              loop
+              autoplay>
+            </dotlottie-player>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- Best Work Section -->
-<section class="section">
+<section class="section section-featured">
   <div class="container">
-    <h2 class="section-title">My Star⭐ Project</h2>
-    <div class="portfolio-grid">
-      {% with portfolio|dictsort:"date" as sorted_portfolio %}
-        {% for item in sorted_portfolio %}
-          {% if item.star %}
-            <div class="featured-project-card">
-              <div class="featured-content">
-                <h3 class="featured-title">
-                  <a href="{% url 'main:portfolio' slug=item.slug %}">{{ item.name }}</a>
-                </h3>
-                <div class="featured-date">{{ item.date.year }}</div>
-                <p class="featured-description">{{ item.description }}</p>
-                <a href="{% url 'main:portfolio' slug=item.slug %}" class="btn btn-primary">View Project</a>
+    <div class="glass-container">
+      <h2 class="section-title">Latest Project</h2>
+      <div class="portfolio-grid">
+        {% with portfolio|dictsort:"date" as sorted_portfolio %}
+          {% for item in sorted_portfolio %}
+            {% if item.star %}
+              <div class="featured-project-card">
+                <div class="featured-content">
+                  <h3 class="featured-title">
+                    <a href="{% url 'main:portfolio' slug=item.slug %}">{{ item.name }}</a>
+                  </h3>
+                  <div class="featured-date">{{ item.date.year }}</div>
+                  <p class="featured-description">{{ item.description }}</p>
+                  <a href="{% url 'main:portfolio' slug=item.slug %}" class="btn btn-primary">View Project</a>
+                </div>
               </div>
-            </div>
-          {% endif %}
-        {% endfor %}
-      {% endwith %}
+            {% endif %}
+          {% endfor %}
+        {% endwith %}
+      </div>
     </div>
   </div>
 </section>
 
 <!-- Other Projects Section -->
-<section class="section" style="background: var(--background);">
+<section class="section section-projects">
   <div class="container">
-    <h2 class="section-title">Other Projects</h2>
-    <div class="swiper projectsSlider">
-      <div class="swiper-wrapper">
-        {% for p in portfolio %}
-          {% if p.is_active and p.featured %}
-            <div class="swiper-slide">
-              <a href="{% url 'main:portfolio' slug=p.slug %}" class="portfolio-card">
-                <div class="card-content">
-                  <img src="{{p.image_url}}" alt="{{p.name}}" class="portfolio-image">
-                  {% if p.video_url %}
-                    <div class="video-container">
-                      <div class="video-controls">
-                        <button class="expand-video" type="button">
-                          <i class="fas fa-expand"></i>
-                        </button>
-                        <a href="{% url 'main:portfolio' slug=p.slug %}" class="view-project" onclick="event.stopPropagation();">
-                          <i class="fas fa-external-link-alt"></i>
-                        </a>
-                      </div>
-                      <iframe 
-                        src="{{p.video_url}}?autoplay=1&mute=1&controls=0&loop=1&playlist={{p.video_url|slice:'-11:'}}"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen>
-                      </iframe>
+    <div class="glass-container">
+      <h2 class="section-title">Other Projects</h2>
+      <div class="swiper projectsSlider">
+        <div class="swiper-wrapper">
+          {% for p in portfolio %}
+            {% if p.is_active and p.featured %}
+              <div class="swiper-slide">
+                <a href="{% url 'main:portfolio' slug=p.slug %}" class="portfolio-card">
+                  <div class="card-content">
+                    <img src="{{p.image_url}}" alt="{{p.name}}" class="portfolio-image">
+                    <div class="portfolio-content">
+                      <h3 class="portfolio-title">{{p.name}}</h3>
+                      <div class="portfolio-date">{{p.date.year}}</div>
+                      <p>{{p.description}}</p>
                     </div>
-                  {% endif %}
-                  <div class="portfolio-content">
-                    <h3 class="portfolio-title">{{p.name}}</h3>
-                    <div class="portfolio-date">{{p.date.year}}</div>
-                    <p>{{p.description}}</p>
                   </div>
-                </div>
-              </a>
-            </div>
-          {% endif %}
-        {% endfor %}
+                </a>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
       </div>
-      <div class="swiper-pagination"></div>
-      <div class="swiper-button-prev"></div>
-      <div class="swiper-button-next"></div>
     </div>
   </div>
 </section>
 
 <!-- Certificates Section -->
-<section class="section">
+<section class="section section-certificates">
   <div class="container">
-    <h2 class="section-title">Education & Certifications</h2>
-    <div class="swiper certificatesSlider">
-      <div class="swiper-wrapper">
-        {% for c in certificates %}
-          {% if c.is_active %}
-            <div class="swiper-slide">
-              <div class="portfolio-card">
-                <div class="portfolio-content">
-                  <h3 class="portfolio-title">
-                    <a href="{% url 'main:dev' %}">{{c.title}}</a>
-                  </h3>
-                  {% if c.image_url %}
-                    <img src="{{ c.image_url }}" alt="{{ c.title }}" class="portfolio-image" style="margin-bottom: 1rem; border-radius: 12px; max-height: 180px; object-fit: contain; background: #fff; box-shadow: var(--shadow);" />
-                  {% endif %}
-                  <!-- <div class="portfolio-date">{{c.date.year}}</div> -->
-                  <p>{{c.description}}</p>
-                  <div class="portfolio-date">{{ c.category }}</div>
-                  {% if c.url %}
-                    <a href="{{ c.url }}" class="btn btn-primary" target="_blank" style="margin-bottom: 1rem; display: inline-block;">
-                      <span role="img" aria-label="certificate">📜</span> View Credential
-                    </a>
-                  {% endif %}
-                  {% if c.is_ongoing %}
-                    <div class="portfolio-date" style="color: var(--secondary);">Status: learning</div>
-                  {% else %}
-                    <div class="portfolio-date" style="color: var(--secondary);">Status: complete</div>
-                  {% endif %}
+    <div class="glass-container">
+      <h2 class="section-title">Education & Certifications</h2>
+      <div class="swiper certificatesSlider">
+        <div class="swiper-wrapper">
+          {% for c in certificates %}
+            {% if c.is_active %}
+              <div class="swiper-slide">
+                <div class="portfolio-card modal-trigger">
+                  <div class="portfolio-content">
+                    <h3 class="portfolio-title">
+                      <a>{{c.title}}</a>
+                    </h3>
+                    {% if c.image_url %}
+                      <img src="{{ c.image_url }}" alt="{{ c.title }}" class="portfolio-image" style="margin-bottom: 1rem; border-radius: 12px; max-height: 180px; object-fit: contain; background: #fff; box-shadow: var(--shadow);" />
+                    {% endif %}
+                    <p>{{c.description}}</p>
+                    <div class="portfolio-date">{{ c.category }}</div>
+                    {% if c.url %}
+                      <a href="{{ c.url }}" class="btn btn-primary" target="_blank" style="margin-bottom: 1rem; display: inline-block;">
+                        <span role="img" aria-label="certificate">📜</span> View Credential
+                      </a>
+                    {% endif %}
+                    {% if c.is_ongoing %}
+                      <div class="portfolio-date" style="color: var(--secondary);">Status: learning</div>
+                    {% else %}
+                      <div class="portfolio-date" style="color: var(--secondary);">Status: complete</div>
+                    {% endif %}
+                  </div>
                 </div>
               </div>
-            </div>
-          {% endif %}
-        {% endfor %}
+            {% endif %}
+          {% endfor %}
+        </div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
       </div>
-      <div class="swiper-pagination"></div>
-      <div class="swiper-button-prev"></div>
-      <div class="swiper-button-next"></div>
     </div>
   </div>
 </section>
 
 <!-- Work Experience Section -->
-<section class="section" style="background: var(--background);">
+<section class="section section-experience">
   <div class="container">
-    <h2 class="section-title">Work Experience</h2>
-    <div class="swiper jobsSlider">
-      <div class="swiper-wrapper">
-        {% for j in jobs %}
-          <div class="swiper-slide">
-            <div class="portfolio-card">
-              <div class="portfolio-content">
-                <h3 class="portfolio-title">{{j.job_title}}</h3>
-                <div class="portfolio-date">Start Date: {{j.start_date}}</div>
-                <div class="portfolio-date">Company: {{j.company_name|title}}</div>
-                <p>{{j.description}}</p>
-                <div class="portfolio-date">Location: {{ j.location }}</div>
-                {% if j.is_current %}
-                  <div class="portfolio-date" style="color: var(--secondary);">My Current Role</div>
-                {% endif %}
+    <div class="glass-container">
+      <h2 class="section-title">Work Experience</h2>
+      <div class="swiper jobsSlider">
+        <div class="swiper-wrapper">
+          {% for j in jobs %}
+            <div class="swiper-slide">
+              <div class="portfolio-card">
+                <div class="portfolio-content">
+                  <h3 class="portfolio-title">{{j.job_title}}</h3>
+                  <div class="portfolio-date">Start Date: {{j.start_date}}</div>
+                  <div class="portfolio-date">Company: {{j.company_name|title}}</div>
+                  <p>{{j.description}}</p>
+                  <div class="portfolio-date">Location: {{ j.location }}</div>
+                  {% if j.is_current %}
+                    <div class="portfolio-date" style="color: var(--secondary);">My Current Role</div>
+                  {% endif %}
+                </div>
               </div>
             </div>
-          </div>
-        {% endfor %}
+          {% endfor %}
+        </div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
       </div>
-      <div class="swiper-pagination"></div>
-      <div class="swiper-button-prev"></div>
-      <div class="swiper-button-next"></div>
     </div>
   </div>
 </section>
 
 <!-- Awards Section -->
-<section class="section">
+<section class="section section-awards">
   <div class="container">
-    <h2 class="section-title">Awards & Honors</h2>
-    <div class="swiper awardsSlider">
-      <div class="swiper-wrapper">
-        {% for c in awards %}
-          {% if c.is_active %}
-            <div class="swiper-slide">
-              <div class="portfolio-card">
-                <img src="{{ c.image_url }}" alt="{{ c.title }}" class="portfolio-image">
-                <div class="portfolio-content">
-                  <h3 class="portfolio-title">{{c.title}}</h3>
-                  <div class="portfolio-date">{{c.date.date}}</div>
-                  <p>{{c.description}}</p>
-                  <div class="portfolio-date">Issued by: {{ c.issued_by }}</div>
+    <div class="glass-container">
+      <h2 class="section-title">Awards & Honors</h2>
+      <div class="swiper awardsSlider">
+        <div class="swiper-wrapper">
+          {% for c in awards %}
+            {% if c.is_active %}
+              <div class="swiper-slide">
+                <div class="portfolio-card">
+                  <img src="{{ c.image_url }}" alt="{{ c.title }}" class="portfolio-image">
+                  <div class="portfolio-content">
+                    <h3 class="portfolio-title">{{c.title}}</h3>
+                    <div class="portfolio-date">{{c.date.date}}</div>
+                    <p>{{c.description}}</p>
+                    <div class="portfolio-date">Issued by: {{ c.issued_by }}</div>
+                  </div>
                 </div>
               </div>
-            </div>
-          {% endif %}
-        {% endfor %}
+            {% endif %}
+          {% endfor %}
+        </div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
       </div>
-      <div class="swiper-pagination"></div>
-      <div class="swiper-button-prev"></div>
-      <div class="swiper-button-next"></div>
     </div>
   </div>
 </section>
-
 
 {% endblock %}
 <!-- ================================

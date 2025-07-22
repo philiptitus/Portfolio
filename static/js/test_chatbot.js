@@ -53,7 +53,6 @@ class Chatbot {
         }
     }
 
-    // FIXED: Made openChat a public method
     openChat() {
         const modal = document.getElementById('chatbot-modal');
         modal.classList.add('active');
@@ -65,12 +64,9 @@ class Chatbot {
             fionaButton.style.display = 'none';
         }
         
-        // Focus input after animation completes
+        // Focus input
         setTimeout(() => {
-            const input = document.getElementById('chatbot-input');
-            if (input) {
-                input.focus();
-            }
+            document.getElementById('chatbot-input').focus();
         }, 300);
         
         // Scroll to bottom
@@ -267,35 +263,6 @@ class Chatbot {
 document.addEventListener('DOMContentLoaded', () => {
     window.chatbot = new Chatbot();
 });
-// Add this to your existing chatbot.js file
 
-// Function to check for portfolio page and add glow effect
-function checkPortfolioPage() {
-    const chatbotButton = document.getElementById('chatbot-toggle');
-    
-    if (chatbotButton && window.location.pathname.includes('portfolio')) {
-        console.log('Portfolio page detected - adding glow effect');
-        chatbotButton.classList.add('portfolio-glow');
-        
-        // If the fancy version doesn't work, try the simple version
-        setTimeout(() => {
-            if (!chatbotButton.classList.contains('portfolio-glow')) {
-                chatbotButton.classList.add('portfolio-glow-simple');
-            }
-        }, 100);
-    }
-}
-
-// Run the check when page loads
-document.addEventListener('DOMContentLoaded', function() {
-    // Your existing chatbot code stays exactly the same
-    // Just add this line at the end:
-    checkPortfolioPage();
-});
-
-// Also check when navigating (for SPAs)
-window.addEventListener('popstate', checkPortfolioPage);
 // Export for global access
-window.Chatbot = Chatbot;
-
-
+window.Chatbot = Chatbot; 
