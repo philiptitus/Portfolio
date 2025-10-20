@@ -12,14 +12,27 @@
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
-    <!-- <title>{% block title %}{%endblock %}</title> -->
-    <title>Philip Titus</title>
+    <title>{% block title %}Philip Titus - Software & Machine Learning Engineer{% endblock %}</title>
 
     <meta name="author" content="Philip Titus">
     <link rel="canonical" href="{{request.path}}"/>
     <link rel="home" href="{% url 'main:home' %}"/>
-    <meta name="description" content="{% block description %}{% endblock %}">
-    <meta name="keywords" content="{% block keywords %}{% endblock %}">
+    <meta name="description" content="{% block description %}Professional software developer and machine learning engineer offering custom web development, mobile apps, AI solutions, and cybersecurity services. Hire Philip Titus for your next project.{% endblock %}">
+    <meta name="keywords" content="{% block keywords %}software developer, machine learning engineer, web development services, mobile app development, AI solutions, Django developer, React Native, Python programming, hire developer, freelance programmer{% endblock %}">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+    <meta property="og:title" content="{% block og_title %}{% block title %}Philip Titus - Software & Machine Learning Engineer{% endblock %}{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}{% block description %}Professional software developer and machine learning engineer offering custom web development, mobile apps, AI solutions, and cybersecurity services. Hire Philip Titus for your next project.{% endblock %}{% endblock %}">
+    <meta property="og:image" content="{% block og_image %}{% static 'images/gone.png' %}{% endblock %}">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="{{ request.build_absolute_uri }}">
+    <meta property="twitter:title" content="{% block twitter_title %}{% block title %}Philip Titus - Software & Machine Learning Engineer{% endblock %}{% endblock %}">
+    <meta property="twitter:description" content="{% block twitter_description %}{% block description %}Professional software developer and machine learning engineer offering custom web development, mobile apps, AI solutions, and cybersecurity services. Hire Philip Titus for your next project.{% endblock %}{% endblock %}">
+    <meta property="twitter:image" content="{% block twitter_image %}{% static 'images/gone.png' %}{% endblock %}">
 
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/gone.png' %}">
     <link rel="apple-touch-icon" type="image/jpg" href="{% static 'images/gone.png' %}">

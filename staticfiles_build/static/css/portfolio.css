@@ -1,0 +1,643 @@
+/* Dark Forest Portfolio Timeline - Main Styles */
+:root {
+    --dark-bg: #0a0e12;
+    --tree-trunk: #3a2614;
+    --tree-branch: #2a1a0c;
+    --leaf-green: #2c5e1a;
+    --moss-green: #1e3b10;
+    --glow-green: rgba(122, 255, 89, 0.15);
+    --glow-gold: rgba(255, 215, 0, 0.2);
+    --card-bg: rgba(20, 30, 25, 0.7);
+    --card-border: rgba(80, 120, 90, 0.3);
+    --text-light: #e0e6e3;
+    --text-dim: #a0a8a4;
+    --vine-color: #2a4d1a;
+  }
+  
+  /* Base Styles */
+  body {
+    background-color: var(--dark-bg);
+    color: var(--text-light);
+    overflow-x: hidden;
+  }
+  
+  .lightBg {
+    background-color: var(--dark-bg);
+    position: relative;
+    min-height: 100vh;
+    overflow: hidden;
+    padding-top: 80px; /* Add top padding to account for header */
+  }
+  
+  .innerPageBannerCol {
+    background-color: rgba(10, 14, 18, 0.9);
+    padding: 3rem 0;
+    position: relative;
+    overflow: hidden;
+    margin-top: 60px; /* Add margin to account for header */
+  }
+  
+  .bannerContent {
+    position: relative;
+    z-index: 2;
+  }
+  
+  .xlTitle {
+    color: var(--text-light);
+    text-shadow: 0 0 10px rgba(122, 255, 89, 0.3);
+  }
+  
+  /* Forest Background */
+  .forest-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+  }
+  
+  .parallax-trees {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 40%;
+    background-image: url("/placeholder.svg?height=400&width=1920");
+    background-size: cover;
+    background-position: bottom center;
+    opacity: 0.4;
+  }
+  
+  .fog-layer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 30%;
+    background: linear-gradient(to top, rgba(255, 255, 255, 0.05), transparent);
+    opacity: 0.3;
+  }
+  
+  .northern-lights {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 40%;
+    background: linear-gradient(to bottom, rgba(10, 20, 30, 0.8), rgba(20, 40, 60, 0.2), transparent);
+    opacity: 0.4;
+  }
+  
+  /* Tree Timeline Structure */
+  .tree-timeline {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    padding: 2rem 0;
+  }
+  
+  .tree-trunk {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 40px;
+    background: linear-gradient(to right, var(--tree-branch), var(--tree-trunk), var(--tree-branch));
+    transform: translateX(-50%);
+    z-index: 1;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  }
+  
+  .tree-trunk::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 10px;
+    background: linear-gradient(to bottom, transparent, var(--glow-green), transparent);
+    transform: translateX(-50%);
+    opacity: 0.6;
+    filter: blur(5px);
+    animation: sapFlow 8s infinite alternate;
+  }
+  
+  /* Vines on the tree trunk */
+  .vine {
+    position: absolute;
+    background-color: var(--vine-color);
+    border-radius: 4px;
+    transform-origin: center top;
+    z-index: 2;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  .vine-1 {
+    width: 5px;
+    height: 120px;
+    left: -10px;
+    top: 15%;
+    transform: rotate(10deg);
+  }
+  
+  .vine-2 {
+    width: 4px;
+    height: 180px;
+    right: -8px;
+    top: 30%;
+    transform: rotate(-15deg);
+  }
+  
+  .vine-3 {
+    width: 6px;
+    height: 150px;
+    left: -15px;
+    top: 60%;
+    transform: rotate(20deg);
+  }
+  
+  .vine-4 {
+    width: 5px;
+    height: 200px;
+    right: -12px;
+    top: 45%;
+    transform: rotate(-25deg);
+  }
+  
+  .vine-leaf {
+    position: absolute;
+    width: 15px;
+    height: 10px;
+    background-color: var(--leaf-green);
+    border-radius: 50% 50% 0 50%;
+    transform-origin: bottom left;
+  }
+  
+  @keyframes sapFlow {
+    0% {
+      opacity: 0.3;
+      height: 70%;
+    }
+    50% {
+      opacity: 0.6;
+      height: 90%;
+    }
+    100% {
+      opacity: 0.4;
+      height: 80%;
+    }
+  }
+  
+  /* Branch Styles */
+  .branch {
+    position: absolute;
+    background: linear-gradient(to bottom, var(--tree-branch), var(--tree-trunk));
+    height: 8px;
+    transform-origin: left center;
+    z-index: 1;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  }
+  
+  .branch::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to right, transparent, var(--glow-green), transparent);
+    opacity: 0;
+    filter: blur(3px);
+  }
+  
+  .branch-s::after {
+    background: linear-gradient(to right, transparent, var(--glow-gold), transparent);
+  }
+  
+  .branch-visible::after {
+    opacity: 0.6;
+    animation: branchGlow 4s infinite alternate;
+  }
+  
+  @keyframes branchGlow {
+    0% {
+      opacity: 0.4;
+    }
+    50% {
+      opacity: 0.7;
+    }
+    100% {
+      opacity: 0.5;
+    }
+  }
+  
+  /* Project Cards */
+  .portfolioRow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 200px; /* Increased gap to prevent overlapping */
+    margin-top: 20px;
+    position: relative;
+    z-index: 2;
+    padding-bottom: 100px; /* Add padding at bottom */
+  }
+  
+  .pColMain {
+    width: 100%;
+    max-width: 400px;
+    position: absolute; /* Changed to absolute for precise positioning */
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  
+  .pColMain.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .pCol {
+    border-radius: 15px;
+    overflow: hidden;
+    background-color: var(--card-bg);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3), inset 0 0 10px var(--glow-green);
+    border: 1px solid var(--card-border);
+    transition: all 0.3s ease;
+    transform-origin: center bottom;
+  }
+  
+  .pCol:hover {
+    transform: translateY(-5px) rotate(0.5deg);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), inset 0 0 15px var(--glow-green);
+  }
+  
+  .tier-s .pCol {
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.4), inset 0 0 15px var(--glow-gold);
+  }
+  
+  .tier-s .pCol:hover {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 0 20px var(--glow-gold);
+  }
+  
+  .pImg {
+    width: 100%;
+    height: auto;
+    border-radius: 15px 15px 0 0;
+    transition: transform 0.5s ease;
+    position: relative;
+  }
+  
+  .pCol:hover .pImg {
+    transform: scale(1.03);
+  }
+  
+  .pContent {
+    padding: 20px;
+    background-color: transparent;
+    border-radius: 0 0 15px 15px;
+    text-align: center;
+    position: relative;
+  }
+  
+  .pContent::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--card-border), transparent);
+  }
+  
+  .pTitle {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: var(--text-light);
+    text-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+  }
+  
+  .pTitle a {
+    color: var(--text-light);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .pTitle a:hover {
+    color: #7aff59;
+    text-shadow: 0 0 10px rgba(122, 255, 89, 0.3);
+  }
+  
+  .pDesc {
+    font-size: 0.95rem;
+    color: var(--text-dim);
+    line-height: 1.6;
+    height: auto;
+    max-height: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 15px;
+  }
+  
+  .pDate {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    margin-top: 5px;
+    font-style: italic;
+  }
+  
+  /* Tier Indicators */
+  .tier-indicator {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    z-index: 3;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  }
+  
+  .tier-s .tier-indicator {
+    background-color: rgba(255, 215, 0, 0.3);
+    border: 1px solid rgba(255, 215, 0, 0.5);
+    color: gold;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  }
+  
+  .tier-a .tier-indicator {
+    background-color: rgba(122, 255, 89, 0.2);
+    border: 1px solid rgba(122, 255, 89, 0.4);
+    color: #7aff59;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  }
+  
+  .tier-b .tier-indicator {
+    background-color: rgba(100, 120, 100, 0.2);
+    border: 1px solid rgba(100, 120, 100, 0.4);
+    color: #a0a8a4;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  }
+  
+  /* Particle Systems */
+  .particles-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+  }
+  
+  .particle {
+    position: absolute;
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0;
+  }
+  
+  .leaf {
+    width: 20px;
+    height: 20px;
+    background-image: url("/placeholder.svg?height=20&width=20");
+    animation: leafFall 15s linear infinite;
+  }
+  
+  .firefly {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 150, 0.8);
+    box-shadow: 0 0 10px rgba(255, 255, 150, 0.5);
+    animation: fireflyFloat 10s ease-in-out infinite;
+  }
+  
+  @keyframes leafFall {
+    0% {
+      transform: translateY(-100px) rotate(0deg) translateX(0);
+      opacity: 0;
+    }
+    10% {
+      opacity: 0.7;
+    }
+    90% {
+      opacity: 0.5;
+    }
+    100% {
+      transform: translateY(calc(100vh + 100px)) rotate(360deg) translateX(100px);
+      opacity: 0;
+    }
+  }
+  
+  @keyframes fireflyFloat {
+    0% {
+      transform: translate(0, 0);
+      opacity: 0;
+    }
+    25% {
+      opacity: 0.8;
+    }
+    50% {
+      transform: translate(100px, -50px);
+      opacity: 0.6;
+    }
+    75% {
+      opacity: 0.9;
+    }
+    100% {
+      transform: translate(0, 0);
+      opacity: 0;
+    }
+  }
+  
+  /* Empty State */
+  .empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .empty-tree {
+    width: 200px;
+    height: 300px;
+    background-image: url("/placeholder.svg?height=300&width=200");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-bottom: 20px;
+    position: relative;
+  }
+  
+  .empty-message {
+    font-size: 1.5rem;
+    color: var(--text-light);
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    margin-bottom: 10px;
+  }
+  
+  .empty-submessage {
+    font-size: 1rem;
+    color: var(--text-dim);
+  }
+  
+  /* Responsive Design */
+  @media (min-width: 768px) {
+    .tree-trunk {
+      width: 60px;
+    }
+  
+    .portfolioRow {
+      height: auto;
+      min-height: 200px;
+      position: relative;
+    }
+  
+    .pColMain {
+      max-width: 40%;
+    }
+  }
+  
+  @media (min-width: 992px) {
+    .pColMain {
+      max-width: 35%;
+    }
+  }
+  
+  /* Mobile One-Sided Tree Design */
+  @media (max-width: 767px) {
+    .tree-timeline {
+      padding-top: 60px;
+    }
+  
+    .tree-trunk {
+      left: 60px; /* Position tree trunk to the left side */
+      transform: none; /* Remove centering transform */
+      width: 25px;
+    }
+  
+    /* Force all branches to extend to the right */
+    .branch {
+      left: 60px !important; /* Start from tree trunk */
+      width: 80px !important;
+      transform: rotate(0deg) !important; /* Make all branches horizontal */
+      transform-origin: left center !important;
+    }
+  
+    /* Override any left-side branch positioning */
+    .branch[style*="right:"],
+    .branch[style*="transform: rotate(-"] {
+      right: auto !important;
+      left: 60px !important;
+      transform: rotate(0deg) !important;
+    }
+  
+    .portfolioRow {
+      gap: 120px; /* Reduce gap for mobile */
+      padding: 0;
+      margin: 0;
+      width: 100%;
+      align-items: flex-start; /* Align to start */
+      padding-left: 0;
+    }
+  
+    /* Force all portfolio items to the right side */
+    .pColMain {
+      position: relative !important;
+      left: 150px !important; /* Position to the right of tree trunk + branch */
+      right: auto !important;
+      top: 0 !important;
+      margin: 0 0 40px 0 !important; /* Add bottom margin for spacing */
+      width: calc(100% - 170px) !important; /* Account for left positioning */
+      max-width: 280px !important;
+    }
+  
+    /* Override any right-side positioning to ensure consistency */
+    .pColMain:nth-child(odd),
+    .pColMain:nth-child(even) {
+      left: 150px !important;
+      right: auto !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+    }
+  
+    /* Stagger the portfolio items vertically to prevent overlap */
+    .pColMain:nth-child(1) { top: 0px !important; }
+    .pColMain:nth-child(2) { top: 160px !important; }
+    .pColMain:nth-child(3) { top: 320px !important; }
+    .pColMain:nth-child(4) { top: 480px !important; }
+    .pColMain:nth-child(5) { top: 640px !important; }
+    .pColMain:nth-child(6) { top: 800px !important; }
+    .pColMain:nth-child(7) { top: 960px !important; }
+    .pColMain:nth-child(8) { top: 1120px !important; }
+    .pColMain:nth-child(9) { top: 1280px !important; }
+    .pColMain:nth-child(10) { top: 1440px !important; }
+  
+    /* Hide vines on mobile for cleaner look */
+    .vine {
+      display: none;
+    }
+  
+    /* Adjust banner content for mobile */
+    .innerPageBannerCol {
+      padding: 2rem 0;
+      margin-top: 60px;
+    }
+  
+    .bannerContent {
+      text-align: center;
+      padding: 0 20px;
+    }
+  
+    .xlTitle {
+      font-size: 1.8rem;
+    }
+  
+    /* Ensure container has enough height for all items */
+    .lightBg {
+      min-height: calc(100vh + 1600px); /* Adjust based on number of portfolio items */
+    }
+  
+    /* Add some breathing room at the bottom */
+    .portfolioRow {
+      padding-bottom: 200px;
+    }
+  }
+  
+  /* Additional fix for very small screens */
+  @media (max-width: 480px) {
+    .tree-trunk {
+      left: 40px;
+      width: 20px;
+    }
+  
+    .branch {
+      left: 40px !important;
+      width: 60px !important;
+    }
+  
+    .pColMain {
+      left: 110px !important;
+      width: calc(100% - 130px) !important;
+      max-width: 250px !important;
+    }
+    
+    .xlTitle {
+      font-size: 1.5rem;
+    }
+    
+    .bannerContent h6 {
+      font-size: 0.9rem;
+    }
+  }

@@ -6,7 +6,7 @@
 <!-- ================================
 Start SEO blocks
 ================================= -->
-{% block title %}Project{% endblock %}
+{% block title %}{{object.name}} | Philip Titus{% endblock %}
 {% block decription %}{% endblock %}
 {% block keywords %}{% endblock %}
 <!-- ================================
@@ -39,7 +39,7 @@ Start Content
 <!-- Hero Section -->
 <div class="hero">
   <div class="hero-img">
-    <img src="{{object.imager.url}}" style="width: 500px;" alt="Pixel Skincare">
+    <img src="{{object.imager.url}}" style="width: 500px;" alt="Photo 1">
   </div>
   <div class="hero-text">
     <h1>{{object.name|title}}</h1>
@@ -84,7 +84,7 @@ Start Content
   </div>
   <div class="wrapper">
     <div class="image">
-      <img src="{{object.image.url}}" alt="Pixel Facial Cream">
+      <img src="{{object.image.url}}" alt="Photo 2">
     </div>
     <div class="text">
       <h6  > STATUS: {{ object.status }}</h6>

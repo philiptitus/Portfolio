@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /philip/
+Disallow: /webhook/
+Disallow: /api/
+Disallow: /404/
+
+Sitemap: http://127.0.0.1:8000/sitemap.xml/
