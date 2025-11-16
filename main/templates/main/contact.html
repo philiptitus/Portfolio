@@ -15,73 +15,149 @@ END SEO blocks
 Start CSS blocks
 ================================= -->
 {% block extend_header %}
+<link href="{% static 'css/index3.css' %}" rel="stylesheet">
 <style>
-  .innerPageBannerCol {
-    background: linear-gradient(135deg, #ff7e5f, #feb47b);
-    color: white;
-    padding: 50px 0;
-    text-align: center;
+  .contact-hero {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    padding: 100px 0;
+    position: relative;
+    overflow: hidden;
   }
-  .bannerContent {
-    animation: fadeInDown 2s ease-in-out;
+  .contact-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 30% 20%, rgba(138, 43, 226, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 70% 80%, rgba(75, 0, 130, 0.3) 0%, transparent 50%);
   }
-  .lightBg {
-    background-color: #f9f9f9;
-    padding: 50px 0;
+  .contact-content {
+    position: relative;
+    z-index: 2;
   }
-  form {
+  .contact-form-section {
+    padding: 80px 0;
+    background: var(--bg-primary);
+  }
+  .contact-form {
     max-width: 600px;
     margin: 0 auto;
-    background: white;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    animation: fadeInUp 2s ease-in-out;
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
   }
-  label {
-    font-weight: bold;
-    margin-top: 15px;
+  .form-group {
+    margin-bottom: 24px;
+  }
+  .form-label {
     display: block;
+    margin-bottom: 8px;
+    color: #fff;
+    font-weight: 600;
+    font-size: 14px;
   }
-  input, textarea, select {
+  .contact-form input,
+  .contact-form textarea,
+  .contact-form select {
     width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    color: #fff;
+    font-size: 16px;
+    transition: all 0.3s ease;
   }
-  .btnPrimary {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #ff7e5f;
+  .contact-form input:focus,
+  .contact-form textarea:focus,
+  .contact-form select:focus {
+    outline: none;
+    border-color: #8a2be2;
+    box-shadow: 0 0 0 3px rgba(138, 43, 226, 0.1);
+    background: rgba(255, 255, 255, 0.15);
+  }
+  .contact-form input::placeholder,
+  .contact-form textarea::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+  }
+  .contact-form select option {
+    background: #2a1a4a;
+    color: #fff;
+  }
+  .contact-form select {
+    background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="%23ffffff" d="M2 0L0 2h4zm0 5L0 3h4z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 12px;
+    appearance: none;
+  }
+  .btn-submit {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
     color: white;
     border: none;
-    border-radius: 4px;
+    padding: 14px 32px;
+    border-radius: 12px;
+    font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: all 0.3s ease;
+    width: 100%;
+    font-size: 16px;
   }
-  .btnPrimary:hover {
-    background-color: #feb47b;
+  .btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(138, 43, 226, 0.3);
   }
-  @keyframes fadeInDown {
-    0% {
-      opacity: 0;
-      transform: translateY(-20px);
+  .contact-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+  }
+  @media (max-width: 768px) {
+    .contact-hero {
+      padding: 60px 0;
     }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
+    .contact-form-section {
+      padding: 40px 0;
+    }
+    .contact-form {
+      padding: 30px 20px;
+      margin: 0 15px;
+    }
+    .contact-buttons {
+      flex-direction: column;
+      gap: 15px;
+      align-items: center;
+    }
+    .contact-buttons .btn-submit {
+      width: 100%;
+      max-width: 280px;
+      padding: 16px 20px;
+      font-size: 16px;
+    }
+    .hero-title {
+      font-size: 2.5rem;
+    }
+    .hero-subtitle {
+      font-size: 1.1rem;
     }
   }
-  @keyframes fadeInUp {
-    0% {
-      opacity: 0;
-      transform: translateY(20px);
+  @media (max-width: 480px) {
+    .contact-form {
+      padding: 25px 15px;
+      margin: 0 10px;
     }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
+    .hero-title {
+      font-size: 2rem;
+    }
+    .hero-subtitle {
+      font-size: 1rem;
     }
   }
 </style>
@@ -94,20 +170,6 @@ END CSS blocks
 Start script blocks
 ================================= -->
 {% block extend_footer %}
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    var form = document.getElementById("contactForm");
-    form.addEventListener("submit", function(event) {
-      event.preventDefault();
-      var submitButton = form.querySelector(".btnPrimary");
-      submitButton.classList.add("loading");
-      setTimeout(function() {
-        submitButton.classList.remove("loading");
-        form.submit();
-      }, 1000); // Simulate a delay for demonstration
-    });
-  });
-</script>
 {% endblock %}
 <!-- ================================
 END script blocks
@@ -117,39 +179,46 @@ END script blocks
 Start Content
 ================================= -->
 {% block content %}
-<section>
-  <div class="innerPageBannerCol">
-    <div class="container">
-      <div class="row g-4 g-md-3  align-items-center">
-        <div class="col-md-6">
-          <div class="bannerContent">
-            <!--<b>You Can Reach Out Below...</b>-->
-            <!--<p>Please be sure to leave the correct email or I won't be able to reach out!</p>-->
-          </div>
-        </div>
-      </div>
+<!-- Floating Background Elements -->
+<div class="floating-elements">
+  <div class="floating-element floating-circle"></div>
+  <div class="floating-element floating-square"></div>
+  <div class="floating-element floating-triangle"></div>
+  <div class="floating-element floating-hexagon"></div>
+</div>
+<br/>
+<br/>
+<br/>
+
+<!-- Contact Hero Section -->
+<section class="contact-hero">
+  <div class="container">
+    <div class="contact-content text-center">
+      <h1 class="hero-title">Get In Touch</h1>
+      <div class="hero-subtitle">Let's discuss your next project</div>
     </div>
   </div>
 </section>
 
-<section>
-  <div class="lightBg">
-    <div class="container">
-        <form id="contactForm" method="POST" action="/contact/">
-        {% csrf_token %}
-            <label for="name">Name</label>
-            {{form.name}}
-
-            <label for="email">Email</label>
-            {{form.email}}
-
-            <label for="message">Message</label>
-            {{form.message}}
-
-            <label for="category">Category</label>
-            {{form.category}}
-            <input class="btn btnPrimary" type="submit" value="Submit">
-        </form>
+<!-- Contact Info Section -->
+<section class="contact-form-section">
+  <div class="container">
+    <div class="glass-container">
+      <div class="contact-form text-center">
+        <h3 style="color: #fff; margin-bottom: 30px;">Ready to work together?</h3>
+        <p style="color: rgba(255,255,255,0.8); margin-bottom: 40px;">Get in touch via email or connect with me on LinkedIn</p>
+        <div class="contact-buttons">
+          <a href="mailto:mrphilipowade@gmail.com?subject=Project Inquiry&body=Hi Philip,%0D%0A%0D%0AI'm interested in working with you on a project.%0D%0A%0D%0AProject details:%0D%0A%0D%0ABest regards," class="btn-submit" style="display: inline-block; text-decoration: none; width: auto; padding: 16px 32px;">
+            📧 Send Email
+          </a>
+          <a href="https://linkedin.com/in/philiptitus" target="_blank" class="btn-submit" style="display: inline-block; text-decoration: none; width: auto; padding: 16px 32px; background: linear-gradient(135deg, #0077b5, #005885);">
+            💼 LinkedIn
+          </a>
+        </div>
+        <div style="color: rgba(255,255,255,0.6);">
+          <p>mrphilipowade@gmail.com</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>

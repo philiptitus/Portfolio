@@ -40,7 +40,7 @@ const defaultConfig = {
     spaceBetween: 30,
     loop: true,
     autoplay: {
-        delay: 10000, // 10000 milliseconds = 10 seconds
+        delay: 60000, // 10000 milliseconds = 10 seconds
         disableOnInteraction: false,
     },
     pagination: {
@@ -176,10 +176,59 @@ document.addEventListener('DOMContentLoaded', async () => {
         window.portfolioCarousels = initAllCarousels();
         setupVideoInteractions();
         initModal();
+        initChatbotIcons();
     } catch (error) {
         console.error('Failed to initialize carousels:', error);
     }
-}); 
+});
+
+// Chatbot Info Icons Functionality
+function initChatbotIcons() {
+    const chatbotIcons = document.querySelectorAll('.chatbot-info-icon');
+    
+    chatbotIcons.forEach(icon => {
+        icon.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const type = icon.dataset.type;
+            const title = icon.dataset.title;
+            let message = '';
+            
+            switch(type) {
+                case 'project':
+                    message = `Tell me about Philip's project "${title}". What technologies were used and what problem does it solve?`;
+                    break;
+                case 'certificate':
+                    const certCategory = icon.dataset.category;
+                    message = `Tell me about Philip's certification "${title}" in ${certCategory}. What skills does this certification demonstrate?`;
+                    break;
+                case 'job':
+                    const company = icon.dataset.company;
+                    const current = icon.dataset.current;
+                    message = `Tell me about Philip's ${current === 'yes' ? 'current ' : ''}role as ${title} at ${company}. What are his key responsibilities?`;
+                    break;
+                case 'award':
+                    const issuer = icon.dataset.issuer;
+                    message = `Tell me about Philip's award "${title}" from ${issuer}. What did he achieve to earn this?`;
+                    break;
+                default:
+                    message = `Tell me more about ${title}.`;
+            }
+            
+            if (window.chatbot) {
+                window.chatbot.open();
+                setTimeout(() => {
+                    const input = document.getElementById('chatbot-input');
+                    if (input) {
+                        input.value = message;
+                        window.chatbot.sendMessage();
+                    }
+                }, 500);
+            }
+        });
+    });
+} 
 
 // Parallax effect for floating elements
 document.addEventListener('mousemove', (e) => {
@@ -369,66 +418,24 @@ Start Content
             <a href="https://github.com/philiptitus" class="btn btn-outline" target="_blank">
               <i class="fab fa-github"></i> My Github
             </a>
-            <a href="https://linkedin.com/in/philiptitus" class="btn btn-outline" target="_blank">
-              <i class="fab fa-linkedin"></i> My LinkedIn
-            </a>
-            <a href="https://shop.mrphilip.cv/" class="btn btn-primary shop-button" target="_blank">
-              <i class="fas fa-shopping-cart"></i> Visit Shop
-            </a>
+
             <a href="{% url 'main:contact' %}" class="btn btn-outline">
-              <i class="fas fa-envelope"></i> Contact
+              <i class="fas fa-envelope"></i> Contact📞
             </a>
           </div>
         </div>
-        <div class="col-lg-6">
-          <div class="hero-animation">
-            <dotlottie-player
-              src="https://lottie.host/0c0c0c0c-0c0c-0c0c-0c0c-0c0c0c0c0c0c/0c0c0c0c-0c0c-0c0c-0c0c-0c0c0c0c0c0c.json"
-              background="transparent"
-              speed="1"
-              style="width: 100%; height: 400px;"
-              loop
-              autoplay>
-            </dotlottie-player>
-          </div>
-        </div>
+
       </div>
     </div>
   </div>
 </section>
 
-<!-- Best Work Section -->
-<section class="section section-featured">
-  <div class="container">
-    <div class="glass-container">
-      <h2 class="section-title">Latest Project</h2>
-      <div class="portfolio-grid">
-        {% with portfolio|dictsort:"date" as sorted_portfolio %}
-          {% for item in sorted_portfolio %}
-            {% if item.star %}
-              <div class="featured-project-card">
-                <div class="featured-content">
-                  <h3 class="featured-title">
-                    <a href="{% url 'main:portfolio' slug=item.slug %}">{{ item.name }}</a>
-                  </h3>
-                  <div class="featured-date">{{ item.date.year }}</div>
-                  <p class="featured-description">{{ item.description }}</p>
-                  <a href="{% url 'main:portfolio' slug=item.slug %}" class="btn btn-primary">View Project</a>
-                </div>
-              </div>
-            {% endif %}
-          {% endfor %}
-        {% endwith %}
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- Other Projects Section -->
 <section class="section section-projects">
   <div class="container">
     <div class="glass-container">
-      <h2 class="section-title">Other Projects</h2>
+      <h2 class="section-title">Key Projects</h2>
       <div class="swiper projectsSlider">
         <div class="swiper-wrapper">
           {% for p in portfolio %}
@@ -439,9 +446,9 @@ Start Content
                     <img src="{{p.image_url}}" alt="{{p.name}}" class="portfolio-image">
                     <div class="portfolio-content">
                       <h3 class="portfolio-title">{{p.name}}</h3>
-                      <div class="portfolio-date">{{p.date.year}}</div>
                       <p>{{p.description}}</p>
                     </div>
+                    <div class="chatbot-info-icon" data-type="project" data-title="{{p.name}}" data-description="{{p.description}}" data-category="{{p.category}}" title="Ask chatbot about this project">💬</div>
                   </div>
                 </a>
               </div>
@@ -456,36 +463,77 @@ Start Content
   </div>
 </section>
 
+
+
+
+<!-- Work Experience Section -->
+<section class="section section-experience">
+  <div class="container">
+    <div class="glass-container">
+      <h2 class="section-title">Work Experience</h2>
+      <div class="swiper jobsSlider">
+        <div class="swiper-wrapper">
+          {% for j in jobs %}
+            <div class="swiper-slide">
+              <div class="portfolio-card">
+                <div class="portfolio-content">
+                  <h3 class="portfolio-title">{{j.job_title}}</h3>
+                  <div class="portfolio-date">From: {{j.start_date}}</div>
+                  <div class="portfolio-date">Company: {{j.company_name|title}}</div>
+                  <!-- <p>{{j.description}}</p> -->
+                  <div class="portfolio-date">Location: {{ j.location }}</div>
+                  {% if j.is_current %}
+                    <div class="portfolio-date" style="color: var(--secondary);">My Current Role</div>
+                  {% endif %}
+                  <div class="chatbot-info-icon" data-type="job" data-title="{{j.job_title}}" data-company="{{j.company_name}}" data-location="{{j.location}}" data-current="{% if j.is_current %}yes{% else %}no{% endif %}" title="Ask chatbot about this job">💬</div>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
 <!-- Certificates Section -->
 <section class="section section-certificates">
   <div class="container">
     <div class="glass-container">
-      <h2 class="section-title">Education & Certifications</h2>
+      <h2 class="section-title">Certifications</h2>
       <div class="swiper certificatesSlider">
         <div class="swiper-wrapper">
           {% for c in certificates %}
             {% if c.is_active %}
               <div class="swiper-slide">
-                <div class="portfolio-card modal-trigger">
+                <div class="portfolio-card">
                   <div class="portfolio-content">
                     <h3 class="portfolio-title">
                       <a>{{c.title}}</a>
                     </h3>
                     {% if c.image_url %}
                       <img src="{{ c.image_url }}" alt="{{ c.title }}" class="portfolio-image" style="margin-bottom: 1rem; border-radius: 12px; max-height: 180px; object-fit: contain; background: #fff; box-shadow: var(--shadow);" />
+                    {% else %}
+                      <p>{{c.description}}</p>
                     {% endif %}
-                    <p>{{c.description}}</p>
                     <div class="portfolio-date">{{ c.category }}</div>
                     {% if c.url %}
-                      <a href="{{ c.url }}" class="btn btn-primary" target="_blank" style="margin-bottom: 1rem; display: inline-block;">
-                        <span role="img" aria-label="certificate">📜</span> View Credential
-                      </a>
+                      <div class="portfolio-date">
+                        <a href="{{ c.url }}" target="_blank" style="color: greenyellow; text-decoration: none; font-size: 0.9rem;">
+                          📜 View Credential
+                        </a>
+                      </div>
                     {% endif %}
                     {% if c.is_ongoing %}
                       <div class="portfolio-date" style="color: var(--secondary);">Status: learning</div>
                     {% else %}
                       <div class="portfolio-date" style="color: var(--secondary);">Status: complete</div>
                     {% endif %}
+                    <div class="chatbot-info-icon" data-type="certificate" data-title="{{c.title}}" data-description="{{c.description}}" data-category="{{c.category}}" data-status="{% if c.is_ongoing %}learning{% else %}complete{% endif %}" title="Ask chatbot about this certificate">💬</div>
                   </div>
                 </div>
               </div>
@@ -500,43 +548,13 @@ Start Content
   </div>
 </section>
 
-<!-- Work Experience Section -->
-<section class="section section-experience">
-  <div class="container">
-    <div class="glass-container">
-      <h2 class="section-title">Work Experience</h2>
-      <div class="swiper jobsSlider">
-        <div class="swiper-wrapper">
-          {% for j in jobs %}
-            <div class="swiper-slide">
-              <div class="portfolio-card">
-                <div class="portfolio-content">
-                  <h3 class="portfolio-title">{{j.job_title}}</h3>
-                  <div class="portfolio-date">Start Date: {{j.start_date}}</div>
-                  <div class="portfolio-date">Company: {{j.company_name|title}}</div>
-                  <p>{{j.description}}</p>
-                  <div class="portfolio-date">Location: {{ j.location }}</div>
-                  {% if j.is_current %}
-                    <div class="portfolio-date" style="color: var(--secondary);">My Current Role</div>
-                  {% endif %}
-                </div>
-              </div>
-            </div>
-          {% endfor %}
-        </div>
-        <div class="swiper-pagination"></div>
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-button-next"></div>
-      </div>
-    </div>
-  </div>
-</section>
+
 
 <!-- Awards Section -->
 <section class="section section-awards">
   <div class="container">
     <div class="glass-container">
-      <h2 class="section-title">Awards & Honors</h2>
+      <h2 class="section-title">Awards</h2>
       <div class="swiper awardsSlider">
         <div class="swiper-wrapper">
           {% for c in awards %}
@@ -546,9 +564,8 @@ Start Content
                   <img src="{{ c.image_url }}" alt="{{ c.title }}" class="portfolio-image">
                   <div class="portfolio-content">
                     <h3 class="portfolio-title">{{c.title}}</h3>
-                    <div class="portfolio-date">{{c.date.date}}</div>
-                    <p>{{c.description}}</p>
                     <div class="portfolio-date">Issued by: {{ c.issued_by }}</div>
+                    <div class="chatbot-info-icon" data-type="award" data-title="{{c.title}}" data-issuer="{{c.issued_by}}" data-description="{{c.description}}" title="Ask chatbot about this award">💬</div>
                   </div>
                 </div>
               </div>

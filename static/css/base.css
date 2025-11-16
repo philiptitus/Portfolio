@@ -3,8 +3,8 @@
 font-family: 'Heebo', sans-serif; */
 :root {
   --primaryColor: #000000;
-  --primaryDarkColor: #76e255;
-  --primaryHoverColor: #76e255;
+  --primaryDarkColor: #bd59ff;
+  --primaryHoverColor: #bd59ff;
   --secondaryColor: #f0faf1;
   --baseColor: #21243D;
   --baseFont: 'Heebo', sans-serif;
@@ -22,7 +22,7 @@ body {
   font-family: var(--baseFont);
   color: var(--baseColor);
   line-height: normal;
-  background-color: #cff4c8;
+  background-color: #f8f9fa;
 }
 ul {
   margin: 0;
@@ -36,12 +36,12 @@ a {
   color: inherit;
 }
 .viewp{
-  color: #3af900;
+  color: #bd59ff;
   align-items: center;
 }
 .core{
   text-align: right;
-  color:#04f900;
+  color:#bd59ff;
   font-style: var(--primaryDarkColor);
   font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
@@ -179,6 +179,13 @@ a, .btn {
   left: 0;
   right: 0;
   top: 0;
+}
+
+@media (max-width: 767px) {
+  .headerCol {
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+  }
 }
 .fixedHeader .headerCol {
   padding: 10px 0;
@@ -329,7 +336,7 @@ a, .btn {
 
 
 .typed-text{
-color: #0fa80a;
+color: #bd59ff;
 font-size: smaller;
 font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
@@ -674,7 +681,8 @@ body.navToggleActive {
     bottom: 0;
     width: 230px;
     padding: 20px;
-    background: var(--primaryDarkColor);
+    background: rgba(189, 89, 255, 0.95);
+    backdrop-filter: blur(10px);
     z-index: 99;
     -webkit-transform: translateX(-100%);
     -ms-transform: translateX(-100%);

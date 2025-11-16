@@ -9,7 +9,7 @@ Start Futuristic Navigation Bar
               <div class="col-auto">
                   <div class="logoCol">
                       <a href="{% url 'main:home' %}" class="logo-link">
-                          <img style="width: 50%;" src="{% static 'images/og.svg' %}" alt="Logo">
+                          <img style="width: 50%;" src="{% static 'images/logo.svg' %}" alt="Logo">
                       </a>
                   </div>
               </div>
@@ -27,33 +27,28 @@ Start Futuristic Navigation Bar
                   <div class="navCollapseCol">
                       <div class="navCol">
                           <ul class="futuristic-nav-list">
-                              <li class="nav-item">
-                                  <a href="https://blog.mrphilip.cv/" target="_blank" class="nav-link">
-                                      <span class="link-text">Blog</span>
-                                      <div class="link-glow"></div>
-                                  </a>
-                              </li>
-                              <li class="nav-item">
+                                                          <li class="nav-item">
                                   <a href="{%url 'main:portfolios' %}" class="nav-link">
-                                      <span class="link-text">All Projects</span>
+                                      <span class="link-text">Work Samples💼</span>
                                       <div class="link-glow"></div>
                                   </a>
                               </li>
-                              <li class="nav-item">
+
+
+                              <!-- <li class="nav-item">
                                   <a href="{%url 'main:mlmodels' %}" class="nav-link">
-                                      <span class="link-text">ML Models</span>
+                                      <span class="link-text">Machine Learning🧠</span>
+                                      <div class="link-glow"></div>
+                                  </a>
+                              </li> -->
+
+                                                            <li class="nav-item">
+                                  <a href="https://blog.mrphilip.cv/" target="_blank" class="nav-link">
+                                      <span class="link-text">Blog📚</span>
                                       <div class="link-glow"></div>
                                   </a>
                               </li>
-                              <li class="nav-item">
-                                  <div class="bell-icon futuristic-bell" data-bs-toggle="modal" data-bs-target="#notificationModal">
-                                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                          <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                          <path d="M13.73 21a2 2 0 0 1-3.46 0" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                      </svg>
-                                      <div class="notification-pulse"></div>
-                                  </div>
-                              </li>
+
                           </ul>
                       </div>
                   </div>
@@ -65,92 +60,6 @@ Start Futuristic Navigation Bar
 <!-- ================================
 End Futuristic Navigation Bar
 ================================= -->
-
-<!-- Futuristic Modal Structure -->
-<div class="modal fade" id="notificationModal" tabindex="-1" aria-labelledby="notificationModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content futuristic-modal">
-      <div class="modal-header glass-header">
-        <h5 class="modal-title futuristic-title" id="notificationModalLabel">
-            <span class="title-glow">Recent Activities</span>
-        </h5>
-        <button type="button" class="btn-close futuristic-close" data-bs-dismiss="modal" aria-label="Close">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-        </button>
-      </div>
-      <div class="modal-body glass-body">
-        <p class="powered-by-text">Powered by GitHub Webhooks</p>
-        <div id="loading-spinner" class="futuristic-spinner" style="display: none;">
-          <div class="spinner-ring"></div>
-          <span class="loading-text">Loading...</span>
-        </div>
-        <ul id="activity-list" class="activity-list"></ul>
-        <p id="no-updates-message" class="no-updates" style="display: none;">No new updates yet.</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<script>
-// Function to fetch and display recent activities
-async function fetchRecentActivities() {
-  const activityList = document.getElementById('activity-list');
-  const loadingSpinner = document.getElementById('loading-spinner');
-  const noUpdatesMessage = document.getElementById('no-updates-message');
-
-  // Show loading spinner and hide other elements initially
-  loadingSpinner.style.display = 'flex';
-  activityList.innerHTML = '';
-  noUpdatesMessage.style.display = 'none';
-
-  try {
-    const response = await fetch('https://www.mrphilip.cv/new/');
-    const data = await response.json();
-
-    // Hide loading spinner
-    loadingSpinner.style.display = 'none';
-
-    if (data.length > 0) {
-      data.forEach(event => {
-        const listItem = document.createElement('li');
-        listItem.className = 'activity-item';
-        listItem.innerHTML = `
-          <div class="activity-content">
-            <div class="activity-header">
-              <a href="${event.repository_url}" target="_blank" class="repo-link">
-                <span class="repo-icon">📁</span>
-                ${event.repository_url}
-              </a>
-            </div>
-            <div class="activity-body">
-              <a href="${event.commit_url}" target="_blank" class="commit-link">
-                <strong>${event.repository}</strong> - ${event.description}
-              </a>
-            </div>
-            <div class="activity-time">
-              <span class="time-icon">🕒</span>
-              ${new Date(event.timestamp).toLocaleString()}
-            </div>
-          </div>
-        `;
-        activityList.appendChild(listItem);
-      });
-    } else {
-      noUpdatesMessage.style.display = 'block';
-    }
-  } catch (error) {
-    console.error('Error fetching activities:', error);
-    loadingSpinner.style.display = 'none';
-    noUpdatesMessage.innerText = 'Failed to load updates. Please try again later.';
-    noUpdatesMessage.style.display = 'block';
-  }
-}
-
-// Trigger the fetch function each time the modal is opened
-document.getElementById('notificationModal').addEventListener('show.bs.modal', fetchRecentActivities);
-</script>
 
 <style>
 /* Futuristic Header Styles */
@@ -166,7 +75,7 @@ document.getElementById('notificationModal').addEventListener('show.bs.modal', f
 }
 
 .glass-nav-container {
-  background: rgba(147, 112, 219, 0.1); /* Light purple with transparency */
+  background: rgba(147, 112, 219, 0.1);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 2px solid rgba(147, 112, 219, 0.4);
@@ -222,6 +131,7 @@ document.getElementById('notificationModal').addEventListener('show.bs.modal', f
 .link-text {
   position: relative;
   z-index: 2;
+  color: aliceblue;
 }
 
 .link-glow {
@@ -240,45 +150,6 @@ document.getElementById('notificationModal').addEventListener('show.bs.modal', f
   opacity: 1;
 }
 
-.futuristic-bell {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  background: rgba(147, 112, 219, 0.2);
-  border: 2px solid rgba(147, 112, 219, 0.5);
-  border-radius: 12px;
-  color: #ffffff;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  overflow: hidden;
-}
-
-.futuristic-bell:hover {
-  background: rgba(147, 112, 219, 0.3);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(147, 112, 219, 0.3);
-}
-
-.notification-pulse {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  width: 8px;
-  height: 8px;
-  background: #ff4757;
-  border-radius: 50%;
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.2); opacity: 0.7; }
-  100% { transform: scale(1); opacity: 1; }
-}
-
 /* Mobile Toggle */
 .futuristic-toggle {
   display: flex;
@@ -291,6 +162,12 @@ document.getElementById('notificationModal').addEventListener('show.bs.modal', f
   padding: 12px;
   color: #ffffff;
   transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.futuristic-toggle:hover {
+  background: rgba(147, 112, 219, 0.3);
+  transform: translateY(-2px);
 }
 
 .toggle-lines {
@@ -307,468 +184,59 @@ document.getElementById('notificationModal').addEventListener('show.bs.modal', f
   transition: all 0.3s ease;
 }
 
-/* Futuristic Modal */
-.futuristic-modal {
-  background: rgba(147, 112, 219, 0.1);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 2px solid rgba(147, 112, 219, 0.4);
-  border-radius: 20px;
-  box-shadow: 
-    0 20px 60px rgba(147, 112, 219, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  overflow: hidden;
-}
-
-.glass-header {
-  background: rgba(147, 112, 219, 0.15);
-  border-bottom: 2px solid rgba(147, 112, 219, 0.4);
-  padding: 20px 25px;
-}
-
-.futuristic-title {
-  color: #ffffff;
+.navToggle__text {
+  font-size: 12px;
   font-weight: 600;
-  font-size: 18px;
-  margin: 0;
+  letter-spacing: 0.5px;
 }
 
-.title-glow {
-  text-shadow: 0 0 20px rgba(147, 112, 219, 0.5);
-}
-
-.futuristic-close {
-  background: rgba(255, 255, 255, 0.1);
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  border-radius: 8px;
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #ffffff;
-  transition: all 0.3s ease;
-}
-
-.futuristic-close:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: scale(1.1);
-}
-
-.glass-body {
-  padding: 25px;
-  max-height: 400px;
-  overflow-y: auto;
-}
-
-.powered-by-text {
-  text-align: center;
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 12px;
-  margin-bottom: 20px;
-  font-weight: 500;
-}
-
-.futuristic-spinner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 15px;
-  padding: 40px 0;
-}
-
-.spinner-ring {
-  width: 40px;
-  height: 40px;
-  border: 3px solid rgba(147, 112, 219, 0.3);
-  border-top: 3px solid #9370db;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-.loading-text {
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 14px;
-  font-weight: 500;
-}
-
-.activity-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.activity-item {
-  background: rgba(147, 112, 219, 0.1);
-  border: 2px solid rgba(147, 112, 219, 0.4);
-  border-radius: 12px;
-  padding: 16px;
-  transition: all 0.3s ease;
-}
-
-.activity-item:hover {
-  background: rgba(147, 112, 219, 0.15);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(147, 112, 219, 0.2);
-}
-
-.activity-content {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.activity-header .repo-link {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: #9370db;
-  text-decoration: none;
-  font-size: 13px;
-  font-weight: 500;
-}
-
-.activity-body .commit-link {
-  color: #ffffff;
-  text-decoration: none;
-  font-size: 14px;
-  line-height: 1.4;
-}
-
-.activity-body .commit-link:hover {
-  color: #9370db;
-}
-
-.activity-time {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 12px;
-}
-
-.no-updates {
-  text-align: center;
-  color: rgba(255, 255, 255, 0.7);
-  font-weight: 500;
-  padding: 40px 0;
-}
-
-/* Enhanced Responsive Design */
-@media (max-width: 1200px) {
+/* Mobile Responsive */
+@media (max-width: 768px) {
   .futuristic-header {
-    width: calc(100% - 30px);
+    top: 10px;
+    width: calc(100% - 20px);
   }
   
   .glass-nav-container {
     padding: 12px 20px;
+    background: rgba(147, 112, 219, 0.3);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
   }
   
   .futuristic-nav-list {
-    gap: 25px;
-  }
-}
-
-@media (max-width: 992px) {
-  .futuristic-header {
-    width: calc(100% - 20px);
-  }
-  
-  .futuristic-nav-list {
-    gap: 20px;
-  }
-  
-  .nav-link {
-    padding: 8px 14px;
-    font-size: 13px;
-  }
-  
-  .futuristic-bell {
-    width: 40px;
-    height: 40px;
-  }
-}
-
-@media (max-width: 768px) {
-  .futuristic-header {
-    top: 10px;
-    width: calc(100% - 16px);
-  }
-  
-  .glass-nav-container {
-    padding: 10px 16px;
-    border-radius: 16px;
-  }
-  
-  .futuristic-nav-list {
+    flex-direction: column;
     gap: 15px;
-    flex-wrap: wrap;
-    justify-content: center;
+    text-align: center;
   }
   
   .nav-link {
-    padding: 6px 12px;
-    font-size: 12px;
-    border-radius: 10px;
-  }
-  
-  .futuristic-bell {
-    width: 36px;
-    height: 36px;
-    border-radius: 10px;
-  }
-  
-  .futuristic-bell svg {
-    width: 20px;
-    height: 20px;
-  }
-  
-  .notification-pulse {
-    top: 6px;
-    right: 6px;
-    width: 6px;
-    height: 6px;
-  }
-  
-  .futuristic-toggle {
-    padding: 10px;
-    border-radius: 10px;
-  }
-  
-  .toggle-lines span {
-    width: 18px;
-  }
-  
-  /* Modal adjustments for mobile */
-  .futuristic-modal {
-    margin: 10px;
-    border-radius: 16px;
-  }
-  
-  .glass-header {
-    padding: 16px 20px;
-  }
-  
-  .futuristic-title {
     font-size: 16px;
-  }
-  
-  .glass-body {
-    padding: 20px;
-    max-height: 60vh;
-  }
-  
-  .activity-item {
-    padding: 12px;
-    border-radius: 10px;
-  }
-  
-  .activity-header .repo-link {
-    font-size: 12px;
-  }
-  
-  .activity-body .commit-link {
-    font-size: 13px;
-  }
-  
-  .activity-time {
-    font-size: 11px;
-  }
-}
-
-@media (max-width: 576px) {
-  .futuristic-header {
-    top: 8px;
-    width: calc(100% - 12px);
-  }
-  
-  .glass-nav-container {
-    padding: 8px 12px;
-    border-radius: 14px;
-  }
-  
-  .futuristic-nav-list {
-    gap: 12px;
-    flex-direction: column;
-    align-items: stretch;
-  }
-  
-  .nav-item {
+    padding: 12px 20px;
     width: 100%;
-  }
-  
-  .nav-link {
     justify-content: center;
-    padding: 8px 16px;
-    font-size: 13px;
-    width: 100%;
-  }
-  
-  .futuristic-bell {
-    width: 100%;
-    height: 40px;
-    justify-content: center;
-  }
-  
-  .logoCol {
-    text-align: center;
-    margin-bottom: 10px;
+    background: rgba(147, 112, 219, 0.2);
   }
   
   .logoCol img {
-    width: 40% !important;
-  }
-  
-  /* Stack layout for very small screens */
-  .row {
-    flex-direction: column;
-    text-align: center;
-  }
-  
-  .col-auto, .col {
-    width: 100%;
-    max-width: 100%;
-  }
-  
-  /* Modal full screen on very small devices */
-  .modal-dialog {
-    margin: 5px;
-    max-width: calc(100% - 10px);
-  }
-  
-  .futuristic-modal {
-    border-radius: 12px;
-  }
-  
-  .glass-header {
-    padding: 12px 16px;
-  }
-  
-  .glass-body {
-    padding: 16px;
-    max-height: 70vh;
-  }
-  
-  .futuristic-title {
-    font-size: 15px;
-  }
-  
-  .powered-by-text {
-    font-size: 11px;
-  }
-  
-  .activity-item {
-    padding: 10px;
+    width: 40px;
   }
 }
 
-@media (max-width: 400px) {
-  .futuristic-header {
-    top: 5px;
-    width: calc(100% - 8px);
-  }
-  
+@media (max-width: 480px) {
   .glass-nav-container {
-    padding: 6px 10px;
-    border-radius: 12px;
+    padding: 10px 15px;
+    background: rgba(147, 112, 219, 0.35);
   }
   
   .nav-link {
-    padding: 6px 12px;
-    font-size: 12px;
-  }
-  
-  .logoCol img {
-    width: 35% !important;
-  }
-  
-  .futuristic-title {
     font-size: 14px;
+    padding: 10px 15px;
+    background: rgba(147, 112, 219, 0.25);
   }
   
-  .glass-body {
-    padding: 12px;
+  .logoCol img {
+    width: 35px;
   }
-}
-
-/* Landscape orientation adjustments */
-@media (max-height: 500px) and (orientation: landscape) {
-  .futuristic-header {
-    top: 5px;
-  }
-  
-  .glass-nav-container {
-    padding: 6px 16px;
-  }
-  
-  .futuristic-nav-list {
-    flex-direction: row;
-    gap: 15px;
-  }
-  
-  .nav-link {
-    padding: 4px 10px;
-    font-size: 12px;
-  }
-  
-  .modal-dialog {
-    max-height: 90vh;
-  }
-  
-  .glass-body {
-    max-height: 50vh;
-  }
-}
-
-/* Touch device optimizations */
-@media (hover: none) and (pointer: coarse) {
-  .nav-link {
-    padding: 12px 16px;
-    min-height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .futuristic-bell {
-    min-height: 44px;
-    min-width: 44px;
-  }
-  
-  .futuristic-close {
-    min-height: 44px;
-    min-width: 44px;
-  }
-  
-  .activity-item {
-    padding: 16px;
-  }
-}
-
-/* Scrollbar Styling */
-.glass-body::-webkit-scrollbar {
-  width: 6px;
-}
-
-.glass-body::-webkit-scrollbar-track {
-  background: rgba(147, 112, 219, 0.1);
-  border-radius: 3px;
-}
-
-.glass-body::-webkit-scrollbar-thumb {
-  background: rgba(147, 112, 219, 0.4);
-  border-radius: 3px;
-}
-
-.glass-body::-webkit-scrollbar-thumb:hover {
-  background: rgba(147, 112, 219, 0.6);
 }
 </style>

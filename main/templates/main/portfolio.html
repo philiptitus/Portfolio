@@ -16,7 +16,11 @@ END CSS blocks
 Start Content
 ================================= -->
 {% block content %}
-<link rel="stylesheet" href="{% static 'css/portfolio2.css' %}">
+<link rel="stylesheet" href="{% static 'css/portfolio.css' %}">
+<br/>
+<br/>
+<br/>
+<br/>
 
 <section>
   <div class="innerPageBannerCol">
@@ -24,9 +28,8 @@ Start Content
       <div class="row g-4 g-md-3 align-items-center">
         <div class="col-md-6">
           <div class="bannerContent">
-            <h1 class="xlTitle pb-md-3">See my recent projects below</h1>
-            <h6><i>Click on a picture to view</i></h6>
-            <h6><b>PS, these are not all my projects just my major ones check out my github, for more (link on footer)</b></h6>
+            <h1 class="xlTitle pb-md-3">Few Work Samples</h1>
+            <h6>Visit My <a href="https://github.com/philiptitus" style="color: aqua;">Github</a> for more</h6>
           </div>
         </div>
       </div>
@@ -37,10 +40,12 @@ Start Content
 <section>
   <div class="lightBg">
     <div class="container">
-      <div class="portfolioContentMain">
-        <div class="row g-3 g-md-4 g-lg-5 portfolioRow">
+      <div class="timeline-container">
+        <div class="timeline-line"></div>
+        <div class="timeline-items">
           {% for obj in object_list %}
-          <div class="pColMain">
+          <div class="timeline-item {% cycle 'left' 'right' %}">
+            <div class="timeline-dot"></div>
             <div class="pCol">
               <a href="{% url 'main:portfolio' slug=obj.slug %}">
                 <img src="{{obj.image_url}}" alt="{{ obj.name }}" class="pImg">
@@ -48,7 +53,6 @@ Start Content
               <div class="pContent">
                 <h4 class="pTitle"><a href="{% url 'main:portfolio' slug=obj.slug %}">{{ obj.name }}</a></h4>
                 <p class="pDesc">{{ obj.description }}</p>
-                <p class="pDate">{{ obj.date.year }}</p>
               </div>
             </div>
           </div>

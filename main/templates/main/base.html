@@ -23,15 +23,15 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ request.build_absolute_uri }}">
-    <meta property="og:title" content="{% block og_title %}{% block title %}Philip Titus - Software & Machine Learning Engineer{% endblock %}{% endblock %}">
-    <meta property="og:description" content="{% block og_description %}{% block description %}Professional software developer and machine learning engineer offering custom web development, mobile apps, AI solutions, and cybersecurity services. Hire Philip Titus for your next project.{% endblock %}{% endblock %}">
+    <meta property="og:title" content="{% block og_title %}Philip Titus - Software & Machine Learning Engineer{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}Professional software developer and machine learning engineer offering custom web development, mobile apps, AI solutions, and cybersecurity services. Hire Philip Titus for your next project.{% endblock %}">
     <meta property="og:image" content="{% block og_image %}{% static 'images/gone.png' %}{% endblock %}">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="{{ request.build_absolute_uri }}">
-    <meta property="twitter:title" content="{% block twitter_title %}{% block title %}Philip Titus - Software & Machine Learning Engineer{% endblock %}{% endblock %}">
-    <meta property="twitter:description" content="{% block twitter_description %}{% block description %}Professional software developer and machine learning engineer offering custom web development, mobile apps, AI solutions, and cybersecurity services. Hire Philip Titus for your next project.{% endblock %}{% endblock %}">
+    <meta property="twitter:title" content="{% block twitter_title %}Philip Titus - Software & Machine Learning Engineer{% endblock %}">
+    <meta property="twitter:description" content="{% block twitter_description %}Professional software developer and machine learning engineer offering custom web development, mobile apps, AI solutions, and cybersecurity services. Hire Philip Titus for your next project.{% endblock %}">
     <meta property="twitter:image" content="{% block twitter_image %}{% static 'images/gone.png' %}{% endblock %}">
 
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/gone.png' %}">
@@ -40,7 +40,7 @@
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/swiper@7.0.5/swiper-bundle.min.css">
     <link href="{% static 'css/style2.css' %}" rel="stylesheet">
-    <link href="{% static 'css/chatbot.css' %}" rel="stylesheet">
+    <link href="{% static 'css/chatbot2.css' %}" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     {% block extend_header%}{%endblock%}
 
@@ -52,6 +52,17 @@
     })(window, document, "clarity", "script", "rzan63qptg");
 </script>
   </head>
+  
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LT2D7ZB15B"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LT2D7ZB15B');
+</script>
+
   <body>
     {% include 'main/partials/messages.html' %}
     {% include 'main/partials/nav.html' %}
@@ -61,8 +72,10 @@
 
     {% include 'main/partials/footer.html' %}
 
-    <!-- Chatbot -->
-    {% include 'chatbot.html' %}
+    <!-- Chatbot - Only on home page -->
+    {% if request.resolver_match.url_name == 'home' %}
+        {% include 'chatbot.html' %}
+    {% endif %}
 
     <!-- ================================
     Start Scripts
@@ -76,7 +89,7 @@
 
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="{% static 'js/chatbot.js' %}"></script>
+    <script src="{% static 'js/chatbot2.js' %}"></script>
 
     <script>
   window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };

@@ -1,14 +1,16 @@
 :root {
     --primary-color: #0a0a0a;
+    --purple-glow: rgba(189, 89, 255, 0.1);
+    --purple-accent: rgba(189, 89, 255, 0.2);
     --secondary-color: #1a1a1a;
-    --accent-color: #f5a623;
+    --accent-color: #bd59ff;
     --text-color: #ffffff;
     --text-secondary: #a0a0a0;
     --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 
   body {
-    background-color: var(--primary-color);
+    background: linear-gradient(135deg, var(--primary-color) 0%, #0f0a1a 100%);
     color: var(--text-color);
     font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
     margin: 0;
@@ -23,7 +25,9 @@
   }
 
   .project-sidebar {
-    background-color: var(--secondary-color);
+    background: linear-gradient(180deg, var(--secondary-color) 0%, rgba(26, 26, 26, 0.8) 100%);
+    border-right: 1px solid var(--purple-glow);
+    box-shadow: inset -1px 0 10px var(--purple-glow);
     padding: 3rem 2rem;
     position: sticky;
     top: 0;
@@ -51,7 +55,7 @@
 
   .project-category {
     display: inline-block;
-    background-color: rgba(245, 166, 35, 0.1);
+    background-color: var(--purple-accent);
     color: var(--accent-color);
     padding: 0.5rem 1rem;
     border-radius: 2rem;
@@ -131,7 +135,7 @@
 
   .btn:hover {
     border-color: var(--accent-color);
-    background-color: rgba(245, 166, 35, 0.05);
+    background-color: var(--purple-glow);
     transform: translateY(-2px);
   }
 
@@ -160,7 +164,7 @@
   }
 
   .btn-primary:hover {
-    background-color: #e69100;
+    background-color: #9d47e6;
     transform: translateY(-2px);
   }
 

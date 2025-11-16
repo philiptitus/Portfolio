@@ -256,7 +256,12 @@ Start Content
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/pdetail.css' %}">
 
-
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
 <!-- Include the new test chatbot -->
 <div class="project-container">
   <!-- Project Sidebar -->
@@ -265,34 +270,18 @@ Start Content
     
     <h1 class="project-title">{{object.name|title}}</h1>
     
-    {% if object.category == 'DATA SCIENCE.AI AND ML' %}
-      <a href="{% url 'main:dscience' %}" class="project-category">{{ object.category }}</a>
-    {% elif object.category == 'WEB DEVELOPMENT' %}
-      <a href="{% url 'main:webdevelopment' %}" class="project-category">{{ object.category }}</a>
-    {% elif object.category == 'MOBILE DEVELOPMENT' %}
-      <a href="{% url 'main:mobiledevelopment' %}" class="project-category">{{ object.category }}</a>
-    {% elif object.category == 'CYBERSECURITY' %}
-      <a href="{% url 'main:cybersecurity' %}" class="project-category">{{ object.category }}</a>
-    {% elif object.category == 'CLOUD COMPUTING' %}
-      <a href="{% url 'main:cloud' %}" class="project-category">{{ object.category }}</a>
-    {% elif object.category == 'GAME DEVELOPMENT' %}
-      <a href="{% url 'main:game' %}" class="project-category">{{ object.category }}</a>
-    {% else %}
-      <a href="{% url 'main:other' %}" class="project-category">{{ object.category }}</a>
-    {% endif %}
-    
-    <div class="project-date">Completed: {{ object.date }}</div>
+  
     
     <!-- Tech Stack -->
     <div class="skills-container">
-      <h5>Tech Stack</h5>
+      <h5>Tools🏗️</h5>
       {% for skill in object.skills.all %}
         <span class="skill-tag">{{ skill.name }}</span>
       {% endfor %}
     </div>
     
     <div class="core">
-      <h6>Language: {{ object.core_skill }}</h6>
+      <h6>Primary Language: {{ object.core_skill }}</h6>
     </div>
   </div>
   
@@ -332,14 +321,7 @@ Start Content
     <!-- Carousel with Video Support -->
     <div class="carousel-container">
       <div class="carousel">
-        <!-- Video (if available) -->
-        {% if object.video_url %}
-          <div class="carousel-slide">
-            <div class="carousel-video-wrapper">
-              <iframe class="carousel-video" src="{{ object.video_url }}" title="Project Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-            </div>
-          </div>
-        {% endif %}
+
         
         <!-- Main image -->
         <div class="carousel-slide">
@@ -507,20 +489,7 @@ Start Content
       </div>
     {% endif %}
     
-    <!-- Videos Section -->
-    {% if videos %}
-      <div class="videos-section">
-        {% for v in videos %}
-          <h3 class="section-title">{{ v.text }}</h3>
-          <p>{{ v.description }}</p>
-          <div class="video-container">
-            <div class="video-wrapper">
-              <iframe src="{{ v.url }}" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-            </div>
-          </div>
-        {% endfor %}
-      </div>
-    {% endif %}
+
   </div>
 </div>
 {% endblock %}
