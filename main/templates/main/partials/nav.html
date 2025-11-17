@@ -14,16 +14,9 @@ Start Futuristic Navigation Bar
                   </div>
               </div>
               <div class="col">
-                  <div class="d-md-none">
-                      <button class="navToggle futuristic-toggle">
-                          <span class="navToggle__text">Menu</span>
-                          <div class="toggle-lines">
-                              <span></span>
-                              <span></span>
-                              <span></span>
-                          </div>
-                      </button>
-                  </div>
+                    <div class="d-md-none">
+                      <a href="{% url 'main:portfolios' %}" class="mobile-work-link nav-link">Work Samples💼</a>
+                    </div>
                   <div class="navCollapseCol">
                       <div class="navCol">
                           <ul class="futuristic-nav-list">
@@ -60,8 +53,6 @@ Start Futuristic Navigation Bar
 <!-- ================================
 End Futuristic Navigation Bar
 ================================= -->
-
-<div class="nav-backdrop" aria-hidden="true"></div>
 
 <style>
 /* Futuristic Header Styles */
@@ -279,6 +270,12 @@ End Futuristic Navigation Bar
   .logoCol img {
     width: 40px;
   }
+
+  /* Mobile overrides: remove sliding sidebar and backdrop; show a single Work Samples link */
+  .navCollapseCol { display: none !important; }
+  .nav-backdrop { display: none !important; }
+  .d-md-none .mobile-work-link { display: inline-flex; }
+
 }
 
 @media (max-width: 480px) {
