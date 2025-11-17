@@ -85,9 +85,7 @@ class NotFoundView(generic.TemplateView):
     template_name = "main/404.html"
 
 
-class Success(generic.TemplateView):
 
-	template_name = "main/success.html"
 
 
 class PortfolioView(generic.ListView):

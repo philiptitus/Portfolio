@@ -6,7 +6,6 @@ app_name = "main"
 
 urlpatterns = [
 	path('', views.IndexView.as_view(), name="home"),
-    path('success/', views.Success.as_view(), name="success"),
     path('privacy/', views.PrivacyView.as_view(), name="privacy"),
     path('404/', views.NotFoundView.as_view(), name="404"),
     path('api/blogs/', views.BlogListJsonView.as_view(), name='blog-list-json'),

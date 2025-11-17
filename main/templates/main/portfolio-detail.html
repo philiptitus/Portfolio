@@ -16,7 +16,8 @@ END SEO blocks
 Start CSS blocks
 ================================= -->
 {% block extend_header %}
-
+<link rel="stylesheet" href="{% static 'css/detail.css' %}">
+<link rel="stylesheet" href="{% static 'css/chatbot_detail.css' %}">
 {% endblock %}
 <!-- ================================
 END CSS blocks
@@ -26,6 +27,7 @@ END CSS blocks
 Start script blocks
 ================================= -->
 {% block extend_footer %}
+<script src="{% static 'js/chatbot_detail.js' %}"></script>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     // Carousel functionality
@@ -254,7 +256,7 @@ END script blocks
 Start Content
 ================================= -->
 {% block content %}
-<link rel="stylesheet" href="{% static 'css/pdetail.css' %}">
+<link rel="stylesheet" href="{% static 'css/detail.css' %}">
 
 <br/>
 <br/>
@@ -268,7 +270,27 @@ Start Content
   <div class="project-sidebar">
     <div class="project-number">/01</div>
     
-    <h1 class="project-title">{{object.name|title}}</h1>
+    <h1 class="project-title">
+      {{object.name|title}}
+      <span class="chatbot-info-icon" data-type="project" data-title="{{ object.name }}" title="Ask chatbot about this project">
+        <img src="/static/images/lightning.svg" alt="Chat">
+      </span>
+    </h1>
+    <!-- Ready-made Chat Area (moved to directly under title) -->
+    <div id="detail-chat-area" class="detail-chat-area" aria-hidden="true" data-project="{{ object.name|escapejs }}">
+      <div class="detail-chat-header">
+        <img src="/static/images/lightning.svg" alt="Chat" class="detail-chat-icon">
+        <div class="detail-chat-title">Ask about this Project</div>
+      </div>
+      <div id="detail-chat-messages" class="detail-chat-messages" role="log" aria-live="polite"></div>
+      <div id="detail-chat-typing" class="detail-chat-typing" style="display:none;" aria-hidden="true">
+        <div class="typing-dots"><span></span><span></span><span></span></div>
+      </div>
+      <div class="detail-chat-input-row">
+        <input id="detail-chat-input" class="detail-chat-input" type="text" placeholder="Ask about this project..." aria-label="Chat input">
+        <button id="detail-chat-send" class="detail-chat-send" type="button">Send</button>
+      </div>
+    </div>
     
   
     
@@ -280,9 +302,7 @@ Start Content
       {% endfor %}
     </div>
     
-    <div class="core">
-      <h6>Primary Language: {{ object.core_skill }}</h6>
-    </div>
+    
   </div>
   
   <!-- Project Content -->
@@ -492,6 +512,87 @@ Start Content
 
   </div>
 </div>
+
+
+<!-- Chatbot Icon for Project Interaction -->
+<div class="chatbot-info-icon" data-type="project" data-title="{{ object.name }}" title="Ask chatbot about this project">
+
+  <img src="/static/images/lightning.svg" alt="Chat">
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const chatbotIcon = document.querySelector('.chatbot-info-icon');
+
+    if (chatbotIcon) {
+      chatbotIcon.addEventListener('click', function(e) {
+        e.preventDefault();
+        const projectName = "{{ object.name|escapejs }}";
+        const question = `Tell me about the project \"${projectName}\".`;
+
+        if (window.chatbot) {
+          window.chatbot.open();
+          setTimeout(() => {
+            const input = document.getElementById('chatbot-input');
+            if (input) {
+              input.value = question;
+              window.chatbot.sendMessage();
+            }
+          }, 500);
+        }
+      });
+    }
+  });
+</script>
+
+<style>
+  .project-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .chatbot-info-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+  }
+
+  .chatbot-info-icon:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+  }
+
+  .chatbot-info-icon img {
+    width: 20px;
+    height: 20px;
+  }
+
+  @media (max-width: 768px) {
+    .project-title {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .chatbot-info-icon {
+      width: 35px;
+      height: 35px;
+    }
+
+    .chatbot-info-icon img {
+      width: 18px;
+      height: 18px;
+    }
+  }
+</style>
 {% endblock %}
 <!-- ================================
 End Content

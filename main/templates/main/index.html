@@ -448,7 +448,9 @@ Start Content
                       <h3 class="portfolio-title">{{p.name}}</h3>
                       <p>{{p.description}}</p>
                     </div>
-                    <div class="chatbot-info-icon" data-type="project" data-title="{{p.name}}" data-description="{{p.description}}" data-category="{{p.category}}" title="Ask chatbot about this project">💬</div>
+                    <div class="chatbot-info-icon" data-type="project" data-title="{{p.name}}" data-description="{{p.description}}" data-category="{{p.category}}" title="Ask chatbot about this project">
+    <img src="/static/images/lightning.svg" alt="Chat" style="width: 1.5em; height: 1.5em; vertical-align: middle;">
+</div>
                   </div>
                 </a>
               </div>
@@ -485,7 +487,9 @@ Start Content
                   {% if j.is_current %}
                     <div class="portfolio-date" style="color: var(--secondary);">My Current Role</div>
                   {% endif %}
-                  <div class="chatbot-info-icon" data-type="job" data-title="{{j.job_title}}" data-company="{{j.company_name}}" data-location="{{j.location}}" data-current="{% if j.is_current %}yes{% else %}no{% endif %}" title="Ask chatbot about this job">💬</div>
+                  <div class="chatbot-info-icon" data-type="job" data-title="{{j.job_title}}" data-company="{{j.company_name}}" data-location="{{j.location}}" data-current="{% if j.is_current %}yes{% else %}no{% endif %}" title="Ask chatbot about this job">
+    <img src="/static/images/lightning.svg" alt="Chat" style="width: 1.5em; height: 1.5em; vertical-align: middle;">
+</div>
                 </div>
               </div>
             </div>
@@ -533,7 +537,9 @@ Start Content
                     {% else %}
                       <div class="portfolio-date" style="color: var(--secondary);">Status: complete</div>
                     {% endif %}
-                    <div class="chatbot-info-icon" data-type="certificate" data-title="{{c.title}}" data-description="{{c.description}}" data-category="{{c.category}}" data-status="{% if c.is_ongoing %}learning{% else %}complete{% endif %}" title="Ask chatbot about this certificate">💬</div>
+                    <div class="chatbot-info-icon" data-type="certificate" data-title="{{c.title}}" data-description="{{c.description}}" data-category="{{c.category}}" data-status="{% if c.is_ongoing %}learning{% else %}complete{% endif %}" title="Ask chatbot about this certificate">
+    <img src="/static/images/lightning.svg" alt="Chat" style="width: 1.5em; height: 1.5em; vertical-align: middle;">
+</div>
                   </div>
                 </div>
               </div>
@@ -565,7 +571,9 @@ Start Content
                   <div class="portfolio-content">
                     <h3 class="portfolio-title">{{c.title}}</h3>
                     <div class="portfolio-date">Issued by: {{ c.issued_by }}</div>
-                    <div class="chatbot-info-icon" data-type="award" data-title="{{c.title}}" data-issuer="{{c.issued_by}}" data-description="{{c.description}}" title="Ask chatbot about this award">💬</div>
+                    <div class="chatbot-info-icon" data-type="award" data-title="{{c.title}}" data-issuer="{{c.issued_by}}" data-description="{{c.description}}" title="Ask chatbot about this award">
+    <img src="/static/images/lightning.svg" alt="Chat" style="width: 1.5em; height: 1.5em; vertical-align: middle;">
+</div>
                   </div>
                 </div>
               </div>

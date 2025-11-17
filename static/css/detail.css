@@ -204,6 +204,7 @@
     display: flex;
     transition: transform 0.5s ease-in-out;
     height: 500px;
+    align-items: center;
   }
 
   .carousel-slide {
@@ -216,9 +217,10 @@
   }
 
   .carousel-image {
-    max-width: 100%;
-    max-height: 100%;
+    width: 100%;
+    height: 100%;
     object-fit: contain;
+    display: block;
   }
 
   .carousel-video-wrapper {
@@ -410,13 +412,27 @@
     }
     
     .carousel-container {
-      height: 400px;
+      height: 300px;
+      max-width: 100vw;
+    }
+    .carousel {
+      height: 300px;
     }
   }
 
   @media (max-width: 768px) {
     .carousel-container {
-      height: 300px;
+      height: 220px;
+      max-width: 100vw;
+    }
+    .carousel {
+      height: 220px;
+    }
+    .carousel-image {
+      height: 100%;
+      width: 100%;
+      object-fit: contain;
+      display: block;
     }
     
     .project-title {
@@ -426,6 +442,10 @@
     .project-actions {
       flex-direction: column;
     }
+      /* Hide tools section on mobile */
+      .skills-container {
+        display: none;
+      }
   }
   /* Floating Quick Action Bar for Chatbot */
  
