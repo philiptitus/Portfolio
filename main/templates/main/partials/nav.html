@@ -61,6 +61,8 @@ Start Futuristic Navigation Bar
 End Futuristic Navigation Bar
 ================================= -->
 
+<div class="nav-backdrop" aria-hidden="true"></div>
+
 <style>
 /* Futuristic Header Styles */
 .futuristic-header {
@@ -209,6 +211,62 @@ End Futuristic Navigation Bar
     gap: 15px;
     text-align: center;
   }
+
+  /* Make the collapsed nav act as a fixed left-side panel that fills
+     the left side of the screen from top to bottom. It's hidden by
+     default (translated off-screen) and slides in when the JS toggle
+     adds a common "open"/"show"/"active" class. */
+  .navCollapseCol {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 320px;
+    max-width: 80vw;
+    padding-top: 80px; /* leave room for header */
+    background: rgba(40, 12, 60, 0.94);
+    border-right: 1px solid rgba(75, 0, 130, 0.65);
+    z-index: 1001; /* above the header */
+    box-shadow: 4px 0 30px rgba(0,0,0,0.4);
+    transform: translateX(-110%);
+    transition: transform 0.28s cubic-bezier(0.2, 0, 0, 1);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+  }
+
+  /* Open the panel when the body has the toggle-active class
+     (existing site JS toggles `body.navToggleActive`). */
+  body.navToggleActive .navCollapseCol {
+    transform: translateX(0);
+  }
+
+  /* Backdrop that covers the rest of the page (to the right of the panel).
+     It's invisible/untouchable by default and becomes visible when the
+     nav is active. Clicking it will close the nav (handled by JS below). */
+  .nav-backdrop {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 320px; /* start where the panel ends */
+    background: rgba(0,0,0,0.45);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 200ms ease;
+    z-index: 1000; /* below the panel (1001) */
+  }
+
+  body.navToggleActive .nav-backdrop {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .navCollapseCol .futuristic-nav-list {
+    padding-left: 22px;
+    padding-right: 12px;
+    align-items: flex-start;
+    gap: 18px;
+  }
   
   .nav-link {
     font-size: 16px;
@@ -240,3 +298,18 @@ End Futuristic Navigation Bar
   }
 }
 </style>
+
+<script>
+  (function($){
+    // Close nav when backdrop is clicked
+    $(document).on('click', '.nav-backdrop', function(e){
+      e.preventDefault();
+      $('body').removeClass('navToggleActive');
+    });
+
+    // Close nav when any nav link is clicked (mobile)
+    $(document).on('click', '.navCollapseCol .nav-link', function(){
+      $('body').removeClass('navToggleActive');
+    });
+  })(jQuery);
+</script>
