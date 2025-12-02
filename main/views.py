@@ -23,11 +23,13 @@ from .models import (
 	)
 
 from django.views import generic
+from django.views.decorators.cache import cache_page
+from django.utils.decorators import method_decorator
 
 
 from . forms import ContactForm
 
-
+@method_decorator(cache_page(60 * 60 * 24), name="dispatch")
 class IndexView(generic.TemplateView):
 	template_name = "main/index.html"
 
@@ -88,6 +90,7 @@ class NotFoundView(generic.TemplateView):
 
 
 
+@method_decorator(cache_page(60 * 60 * 24), name="dispatch")
 class PortfolioView(generic.ListView):
 	model = Portfolio
 	template_name = "main/portfolio.html"
@@ -96,7 +99,7 @@ class PortfolioView(generic.ListView):
 	def get_queryset(self):
 		return super().get_queryset().filter(is_active=True).order_by('-date')
 
-
+@method_decorator(cache_page(60 * 60 * 24), name="dispatch")
 class PortfolioDetailView(generic.DetailView):
 	model = Portfolio
 	template_name = "main/portfolio-detail.html"
@@ -113,6 +116,7 @@ class PortfolioDetailView(generic.DetailView):
 
 		return context
 
+@method_decorator(cache_page(60 * 60 * 24), name="dispatch")
 class BlogView(generic.ListView):
 	model = Blog
 	template_name = "main/blog.html"
@@ -132,7 +136,7 @@ class BlogListJsonView(View):
         blogs = Blog.objects.filter(is_active=True).order_by('-timestamp').values()
         return JsonResponse(list(blogs), safe=False)
 
-
+@method_decorator(cache_page(60 * 60 * 24), name="dispatch")
 class BlogDetailView(generic.DetailView):
 	model = Blog
 	template_name = "main/blog-detail.html"
@@ -150,6 +154,7 @@ class BlogDetailView(generic.DetailView):
 
 		return context
 
+@method_decorator(cache_page(60 * 60 * 24), name="dispatch")
 class ProjectView(generic.ListView):
 	model = Project
 	template_name = "main/project.html"
@@ -157,6 +162,7 @@ class ProjectView(generic.ListView):
 	def get_queryset(self):
 		return super().get_queryset().all()
 
+@method_decorator(cache_page(60 * 60 * 24), name="dispatch")
 class ProjectDetailView(generic.DetailView):
 	model = Project
 	template_name = "main/project-detail.html"
@@ -173,6 +179,7 @@ class ProjectDetailView(generic.DetailView):
 		return context
 
 
+@method_decorator(cache_page(60 * 60 * 24), name="dispatch")
 class DSView(generic.ListView):
 	model = Blog
 	template_name = "main/categories/dscience.html"
@@ -204,6 +211,7 @@ class DSView(generic.ListView):
 
 
 
+@method_decorator(cache_page(60 * 60 * 24), name="dispatch")
 class WebDevelopment(generic.ListView):
 	model = Blog
 	template_name = "main/categories/web.html"
@@ -232,6 +240,7 @@ class WebDevelopment(generic.ListView):
 	def get_queryset(self):
 		return super().get_queryset().all()
 
+@method_decorator(cache_page(60 * 60 * 24), name="dispatch")
 class MobileDevelopment(generic.ListView):
 	model = Blog
 	template_name = "main/categories/mobile.html"
@@ -263,6 +272,7 @@ class MobileDevelopment(generic.ListView):
 
 
 
+@method_decorator(cache_page(60 * 60 * 24), name="dispatch")
 class CyberSecurity(generic.ListView):
 	model = Blog
 	template_name = "main/categories/cyber.html"
@@ -296,6 +306,7 @@ class CyberSecurity(generic.ListView):
 
 
 
+@method_decorator(cache_page(60 * 60 * 24), name="dispatch")
 class CloudComputing(generic.ListView):
 	model = Blog
 	template_name = "main/categories/cloud.html"
@@ -326,6 +337,7 @@ class CloudComputing(generic.ListView):
 
 
 
+@method_decorator(cache_page(60 * 60 * 24), name="dispatch")
 class Game(generic.ListView):
 	model = Blog
 	template_name = "main/categories/game.html"
@@ -355,6 +367,7 @@ class Game(generic.ListView):
 
 
 
+@method_decorator(cache_page(60 * 60 * 24), name="dispatch")
 class Other(generic.ListView):
 	model = Blog
 	template_name = "main/categories/other.html"
@@ -401,6 +414,7 @@ class LatestEventsView(ListView):
 
 
 
+@method_decorator(cache_page(60 * 60 * 24), name="dispatch")
 class MLModelListView(generic.ListView):
     model = MLModel
     template_name = "main/mlmodel_list.html"

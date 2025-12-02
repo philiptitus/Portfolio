@@ -65,7 +65,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'main.middleware.Redirect404Middleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware'
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'main.db_debug_middleware.DBDebugMiddleware'
 
 ]
 
@@ -211,13 +212,21 @@ CKEDITOR_CONFIGS = {
     }
 }
 
-
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": os.environ.get("UPSTASH_REDIS_REDIS_URL"),  # your Upstash Redis URL
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}
 
 
 
 import os
 
-# Check if the environment variable is set
+# Check if the environment variable is 
 SITE_UNDER_CONSTRUCTION = False
 
 if SITE_UNDER_CONSTRUCTION == True:
